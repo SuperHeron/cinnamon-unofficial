@@ -1,0 +1,445 @@
+--- a/tools/check-for-missing.py	2014-11-26 22:22:05.000000000 +0100
++++ b/tools/check-for-missing.py	2015-01-18 00:09:43.444816680 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ #
+ # This is a simple script that we use to check for files in git
+ # and not in the distribution. It was previously written in cinnamon
+--- a/tests/interactive/urgentwindow.py	2014-11-26 22:22:05.000000000 +0100
++++ b/tests/interactive/urgentwindow.py	2015-01-18 00:09:43.445816694 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ from gi.repository import Gtk
+ import glib
+ 
+--- a/generate_cs_module_desktop_files.py	2014-11-26 22:22:05.000000000 +0100
++++ b/generate_cs_module_desktop_files.py	2015-01-18 00:09:43.558818324 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ DOMAIN = "cinnamon"
+ PATH = "/usr/share/locale"
+--- a/generate_additional_files.py	2014-11-26 22:22:05.000000000 +0100
++++ b/generate_additional_files.py	2015-01-18 00:09:43.558818324 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ DOMAIN = "cinnamon"
+ PATH = "/usr/share/locale"
+--- a/files/usr/share/cinnamon/desklets/launcher@cinnamon.org/editorDialog.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/share/cinnamon/desklets/launcher@cinnamon.org/editorDialog.py	2015-01-18 00:09:43.567818453 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ #-*-indent-tabs-mode: nil-*-
+ 
+ import sys
+--- a/files/usr/lib/cinnamon-slideshow/cinnamon-slideshow.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-slideshow/cinnamon-slideshow.py	2015-01-18 00:09:43.603818972 +0100
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python
++#!/usr/bin/python2
+ 
+ from gi.repository import Gio, GLib
+ import dbus, dbus.service, dbus.glib
+--- a/files/usr/lib/cinnamon-settings/modules/cs_workspaces.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_workspaces.py	2015-01-18 00:09:43.603818972 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ 
+--- a/files/usr/lib/cinnamon-settings/modules/cs_windows.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_windows.py	2015-01-18 00:09:43.603818972 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository import Gio, Gtk, GObject, Gdk
+--- a/files/usr/lib/cinnamon-settings/modules/cs_user.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_user.py	2015-01-18 00:09:43.604818987 +0100
+@@ -1,8 +1,8 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository import AccountsService, GLib
+-import PAM
++import pam
+ import pexpect
+ import time
+ from random import randint
+--- a/files/usr/lib/cinnamon-settings/modules/cs_tiling.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_tiling.py	2015-01-18 00:09:43.604818987 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository import Gio, Gtk, GObject, Gdk
+--- a/files/usr/lib/cinnamon-settings/modules/cs_themes.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_themes.py	2015-01-18 00:09:43.604818987 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from ExtensionCore import ExtensionSidePage
+ from gi.repository.Gtk import SizeGroup, SizeGroupMode
+--- a/files/usr/lib/cinnamon-settings/modules/cs_screensaver.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_screensaver.py	2015-01-18 00:09:43.604818987 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ 
+--- a/files/usr/lib/cinnamon-settings/modules/cs_privacy.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_privacy.py	2015-01-18 00:09:43.604818987 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ 
+--- a/files/usr/lib/cinnamon-settings/modules/cs_power.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_power.py	2015-01-18 00:09:43.605819001 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ import os
+ from SettingsWidgets import *
+--- a/files/usr/lib/cinnamon-settings/modules/cs_panel.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_panel.py	2015-01-18 00:09:43.605819001 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ 
+--- a/files/usr/lib/cinnamon-settings/modules/cs_notifications.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_notifications.py	2015-01-18 00:09:43.605819001 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository import GObject, Notify
+--- a/files/usr/lib/cinnamon-settings/modules/cs_mouse.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_mouse.py	2015-01-18 00:09:43.605819001 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from gi.repository import Gtk, Gdk, GLib
+ from SettingsWidgets import *
+--- a/files/usr/lib/cinnamon-settings/modules/cs_keyboard.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_keyboard.py	2015-01-18 00:09:43.606819015 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository import Gio, Gtk, GObject, Gdk
+--- a/files/usr/lib/cinnamon-settings/modules/cs_info.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_info.py	2015-01-18 00:09:43.606819015 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ 
+--- a/files/usr/lib/cinnamon-settings/modules/cs_hotcorner.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_hotcorner.py	2015-01-18 00:09:43.607819030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ import cairo
+ import math
+ 
+--- a/files/usr/lib/cinnamon-settings/modules/cs_general.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_general.py	2015-01-18 00:09:43.607819030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ 
+--- a/files/usr/lib/cinnamon-settings/modules/cs_fonts.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_fonts.py	2015-01-18 00:09:43.607819030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository import Gtk
+--- a/files/usr/lib/cinnamon-settings/modules/cs_extensions.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_extensions.py	2015-01-18 00:09:43.607819030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from ExtensionCore import ExtensionSidePage
+ 
+--- a/files/usr/lib/cinnamon-settings/modules/cs_effects.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_effects.py	2015-01-18 00:09:43.607819030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository.Gtk import SizeGroup, SizeGroupMode
+--- a/files/usr/lib/cinnamon-settings/modules/cs_desktop.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_desktop.py	2015-01-18 00:09:43.607819030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository import Gio
+--- a/files/usr/lib/cinnamon-settings/modules/cs_desklets.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_desklets.py	2015-01-18 00:09:43.607819030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from ExtensionCore import ExtensionSidePage
+ from gi.repository import Gtk
+--- a/files/usr/lib/cinnamon-settings/modules/cs_default.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_default.py	2015-01-18 00:09:43.608819044 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository import *
+--- a/files/usr/lib/cinnamon-settings/modules/cs_calendar.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_calendar.py	2015-01-18 00:09:43.608819044 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from SettingsWidgets import *
+ from gi.repository import Gtk
+--- a/files/usr/lib/cinnamon-settings/modules/cs_backgrounds.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_backgrounds.py	2015-01-18 00:09:43.609819059 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ import sys
+ sys.path.append('/usr/lib/cinnamon-settings/bin')
+--- a/files/usr/lib/cinnamon-settings/modules/cs_applets.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/modules/cs_applets.py	2015-01-18 00:09:43.609819059 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ from ExtensionCore import ExtensionSidePage
+ 
+--- a/files/usr/lib/cinnamon-settings/cinnamon-settings.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/cinnamon-settings.py	2015-01-18 00:09:43.610819073 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ import sys
+ reload(sys)
+--- a/files/usr/lib/cinnamon-settings/bin/removeSchema.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/bin/removeSchema.py	2015-01-18 00:09:43.610819073 +0100
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python
++#!/usr/bin/python2
+ 
+ import os
+ import sys
+--- a/files/usr/lib/cinnamon-settings/bin/installSchema.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/bin/installSchema.py	2015-01-18 00:09:43.610819073 +0100
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python
++#!/usr/bin/python2
+ 
+ import os
+ import sys
+--- a/files/usr/lib/cinnamon-settings/bin/XletSettingsWidgets.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/bin/XletSettingsWidgets.py	2015-01-18 00:09:43.613819116 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ try:
+     import os
+--- a/files/usr/lib/cinnamon-settings/bin/XletSettings.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/bin/XletSettings.py	2015-01-18 00:09:43.614819131 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ import sys
+ 
+--- a/files/usr/lib/cinnamon-settings/bin/SettingsWidgets.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/bin/SettingsWidgets.py	2015-01-18 00:09:43.616819160 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ try:
+     import os
+--- a/files/usr/lib/cinnamon-settings/bin/ExtensionCore.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings/bin/ExtensionCore.py	2015-01-18 00:09:43.617819174 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ try:
+     from SettingsWidgets import SidePage
+--- a/files/usr/lib/cinnamon-settings-users/cinnamon-settings-users.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-settings-users/cinnamon-settings-users.py	2015-01-18 00:09:43.619819203 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ import sys, os, commands
+ import pwd, grp
+--- a/files/usr/lib/cinnamon-screensaver-lock-dialog/cinnamon-screensaver-lock-dialog.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-screensaver-lock-dialog/cinnamon-screensaver-lock-dialog.py	2015-01-18 00:09:43.619819203 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ import sys
+ import os
+--- a/files/usr/lib/cinnamon-looking-glass/cinnamon-looking-glass.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-looking-glass/cinnamon-looking-glass.py	2015-01-18 00:09:43.623819261 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ # Todo:
+ # - TextTag.invisible does not work nicely with scrollheight, find out why
+--- a/files/usr/lib/cinnamon-json-makepot/cinnamon-json-makepot.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-json-makepot/cinnamon-json-makepot.py	2015-01-18 00:09:43.623819261 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ import sys
+ import os
+--- a/files/usr/lib/cinnamon-desktop-editor/cinnamon-desktop-editor.py	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/lib/cinnamon-desktop-editor/cinnamon-desktop-editor.py	2015-01-18 00:09:43.624819275 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ import sys
+ import os
+--- a/files/usr/bin/cinnamon-slideshow	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-slideshow	2015-01-18 00:09:43.624819275 +0100
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python
++#!/usr/bin/python2
+ 
+ import os
+ 
+--- a/files/usr/bin/cinnamon-settings-users	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-settings-users	2015-01-18 00:09:43.624819275 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ import os
+ 
+--- a/files/usr/bin/cinnamon-settings	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-settings	2015-01-18 00:09:43.624819275 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ import os, sys
+ 
+--- a/files/usr/bin/cinnamon-screensaver-lock-dialog	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-screensaver-lock-dialog	2015-01-18 00:09:43.624819275 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ import os
+ 
+--- a/files/usr/bin/cinnamon-preview-gtk-theme	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-preview-gtk-theme	2015-01-18 00:09:43.625819289 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ 
+ import gi, sys
+ from gi.repository import Gtk
+--- a/files/usr/bin/cinnamon-looking-glass	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-looking-glass	2015-01-18 00:09:43.625819289 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ import os, sys
+ 
+--- a/files/usr/bin/cinnamon-launcher	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-launcher	2015-01-18 00:09:43.625819289 +0100
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python
++#!/usr/bin/python2
+ # -*- coding=utf-8 -*-
+ 
+ FALLBACK_COMMAND = "metacity"
+--- a/files/usr/bin/cinnamon-json-makepot	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-json-makepot	2015-01-18 00:09:43.625819289 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ import os, sys
+ 
+--- a/files/usr/bin/cinnamon-desktop-editor	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-desktop-editor	2015-01-18 00:09:43.625819289 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ import os, sys
+ 
+--- a/files/generate_desktop_files	2014-11-26 22:22:05.000000000 +0100
++++ b/files/generate_desktop_files	2015-01-18 00:09:43.625819289 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ import commands, os
+ 
+--- a/doc/xmltohtml.py	2014-11-26 22:22:05.000000000 +0100
++++ b/doc/xmltohtml.py	2015-01-18 00:09:43.625819289 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ #-*- indent-tabs-mode: nil-*-
+ 
+ import sys
+--- a/doc/jstoxml.py	2014-11-26 22:22:05.000000000 +0100
++++ b/doc/jstoxml.py	2015-01-18 00:09:43.626819304 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ #-*- indent-tabs-mode: nil-*-
+ 
+ 
+--- a/doc/create-doc.py	2014-11-26 22:22:05.000000000 +0100
++++ b/doc/create-doc.py	2015-01-18 00:09:43.626819304 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python2
+ #-*- indent-tabs-mode: nil-*-
+ 
+ import sys

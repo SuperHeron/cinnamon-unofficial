@@ -1,0 +1,127 @@
+# Copyright 2015 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN="Cinnamon"
+
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+require python [ python_dep=2.5 ] github [ user='linuxmint' ]
+require freedesktop-desktop gsettings gtk-icon-cache
+
+SUMMARY="A Linux Desktop featuring a traditional layout, built from modern technology and introducing brand new innovative features."
+DESCRIPTION="
+Cinnamon is a Linux desktop which provides advanced innovative features and a traditional user
+experience.
+
+The desktop layout is similar to Gnome 2.
+The underlying technology is forked from Gnome Shell.
+The emphasis is put on making users feel at home and providing them with an easy to use and
+comfortable desktop experience.
+"
+
+LICENCES="GPL-2"
+SLOT="0"
+MYOPTIONS="bluetooth gobject-introspection"
+PLATFORMS="~amd64"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.40]
+        sys-devel/gettext[>=0.17]
+        virtual/pkg-config[>=0.22]
+    build+run:
+        app-misc/ca-certificates
+        cinnamon-bindings/cjs:1[>=2.3.1]
+        cinnamon-desktop/cinnamon-desktop[>=1.0.0][gobject-introspection?]
+        cinnamon-desktop/cinnamon-menus:3.0[gobject-introspection?]
+        cinnamon-desktop/muffin[>=1.9.1][gobject-introspection?]
+        dev-libs/dbus-glib:1
+        dev-libs/glib:2[>=2.29.10]
+        dev-libs/libcroco[>=0.6.2]
+        dev-libs/libxml2:2.0
+        dev-libs/pyinotify
+        || ( dev-python/Imaging dev-python/Pillow[python_abis:2.7] )
+        dev-python/dbus-python[python_abis:2.7]
+        dev-python/lxml[python_abis:2.7]
+        dev-python/pam[python_abis:2.7]
+        dev-python/pexpect[python_abis:2.7]
+        dev-python/pycairo[python_abis:2.7]
+        gnome-desktop/gnome-backgrounds
+        gnome-desktop/gnome-keyring:1
+        gnome-desktop/gnome-themes-standard
+        gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
+        gnome-desktop/libsoup:2.4[gconf(+)][gobject-introspection?]
+        gnome-desktop/network-manager-applet[bluetooth?][gobject-introspection]
+        gnome-platform/GConf:2[gobject-introspection?][policykit]
+        media-libs/gstreamer:1.0[>=0.11.92][gobject-introspection?]
+        media-libs/libcanberra[gstreamer][gtk3][pulseaudio]
+        media-plugins/gst-plugins-base:1.0[>=0.11.92][gobject-introspection?]
+        media-sound/pulseaudio
+        net-apps/NetworkManager[gobject-introspection?][policykit]
+        sys-apps/accountsservice[>=0.6.14][gobject-introspection?]
+        sys-auth/polkit:1[>=0.100][gobject-introspection?]
+        x11-dri/mesa
+        x11-libs/clutter:1[>=1.7.5][X][gobject-introspection?]
+        x11-libs/gdk-pixbuf:2.0[gobject-introspection?]
+        x11-libs/gtk+:3[>=3.0.0][gobject-introspection?]
+        x11-libs/libX11
+        x11-libs/libXfixes
+        x11-libs/startup-notification[>=0.11]
+        bluetooth? ( gnome-desktop/gnome-bluetooth:1[>=3.1.0][gobject-introspection?] )
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.10.1] )
+    run:
+        cinnamon-desktop/cinnamon-control-center
+        cinnamon-desktop/cinnamon-screensaver
+        cinnamon-desktop/cinnamon-session
+        cinnamon-desktop/cinnamon-settings-daemon
+        gnome-desktop/caribou:1.0
+        gnome-desktop/polkit-gnome:1
+    suggestion:
+        cinnamon-desktop/cinnamon-translations
+"
+
+WORK="${WORKBASE}/${MY_PN}-${PV}"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}/${PNV}-automagic-gnome-bluetooth.patch"
+    "${FILES}/${PNV}-force-python2.patch"
+    "${FILES}/${PNV}-gnome-3.14.patch"
+    "${FILES}/${PNV}-set-default-theme.patch"
+    "${FILES}/${PNV}-set-wheel.patch"
+    "${FILES}/${PNV}-use-pkexec.patch"
+    "${FILES}/${PNV}-os-release.patch"
+)
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    '--disable-schemas-compile'
+    '--disable-schemas-install'
+    '--enable-compile-warnings=no'
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'bluetooth' )
+
+src_prepare() {
+    edo autopoint --force
+    edo intltoolize --copy --force --automake
+    autotools_src_prepare
+}
+
+src_install() {
+    gsettings_src_install
+    if [[ ${LIBDIR} != lib ]]; then
+        edo cd "${IMAGE}"/usr
+        edo mv lib/* "${LIBDIR}"
+        edo rmdir lib
+    fi
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gsettings_pkg_postinst
+    gtk-icon-cache_pkg_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gsettings_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+}
+

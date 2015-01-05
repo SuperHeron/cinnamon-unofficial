@@ -1,0 +1,9 @@
+--- a/files/usr/bin/cinnamon-settings-users	2014-11-26 22:22:05.000000000 +0100
++++ b/files/usr/bin/cinnamon-settings-users	2015-01-18 00:35:25.663387607 +0100
+@@ -2,5 +2,5 @@
+ 
+ import os
+ 
+-os.system("gksu /usr/lib/cinnamon-settings-users/cinnamon-settings-users.py")
++os.system("pkexec /usr/lib/cinnamon-settings-users/cinnamon-settings-users.py")
+ 
