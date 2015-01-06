@@ -1,0 +1,45 @@
+Source: Written by Pascal Hofstee <caelian@gmail.com>
+Upstream: 3.6.2 is the latest in the Gnome 3.6 series, expect no further
+          development there since 3.8 has been released already.
+Reason: The different gsm_systemd_can_* methods issue a g_free call on
+        potentially uninitialized gchar* variables, causing a SIGABRT in
+		gnome-session. This occurs e.g. when opening gnome-shell's
+		user-menu.
+--- a/cinnamon-session/csm-systemd.c	2013-05-14 08:56:35.269505534 +0200
++++ b/cinnamon-session/csm-systemd.c	2013-05-14 09:14:12.063293794 +0200
+@@ -278,7 +278,7 @@
+ csm_systemd_can_restart (CsmSystem *system)
+ {
+         CsmSystemd *manager = CSM_SYSTEMD (system);
+-        gchar *rv;
++        gchar *rv = NULL;
+         GVariant *res;
+         gboolean can_restart;
+ 
+@@ -304,7 +304,7 @@
+ csm_systemd_can_stop (CsmSystem *system)
+ {
+         CsmSystemd *manager = CSM_SYSTEMD (system);
+-        gchar *rv;
++        gchar *rv = NULL;
+         GVariant *res;
+         gboolean can_stop;
+ 
+@@ -355,7 +355,7 @@
+ csm_systemd_can_suspend (CsmSystem *system)
+ {
+         CsmSystemd *manager = CSM_SYSTEMD (system);
+-        gchar *rv;
++        gchar *rv = NULL;
+         GVariant *res;
+         gboolean can_suspend;
+ 
+@@ -381,7 +381,7 @@
+ Csm_systemd_can_hibernate (CsmSystem *system)
+ {
+         CsmSystemd *manager = CSM_SYSTEMD (system);
+-        gchar *rv;
++        gchar *rv = NULL;
+         GVariant *res;
+         gboolean can_hibernate;
+ 
