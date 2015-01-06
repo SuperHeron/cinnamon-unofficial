@@ -1,0 +1,77 @@
+# Copyright 2015 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=linuxmint ] autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+require gsettings gtk-icon-cache freedesktop-desktop freedesktop-mime
+
+SUMMARY="File Manager for Cinnamon"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="
+    exif
+    gobject-introspection
+    gtk-doc
+    tracker [[ description = [ add tracker support ] ]]
+    xmp [[ description = [ Support for XMP metadata ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        app-doc/gtk-doc-autotools[>=1.4]
+        dev-python/polib[python_abis:2.7]
+        dev-util/intltool[>=0.40.1]
+        gnome-desktop/gnome-common[>=2.3.0]
+        sys-devel/gettext
+        virtual/pkg-config[>=0.19]
+        gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
+    build+run:
+        cinnamon-desktop/cinnamon-desktop[>=1.0.0]
+        dev-libs/glib:2[>=2.31.9]
+        dev-libs/libxml2:2.0[>=2.7.8]
+        gnome-desktop/gsettings-desktop-schemas
+        x11-libs/gtk+:3[>=3.3.17][gobject-introspection?]
+        x11-libs/libX11
+        x11-libs/libnotify[>=0.7.0]
+        x11-libs/pango[>=1.28.3]
+        x11-proto/xproto
+        exif? ( media-libs/libexif[>=0.6.20] )
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6.4] )
+        tracker? ( app-pim/tracker:=[>=0.12] )
+        xmp? ( media-libs/exempi:2.0[>=2.1.0] )
+"
+
+RESTRICT="test" # requires X
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( '--disable-packagekit' '--disable-update-mimedb' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    'exif libexif'
+    'gobject-introspection introspection'
+    'gtk-doc'
+    'tracker'
+    'xmp'
+)
+
+src_prepare() {
+    edo glib-gettextize --copy --force
+    edo gtkdocize --copy
+    edo gnome-doc-common
+    edo intltoolize --copy --force --automake
+    autotools_src_prepare
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    freedesktop-mime_pkg_postinst
+    gtk-icon-cache_pkg_postinst
+    gsettings_pkg_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    freedesktop-mime_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+    gsettings_pkg_postrm
+}
+
