@@ -1,0 +1,72 @@
+# Copyright 2015 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='linuxmint' ] gsettings freedesktop-desktop
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+
+SUMMARY="Screensaver Application for Cinnamon"
+DESCRIPTION="
+cinnamon-screensaver is a screen saver and locker that aims to have
+simple, sane, secure defaults and be well integrated with the desktop.
+It is designed to support:
+
+    * the ability to lock down configuration settings
+    * translation into many languages
+    * user switching
+"
+
+LICENCES="GPL-2 LGPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="consolekit doc systemd"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.35.0]
+        gnome-desktop/gnome-common[>=2.3.0]
+        sys-devel/gettext
+        virtual/pkg-config
+        doc? ( app-text/xmlto )
+    build+run:
+        cinnamon-desktop/cinnamon-desktop[>=1.0.0]
+        dev-libs/dbus-glib:1[>=0.30]
+        dev-libs/glib:2[>=2.25.6]
+        gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
+        gnome-desktop/libgnomekbd[>=0.1]
+        sys-apps/dbus[>=0.30]
+        sys-libs/pam
+        x11-libs/gtk+:3[>=2.99.3]
+        x11-libs/libX11[>=1.0]
+        x11-libs/libXScrnSaver
+        x11-libs/libXext
+        x11-libs/libXxf86misc
+        x11-libs/libXxf86vm
+        x11-libs/libxklavier
+        consolekit? ( sys-auth/ConsoleKit )
+        systemd? ( sys-apps/systemd )
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( '--disable-schemas-compile' )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
+    'consolekit console-kit'
+    'systemd'
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'doc docbook-docs' )
+
+src_prepare() {
+    edo glib-gettextize --copy --force
+    edo gnome-doc-common
+    edo intltoolize --copy --force --automake
+    autotools_src_prepare
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gsettings_pkg_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gsettings_pkg_postrm
+}
+
