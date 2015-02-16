@@ -18,7 +18,11 @@ It is designed to support:
 LICENCES="GPL-2 LGPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="consolekit doc systemd"
+MYOPTIONS="
+    consolekit [[ description = [ Use ConsoleKit for locking ] ]]
+    doc 
+    systemd
+"
 
 DEPENDENCIES="
     build:

@@ -12,7 +12,7 @@ PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     cups
     man-pages [[ description = [ Generate and install man pages ] ]]
-    smartcard
+    smartcard [[ description = [ Add support for smart cards via NSS ] ]]
     systemd
     ( linguas: af am ar as ast az be be@latin bg bn bn_IN br bs ca ca@valencia crh cs cy da de dz
                el en_CA en_GB en@shaw eo es et eu fa fi fr ga gl gu he hi hr hu id is it ja ka km
