@@ -13,7 +13,7 @@ MYOPTIONS="
     exif
     gobject-introspection
     gtk-doc
-    tracker [[ description = [ add tracker support ] ]]
+    tracker [[ description = [ Use tracker as search engine ] ]]
     xmp [[ description = [ Support for XMP metadata ] ]]
 "
 
