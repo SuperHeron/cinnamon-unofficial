@@ -4,7 +4,7 @@
 MY_PN="Cinnamon"
 
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
-require python [ python_dep=2.5 ] github [ user='linuxmint' ]
+require python [ blacklist=3 multibuild=false ] github [ user='linuxmint' ]
 require gsettings gtk-icon-cache
 
 SUMMARY="A Linux Desktop featuring a traditional layout, built from modern technology and introducing brand new innovative features."
