@@ -1,3 +1,7 @@
+Source: written by Pierre Lejeune <superheron@gmail.com>, for Exherbo
+Upstream: no
+Reason: Force use of python2
+
 --- a/tools/check-for-missing.py	2014-11-26 22:22:05.000000000 +0100
 +++ b/tools/check-for-missing.py	2015-01-18 00:09:43.444816680 +0100
 @@ -1,4 +1,4 @@

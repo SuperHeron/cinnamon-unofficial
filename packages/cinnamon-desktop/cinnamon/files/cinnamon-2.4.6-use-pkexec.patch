@@ -1,3 +1,7 @@
+Source: written by Pierre Lejeune <superheron@gmail.com>, inspired from ArchLinux
+Upstream: yes, related to GitHub issue #3565: https://github.com/linuxmint/Cinnamon/issues/3565
+Reason: Rely on pkexec (from polkit) instead of gksu
+
 --- a/files/usr/bin/cinnamon-settings-users	2014-11-26 22:22:05.000000000 +0100
 +++ b/files/usr/bin/cinnamon-settings-users	2015-01-18 00:35:25.663387607 +0100
 @@ -2,5 +2,5 @@

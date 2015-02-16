@@ -1,3 +1,7 @@
+Source: from ArchLinux: https://projects.archlinux.org/svntogit/community.git/plain/trunk/gnome-3.14.patch?h=packages/cinnamon
+Upstream: yes, GitHub issue #3577: https://github.com/linuxmint/Cinnamon/issues/3577
+Reason: Fixes for gnome-3.14 compatibility
+
 diff -Naur Cinnamon-2.2.16.orig/data/theme/cinnamon.css Cinnamon-2.2.16/data/theme/cinnamon.css
 --- Cinnamon-2.2.16.orig/data/theme/cinnamon.css	2014-08-12 13:00:36.000000000 +0200
 +++ Cinnamon-2.2.16/data/theme/cinnamon.css	2014-10-01 02:51:45.859630151 +0200

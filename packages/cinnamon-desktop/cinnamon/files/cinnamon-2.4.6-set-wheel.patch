@@ -1,3 +1,7 @@
+Source: from ArchLinux: https://projects.archlinux.org/svntogit/community.git/plain/trunk/set_wheel.patch?h=packages/cinnamon
+Upstream: yes, GitHub issue #3576: https://github.com/linuxmint/Cinnamon/issues/3576
+Reason: Use wheel group instead of relying on sudo
+
 --- a/files/usr/lib/cinnamon-settings-users/cinnamon-settings-users.py
 +++ b/files/usr/lib/cinnamon-settings-users/cinnamon-settings-users.py
 @@ -144,12 +144,11 @@ class EditableEntry (Gtk.Notebook):
