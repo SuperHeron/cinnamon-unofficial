@@ -76,7 +76,7 @@ DEPENDENCIES="
         gnome-desktop/caribou:1.0
         gnome-desktop/polkit-gnome:1
     suggestion:
-        cinnamon-desktop/cinnamon-translations
+        cinnamon-desktop/cinnamon-translations [[ description = [ Install translations files ] ]]
 "
 
 WORK="${WORKBASE}/${MY_PN}-${PV}"
