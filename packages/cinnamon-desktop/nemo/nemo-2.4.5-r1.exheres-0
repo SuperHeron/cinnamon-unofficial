@@ -30,6 +30,7 @@ DEPENDENCIES="
         cinnamon-desktop/cinnamon-desktop[>=1.0.0]
         dev-libs/glib:2[>=2.31.9]
         dev-libs/libxml2:2.0[>=2.7.8]
+        gnome-desktop/gobject-introspection:1[>=0.6.4] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
         gnome-desktop/gsettings-desktop-schemas
         x11-libs/gtk+:3[>=3.3.17][gobject-introspection?]
         x11-libs/libX11
@@ -37,7 +38,6 @@ DEPENDENCIES="
         x11-libs/pango[>=1.28.3]
         x11-proto/xproto
         exif? ( media-libs/libexif[>=0.6.20] )
-        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6.4] )
         tracker? ( app-pim/tracker:=[>=0.12] )
         xmp? ( media-libs/exempi:2.0[>=2.1.0] )
 "
