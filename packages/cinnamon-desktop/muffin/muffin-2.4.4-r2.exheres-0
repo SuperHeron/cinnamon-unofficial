@@ -58,6 +58,7 @@ DEPENDENCIES="
         ]]
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/417ab781aae40562718a023c9f48f07e7222e59c.patch )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-debug'
     '--disable-schemas-compile'
