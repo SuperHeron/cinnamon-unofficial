@@ -41,6 +41,6 @@ src_test() {
 
 src_install() {
     default
-    edo rmdir "${IMAGE}"/usr/libexec/{${PN}/{installed-tests/{js,},},}
+    edo rmdir "${IMAGE}"/usr/$(exhost --target)/libexec/{${PN}/{installed-tests/{js,},},}
 }
 
