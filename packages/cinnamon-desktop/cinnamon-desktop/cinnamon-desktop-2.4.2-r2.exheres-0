@@ -67,3 +67,9 @@ src_prepare() {
     autotools_src_prepare
 }
 
+src_install() {
+    default
+    edo cd "${IMAGE}"/usr
+    edo mv {,$(exhost --target)/}bin
+}
+
