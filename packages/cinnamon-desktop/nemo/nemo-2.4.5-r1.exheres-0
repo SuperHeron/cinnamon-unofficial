@@ -54,6 +54,7 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 )
 
 src_prepare() {
+    edo sed -e "s/AC_PATH_PROG(PKG_CONFIG, pkg-config, no)/PKG_PROG_PKG_CONFIG/g" -i configure.in
     edo glib-gettextize --copy --force
     edo gtkdocize --copy
     edo gnome-doc-common
