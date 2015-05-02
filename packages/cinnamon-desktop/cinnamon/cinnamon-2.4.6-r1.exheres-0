@@ -106,11 +106,11 @@ src_prepare() {
 
 src_install() {
     gsettings_src_install
-    if [[ ${LIBDIR} != lib ]]; then
-        edo cd "${IMAGE}"/usr
-        edo mv lib/* "${LIBDIR}"
-        edo rmdir lib
-    fi
+    edo cd "${IMAGE}"/usr
+    for i in bin lib; do
+        edo mv ${i}/* $(exhost --target)/${i}
+        edo rmdir ${i}
+    done
 }
 
 pkg_postinst() {
