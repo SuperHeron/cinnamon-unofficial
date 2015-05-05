@@ -57,7 +57,7 @@ DEPENDENCIES="
         media-libs/libcanberra[gstreamer][gtk3][pulseaudio]
         media-plugins/gst-plugins-base:1.0[>=0.11.92][gobject-introspection?]
         media-sound/pulseaudio
-        net-apps/NetworkManager[gobject-introspection?][policykit]
+        net-apps/NetworkManager[gobject-introspection?][polkit]
         sys-apps/accountsservice[>=0.6.14][gobject-introspection?]
         sys-auth/polkit:1[>=0.100][gobject-introspection?]
         x11-dri/mesa
