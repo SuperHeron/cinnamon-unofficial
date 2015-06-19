@@ -33,6 +33,7 @@ DEPENDENCIES="
         dev-libs/glib:2[>=2.38.0]
         gnome-desktop/gsettings-desktop-schemas[>=3.4.1]
         gnome-desktop/libgnomekbd[>=2.91.1]
+        gnome-desktop/libgudev
         gnome-desktop/librsvg:2[>=2.36.2]
         gnome-platform/GConf:2[>=2.6.1]
         media-libs/fontconfig
@@ -41,7 +42,6 @@ DEPENDENCIES="
         media-sound/pulseaudio[>=0.9.16]
         sys-apps/colord[>=0.1.9]
         sys-apps/dbus[>=1.1.2]
-        sys-apps/systemd [[ note = [ required for gudev ] ]]
         sys-apps/upower[>=0.9.11]
         sys-auth/polkit:1[>=0.97]
         x11-drivers/xf86-input-wacom
