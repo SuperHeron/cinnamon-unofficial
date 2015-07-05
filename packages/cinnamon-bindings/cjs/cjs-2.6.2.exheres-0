@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ]
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 
 SUMMARY="JavaScript bindings for Cinnamon"
 
@@ -18,10 +18,10 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         dev-libs/dbus-glib:1
-        dev-libs/glib:2[>=2.36.0]
+        dev-libs/glib:2[>=2.37.3]
         dev-libs/libffi
         dev-libs/spidermonkey:24.0
-        gnome-desktop/gobject-introspection:1[>=1.38.0]
+        gnome-desktop/gobject-introspection:1[>=1.33.10]
         sys-apps/dbus
         sys-libs/readline
         x11-libs/cairo
