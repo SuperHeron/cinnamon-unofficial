@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings gtk-icon-cache
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 
 SUMMARY="Cinnamon Settings Daemon"
 
@@ -13,7 +13,6 @@ MYOPTIONS="
     cups
     man-pages [[ description = [ Generate and install man pages ] ]]
     smartcard [[ description = [ Add support for smart cards via NSS ] ]]
-    systemd
     ( linguas: af am ar as ast az be be@latin bg bn bn_IN br bs ca ca@valencia crh cs cy da de dz
                el en_CA en_GB en@shaw eo es et eu fa fi fr ga gl gu he hi hr hu id is it ja ka km
                kn ko ku lt lv mai mg mk ml mn mr ms nb nds ne nl nn nso oc or pa pl pt pt_BR ro ru
@@ -28,11 +27,11 @@ DEPENDENCIES="
         virtual/pkg-config[>=0.20]
         man-pages? ( dev-libs/libxslt [[ note = [ For xsltproc ] ]] )
     build+run:
-        cinnamon-desktop/cinnamon-desktop[>=1.0.0]
+        cinnamon-desktop/cinnamon-desktop[>=2.6.3]
         dev-libs/dbus-glib:1
         dev-libs/glib:2[>=2.38.0]
         gnome-desktop/gsettings-desktop-schemas[>=3.4.1]
-        gnome-desktop/libgnomekbd[>=2.91.1]
+        gnome-desktop/libgnomekbd[>=3.6.0]
         gnome-desktop/libgudev
         gnome-desktop/librsvg:2[>=2.36.2]
         gnome-platform/GConf:2[>=2.6.1]
@@ -40,12 +39,13 @@ DEPENDENCIES="
         media-libs/lcms2[>=2.2]
         media-libs/libcanberra[gtk3]
         media-sound/pulseaudio[>=0.9.16]
-        sys-apps/colord[>=0.1.9]
+        sys-apps/colord[>=0.1.27]
         sys-apps/dbus[>=1.1.2]
+        sys-apps/systemd [[ note = [ Support for logind ] ]]
         sys-apps/upower[>=0.9.11]
         sys-auth/polkit:1[>=0.97]
         x11-drivers/xf86-input-wacom
-        x11-libs/gtk+:3[>=3.7.8]
+        x11-libs/gtk+:3[>=3.9.10]
         x11-libs/libX11
         x11-libs/libXext
         x11-libs/libXfixes
@@ -57,7 +57,6 @@ DEPENDENCIES="
         x11-proto/kbproto
         cups? ( net-print/cups )
         smartcard? ( dev-libs/nss[>=3.11.2] )
-        !systemd? ( sys-auth/ConsoleKit )
     recommendation:
         gnome-desktop/gnome-icon-theme-symbolic [[
             description = [ explicitly uses symbolic icons ]
@@ -73,7 +72,6 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'cups'
     'man-pages man'
     'smartcard smartcard-support'
-    'systemd'
 )
 
 RESTRICT="test" # requires X
