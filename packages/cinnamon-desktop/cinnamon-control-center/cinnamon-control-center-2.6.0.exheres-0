@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gtk-icon-cache
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 
 SUMMARY="Configuration Applications for the Cinnamon Desktop"
 DESCRIPTION="
@@ -15,7 +15,6 @@ PLATFORMS="~amd64"
 MYOPTIONS="
     cups
     doc
-    systemd
     ( linguas: am ar as ast bg bn bn_IN bs ca cs cy da de el en_GB es et fa fi fr gl gu he hi hr hu
                id ilo is it ja ka kn ko ku lo lt lv mai mk ml mr ms nb nds nl nn or pa pl pt pt_BR
                ro ru si sk sl sq sr sr@latin sv ta te tr uk ur vi zh_CN zh_TW )
@@ -42,12 +41,10 @@ DEPENDENCIES="
         media-sound/pulseaudio[>=1.1]
         net-apps/NetworkManager[>=0.9.8][modem-manager][systemd?]
         net-wireless/ModemManager[>=0.7]
-        sys-apps/colord[>=0.1.8]
-        sys-apps/upower[>=0.9.1]
+        sys-apps/colord[>=0.1.14]
         sys-auth/polkit:1[>=0.103]
         x11-libs/gdk-pixbuf:2.0[>=2.23.0]
         x11-libs/gtk+:3[>=3.8.0]
-        x11-libs/clutter:1[>=1.11.3]
         x11-libs/libX11
         x11-libs/libXxf86misc
         x11-libs/libXi[>=1.2]
@@ -56,14 +53,11 @@ DEPENDENCIES="
         x11-libs/libwacom[>=0.7]
         x11-proto/kbproto
         cups? ( net-print/cups[>=1.4] )
-        systemd? ( sys-apps/systemd )
 "
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( '--disable-update-mimedb' '--without-libsocialweb' )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'cups'
     'doc documentation'
-    'systemd'
 )
 
 pkg_postinst() {
