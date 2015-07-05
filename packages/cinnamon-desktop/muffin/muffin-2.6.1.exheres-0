@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require gsettings github [ user=linuxmint ] python [ blacklist=3 multibuild=false ]
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 
 SUMMARY="The Cinnamon window manager"
 
@@ -11,6 +11,7 @@ SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     gobject-introspection
+    gtk-doc
     sound [[ description = [ Enable the use of libcanberra for event sounds ] ]]
     xinerama
     ( linguas: am ar as ast az be be@latin bg bn bn_IN br bs ca ca@valencia cs cy da de dz el en_CA
@@ -21,34 +22,35 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
+        app-doc/gtk-doc-autotools[>=1.15]
         dev-util/intltool[>=0.35.0]
-        gnome-desktop/gnome-common[>=2.3.0]
         gnome-desktop/gnome-doc-utils[>=0.8.0]
         sys-devel/gettext
         virtual/pkg-config[>=0.20]
+        gtk-doc? ( dev-doc/gtk-doc[>=1.15] )
     build+run:
-        cinnamon-desktop/cinnamon-desktop[>=2.3.0][gobject-introspection?]
-        dev-libs/glib:2[>=2.14.0]
-        gnome-desktop/gobject-introspection:1[>=0.9.5] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
+        cinnamon-desktop/cinnamon-desktop[>=2.4.0][gobject-introspection?]
+        dev-libs/glib:2[>=2.37.3]
+        gnome-desktop/gobject-introspection:1[>=0.9.2] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
         gnome-desktop/gsettings-desktop-schemas[>=3.3.0][gobject-introspection?]
         gnome-desktop/zenity
         x11-dri/mesa
         x11-libs/cairo[>=1.10.0]
         x11-libs/cogl:1.0[>=1.9.6][gobject-introspection?]
-        x11-libs/clutter:1[>=1.9.10][gobject-introspection?]
+        x11-libs/clutter:1[>=1.10.0][gobject-introspection?]
         x11-libs/gdk-pixbuf:2.0
-        x11-libs/gtk+:3[>=3.3.7][gobject-introspection?]
+        x11-libs/gtk+:3[>=3.9.12][gobject-introspection?]
         x11-libs/libICE
         x11-libs/libSM
         x11-libs/libX11
-        x11-libs/libXcomposite[>=0.2]
+        x11-libs/libXcomposite[>=0.3]
         x11-libs/libXcursor
         x11-libs/libXdamage
         x11-libs/libXext
         x11-libs/libXfixes
         x11-libs/libXrandr
         x11-libs/libXrender
-        x11-libs/pango[>=1.2.0]
+        x11-libs/pango[>=1.14.0]
         x11-libs/startup-notification[>=0.7]
         sound? ( media-libs/libcanberra[>=0.26][gtk3] )
         xinerama? ( x11-libs/libXinerama )
@@ -58,25 +60,23 @@ DEPENDENCIES="
         ]]
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/417ab781aae40562718a023c9f48f07e7222e59c.patch )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-debug'
     '--disable-schemas-compile'
     '--disable-scrollkeeper'
     '--disable-static'
-    # need to reduce default compiler warnings due to deprecation errors
-    '--enable-compile-warnings=maximum'
     '--enable-shape'
     '--enable-sm'
     '--enable-startup-notification'
     '--enable-xsync'
 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' 'xinerama' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' 'gtk-doc' 'xinerama' )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'sound libcanberra' )
 
 src_prepare() {
+    edo mkdir m4
     edo glib-gettextize --copy --force
-    edo gnome-doc-common
+    edo gtkdocize --copy
     edo gnome-doc-prepare --copy --force --automake
     edo intltoolize --copy --force --automake
     autotools_src_prepare
