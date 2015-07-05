@@ -4,12 +4,12 @@ Reason: Use wheel group instead of relying on sudo
 
 --- a/files/usr/lib/cinnamon-settings-users/cinnamon-settings-users.py
 +++ b/files/usr/lib/cinnamon-settings-users/cinnamon-settings-users.py
-@@ -144,12 +144,11 @@ class EditableEntry (Gtk.Notebook):
+@@ -145,12 +145,11 @@ class EditableEntry (Gtk.Notebook):
  
  class PasswordDialog(Gtk.Dialog):
  
 -    def __init__ (self, user, password_mask, group_mask):            
-+    def __init__ (self, user, password_mask):
++    def __init__ (self, user, password_mask):            
          super(PasswordDialog, self).__init__()
  
          self.user = user
@@ -18,20 +18,23 @@ Reason: Use wheel group instead of relying on sudo
  
          self.set_modal(True)
          self.set_skip_taskbar_hint(True)
-@@ -215,12 +214,6 @@ class PasswordDialog(Gtk.Dialog):
+@@ -216,14 +215,7 @@ class PasswordDialog(Gtk.Dialog):
      def change_password(self):        
          newpass = self.new_password.get_text()
          self.user.set_password(newpass, "")
--        os.system("gpasswd -d '%s' nopasswdlogin" % self.user.get_user_name())
 -        mask = self.group_mask.get_text()
--        mask = mask.split(", ")
--        mask.remove("nopasswdlogin")
--        mask = ", ".join(mask)
--        self.group_mask.set_text(mask)        
-         self.password_mask.set_text(u'\u2022\u2022\u2022\u2022\u2022\u2022')
+-        if "nopasswdlogin" in mask:
+-            os.system("gpasswd -d '%s' nopasswdlogin" % self.user.get_user_name())
+-            mask = mask.split(", ")
+-            mask.remove("nopasswdlogin")
+-            mask = ", ".join(mask)
+-            self.group_mask.set_text(mask)
+-            self.password_mask.set_text(u'\u2022\u2022\u2022\u2022\u2022\u2022')
++	self.password_mask.set_text(u'\u2022\u2022\u2022\u2022\u2022\u2022')
          self.destroy()  
  
-@@ -515,7 +508,7 @@ class Module:
+     def set_passwords_visibility(self):
+@@ -517,7 +509,7 @@ class Module:
          model, treeiter = self.users_treeview.get_selection().get_selected()
          if treeiter != None:
              user = model[treeiter][INDEX_USER_OBJECT]       
@@ -40,7 +43,7 @@ Reason: Use wheel group instead of relying on sudo
              response = dialog.run()
  
      def _on_groups_button_clicked(self, widget): 
-@@ -745,11 +738,11 @@ class Module:
+@@ -756,11 +748,11 @@ class Module:
              pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size("/usr/share/cinnamon/faces/user-generic.png", 48, 48)
              description = "<b>%s</b>\n%s" % (fullname, username)
              piter = self.users.append(None, [new_user, pixbuf, description])
@@ -54,4 +57,4 @@ Reason: Use wheel group instead of relying on sudo
 +                os.system("usermod %s -G %s" % (username, username))
              self.load_groups()
          dialog.destroy()
-          
+ 

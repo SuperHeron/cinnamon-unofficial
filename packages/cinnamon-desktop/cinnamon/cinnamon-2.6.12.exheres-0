@@ -3,7 +3,7 @@
 
 MY_PN="Cinnamon"
 
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 require python [ blacklist=3 multibuild=false ] github [ user='linuxmint' ]
 require gsettings gtk-icon-cache
 
@@ -20,22 +20,24 @@ comfortable desktop experience.
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS="bluetooth gobject-introspection"
+MYOPTIONS="bluetooth gobject-introspection gtk-doc"
 PLATFORMS="~amd64"
 
 DEPENDENCIES="
     build:
+        app-doc/gtk-doc-autotools[>=1.15]
         dev-util/intltool[>=0.40]
         sys-devel/gettext[>=0.17]
         virtual/pkg-config[>=0.22]
+        gtk-doc? ( dev-doc/gtk-doc[>=1.15] )
     build+run:
         app-misc/ca-certificates
-        cinnamon-bindings/cjs:1[>=2.3.1]
-        cinnamon-desktop/cinnamon-desktop[>=1.0.0][gobject-introspection?]
+        cinnamon-bindings/cjs:1[>=2.4.0]
+        cinnamon-desktop/cinnamon-desktop[>=2.4.0][gobject-introspection?]
         cinnamon-desktop/cinnamon-menus:3.0[gobject-introspection?]
-        cinnamon-desktop/muffin[>=1.9.1][gobject-introspection?]
+        cinnamon-desktop/muffin[>=2.4.0][gobject-introspection?]
         dev-libs/dbus-glib:1
-        dev-libs/glib:2[>=2.29.10]
+        dev-libs/glib:2[>=2.37.3]
         dev-libs/libcroco[>=0.6.2]
         dev-libs/libxml2:2.0
         dev-python/dbus-python[python_abis:2.7]
@@ -45,7 +47,7 @@ DEPENDENCIES="
         dev-python/Pillow[python_abis:2.7]
         dev-python/pycairo[python_abis:2.7]
         dev-python/pyinotify
-        gnome-desktop/gobject-introspection:1[>=0.10.1] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
+        gnome-desktop/gobject-introspection:1[>=0.9.2] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
         gnome-desktop/gnome-backgrounds
         gnome-desktop/gnome-keyring:1
         gnome-desktop/gnome-themes-standard
@@ -61,9 +63,9 @@ DEPENDENCIES="
         sys-apps/accountsservice[>=0.6.14][gobject-introspection?]
         sys-auth/polkit:1[>=0.100][gobject-introspection?]
         x11-dri/mesa
-        x11-libs/clutter:1[>=1.7.5][X][gobject-introspection?]
+        x11-libs/clutter:1[>=1.10.0][X][gobject-introspection?]
         x11-libs/gdk-pixbuf:2.0[gobject-introspection?]
-        x11-libs/gtk+:3[>=3.0.0][gobject-introspection?]
+        x11-libs/gtk+:3[>=3.9.12][gobject-introspection?]
         x11-libs/libX11
         x11-libs/libXfixes
         x11-libs/startup-notification[>=0.11]
@@ -83,7 +85,6 @@ WORK="${WORKBASE}/${MY_PN}-${PV}"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}/${PNV}-automagic-gnome-bluetooth.patch"
-    "${FILES}/${PNV}-force-python2.patch"
     "${FILES}/${PNV}-gnome-3.14.patch"
     "${FILES}/${PNV}-set-default-theme.patch"
     "${FILES}/${PNV}-set-wheel.patch"
@@ -93,14 +94,14 @@ DEFAULT_SRC_PREPARE_PATCHES=(
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-schemas-compile'
     '--disable-schemas-install'
-    '--enable-compile-warnings=no'
 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' 'gtk-doc' )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'bluetooth' )
 
 src_prepare() {
     edo autopoint --force
     edo intltoolize --copy --force --automake
+    edo gtkdocize --copy
     autotools_src_prepare
 }
 

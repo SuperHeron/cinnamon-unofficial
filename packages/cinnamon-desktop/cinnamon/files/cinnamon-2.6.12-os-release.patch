@@ -4,7 +4,7 @@ Reason: Show "Exherbo Linux" in System Info
 
 --- a/files/usr/lib/cinnamon-settings/modules/cs_info.py	2015-01-19 16:45:53.000000000 +0100
 +++ b/files/usr/lib/cinnamon-settings/modules/cs_info.py	2015-02-14 23:22:45.294543401 +0100
-@@ -87,6 +87,13 @@
+@@ -92,6 +92,13 @@
      elif os.path.isfile("/etc/arch-release"):
          title = "Arch Linux"
          infos.append((_("Operating System"), title))
