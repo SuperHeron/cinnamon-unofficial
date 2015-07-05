@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 
 SUMMARY="Screensaver Application for Cinnamon"
 DESCRIPTION="
@@ -18,11 +18,7 @@ It is designed to support:
 LICENCES="GPL-2 LGPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="
-    consolekit [[ description = [ Use ConsoleKit for locking ] ]]
-    doc 
-    systemd
-"
+MYOPTIONS="doc"
 
 DEPENDENCIES="
     build:
@@ -32,33 +28,28 @@ DEPENDENCIES="
         virtual/pkg-config
         doc? ( app-text/xmlto )
     build+run:
-        cinnamon-desktop/cinnamon-desktop[>=1.0.0]
+        cinnamon-desktop/cinnamon-desktop[>=2.6.3]
         dev-libs/dbus-glib:1[>=0.30]
-        dev-libs/glib:2[>=2.25.6]
+        dev-libs/glib:2[>=2.37.3]
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
-        gnome-desktop/libgnomekbd[>=0.1]
-        sys-apps/dbus[>=0.30]
+        gnome-desktop/libgnomekbd[>=3.6.0]
+        net-libs/webkit:4.0
+        sys-apps/dbus[>=0.78]
+        sys-apps/systemd[>=183] [[ note = [ Support for logind ] ]]
         sys-libs/pam
-        x11-libs/gtk+:3[>=2.99.3]
+        x11-libs/gtk+:3[>=3.1.4]
         x11-libs/libX11[>=1.0]
         x11-libs/libXScrnSaver
         x11-libs/libXext
         x11-libs/libXxf86misc
         x11-libs/libXxf86vm
         x11-libs/libxklavier
-        consolekit? ( sys-auth/ConsoleKit )
-        systemd? ( sys-apps/systemd )
 "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--disable-schemas-compile' )
-DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
-    'consolekit console-kit'
-    'systemd'
-)
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'doc docbook-docs' )
 
 src_prepare() {
-    edo sed -e "s/pkg-config/\$PKG_CONFIG/g" -i configure.ac
     edo glib-gettextize --copy --force
     edo gnome-doc-common
     edo intltoolize --copy --force --automake
