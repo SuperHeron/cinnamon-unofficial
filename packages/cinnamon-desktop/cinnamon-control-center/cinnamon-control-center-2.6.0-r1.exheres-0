@@ -37,7 +37,7 @@ DEPENDENCIES="
         gnome-desktop/libgnomekbd[>=2.91.91]
         gnome-desktop/network-manager-applet[>=0.9.8]
         media-libs/fontconfig
-        media-libs/libcanberra[>=0.13][gtk3]
+        media-libs/libcanberra[>=0.13][gtk][providers:gtk3]
         media-sound/pulseaudio[>=1.1]
         net-apps/NetworkManager[>=0.9.8][modem-manager][systemd?]
         net-wireless/ModemManager[>=0.7]
