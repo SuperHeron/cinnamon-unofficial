@@ -52,7 +52,7 @@ DEPENDENCIES="
         x11-libs/libXrender
         x11-libs/pango[>=1.14.0]
         x11-libs/startup-notification[>=0.7]
-        sound? ( media-libs/libcanberra[>=0.26][gtk][providers:gtk3] )
+        sound? ( media-libs/libcanberra[>=0.26][providers:gtk3] )
         xinerama? ( x11-libs/libXinerama )
     recommendation:
         gnome-desktop/gnome-themes-standard [[
