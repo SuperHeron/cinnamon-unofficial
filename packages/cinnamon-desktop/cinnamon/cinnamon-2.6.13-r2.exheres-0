@@ -56,7 +56,7 @@ DEPENDENCIES="
         gnome-desktop/network-manager-applet[bluetooth?][gobject-introspection?]
         gnome-platform/GConf:2[gobject-introspection?][polkit]
         media-libs/gstreamer:1.0[>=0.11.92][gobject-introspection?]
-        media-libs/libcanberra[gstreamer][gtk][providers:gtk3][pulseaudio]
+        media-libs/libcanberra[gstreamer][providers:gtk3][pulseaudio]
         media-plugins/gst-plugins-base:1.0[>=0.11.92][gobject-introspection?]
         media-sound/pulseaudio
         net-apps/NetworkManager[gobject-introspection?][polkit]
