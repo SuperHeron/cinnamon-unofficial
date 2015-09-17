@@ -30,7 +30,7 @@ DEPENDENCIES="
         dev-libs/dbus-glib:1[>=0.88]
         dev-libs/glib:2[>=2.37.3]
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7] [[ note = [ See GNOME bug #641686 ] ]]
-        media-libs/libcanberra[gtk][providers:gtk3]
+        media-libs/libcanberra[providers:gtk3]
         sys-apps/systemd[>=183] [[ note = [ Support for logind ] ]]
         sys-apps/upower[>=0.9.0]
         x11-libs/gtk+:3[>=3.0.0]
