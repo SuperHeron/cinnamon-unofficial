@@ -22,7 +22,6 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.37.1]
-        gnome-desktop/gnome-common[>=2.3.0]
         sys-devel/gettext
         virtual/pkg-config[>=0.20]
         man-pages? ( dev-libs/libxslt [[ note = [ For xsltproc ] ]] )
@@ -78,7 +77,6 @@ RESTRICT="test" # requires X
 
 src_prepare() {
     edo glib-gettextize --copy --force
-    edo gnome-doc-common
     edo intltoolize --copy --force --automake
     autotools_src_prepare
 }
