@@ -13,7 +13,6 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        gnome-desktop/gnome-common
         sys-devel/gettext
         virtual/pkg-config
     build+run:
