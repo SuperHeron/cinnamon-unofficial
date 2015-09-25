@@ -22,7 +22,6 @@ DEPENDENCIES="
         app-doc/gtk-doc-autotools[>=1.4]
         dev-python/polib[python_abis:2.7]
         dev-util/intltool[>=0.40.1]
-        gnome-desktop/gnome-common[>=2.3.0]
         sys-devel/gettext
         virtual/pkg-config[>=0.19]
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
@@ -56,7 +55,6 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 src_prepare() {
     edo glib-gettextize --copy --force
     edo gtkdocize --copy
-    edo gnome-doc-common
     edo intltoolize --copy --force --automake
     autotools_src_prepare
 }
