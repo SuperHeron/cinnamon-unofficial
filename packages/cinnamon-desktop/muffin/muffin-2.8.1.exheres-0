@@ -36,8 +36,8 @@ DEPENDENCIES="
         gnome-desktop/zenity
         x11-dri/mesa
         x11-libs/cairo[>=1.10.0]
-        x11-libs/cogl:1.0[>=1.9.6][gobject-introspection?]
-        x11-libs/clutter:1[>=1.10.0][gobject-introspection?]
+        x11-libs/cogl:1.0[>=1.13.3][gobject-introspection?]
+        x11-libs/clutter:1[>=1.14.3][gobject-introspection?]
         x11-libs/gdk-pixbuf:2.0
         x11-libs/gtk+:3[>=3.9.12][gobject-introspection?]
         x11-libs/libICE
