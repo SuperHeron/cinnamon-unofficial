@@ -32,10 +32,10 @@ DEPENDENCIES="
         gtk-doc? ( dev-doc/gtk-doc[>=1.15] )
     build+run:
         app-misc/ca-certificates
-        cinnamon-bindings/cjs:1[>=2.4.0]
-        cinnamon-desktop/cinnamon-desktop[>=2.4.0][gobject-introspection?]
+        cinnamon-bindings/cjs:1[>=2.8.0]
+        cinnamon-desktop/cinnamon-desktop[>=2.8.0][gobject-introspection?]
         cinnamon-desktop/cinnamon-menus:3.0[gobject-introspection?]
-        cinnamon-desktop/muffin[>=2.4.0][gobject-introspection?]
+        cinnamon-desktop/muffin[>=2.5.0][gobject-introspection?]
         dev-libs/dbus-glib:1
         dev-libs/glib:2[>=2.37.3]
         dev-libs/libcroco[>=0.6.2]
@@ -108,10 +108,8 @@ src_prepare() {
 src_install() {
     gsettings_src_install
     edo cd "${IMAGE}"/usr
-    for i in bin lib; do
-        edo mv ${i}/* $(exhost --target)/${i}
-        edo rmdir ${i}
-    done
+    edo mv bin/* $(exhost --target)/bin
+    edo rmdir bin
 }
 
 pkg_postinst() {
