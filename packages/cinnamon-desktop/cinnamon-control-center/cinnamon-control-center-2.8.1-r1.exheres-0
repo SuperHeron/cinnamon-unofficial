@@ -60,13 +60,3 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'doc documentation'
 )
 
-pkg_postinst() {
-    freedesktop-desktop_pkg_postinst
-    gtk-icon-cache_pkg_postinst
-}
-
-pkg_postrm() {
-    freedesktop-desktop_pkg_postrm
-    gtk-icon-cache_pkg_postrm
-}
-
