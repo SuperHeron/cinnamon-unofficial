@@ -84,12 +84,12 @@ DEPENDENCIES="
 WORK="${WORKBASE}/${MY_PN}-${PV}"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}/${PNV}-automagic-gnome-bluetooth.patch"
-    "${FILES}/${PNV}-gnome-3.14.patch"
-    "${FILES}/${PNV}-set-default-theme.patch"
-    "${FILES}/${PNV}-set-wheel.patch"
-    "${FILES}/${PNV}-use-pkexec.patch"
-    "${FILES}/${PNV}-os-release.patch"
+    "${FILES}/${PN}-$(ever range 1-2)-automagic-gnome-bluetooth.patch"
+    "${FILES}/${PN}-$(ever range 1-2)-gnome-3.14.patch"
+    "${FILES}/${PN}-$(ever range 1-2)-set-default-theme.patch"
+    "${FILES}/${PN}-$(ever range 1-2)-set-wheel.patch"
+    "${FILES}/${PN}-$(ever range 1-2)-use-pkexec.patch"
+    "${FILES}/${PN}-$(ever range 1-2)-os-release.patch"
 )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-schemas-compile'
