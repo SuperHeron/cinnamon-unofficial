@@ -66,7 +66,8 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-packagekit'
     '--disable-schemas-compile'
     '--enable-gudev'
-    '--enable-polkit' )
+    '--enable-polkit'
+)
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'cups'
     'man-pages man'
