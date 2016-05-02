@@ -1,4 +1,4 @@
-# Copyright 2015 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2016 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gtk-icon-cache
@@ -37,11 +37,10 @@ DEPENDENCIES="
         gnome-desktop/libgnomekbd[>=2.91.91]
         gnome-desktop/network-manager-applet[>=0.9.8]
         media-libs/fontconfig
-        media-libs/libcanberra[>=0.13][providers:gtk3]
-        media-sound/pulseaudio[>=1.1]
-        net-apps/NetworkManager[>=0.9.8][modem-manager][systemd?]
+        net-apps/NetworkManager[>=0.9.8][modem-manager]
         net-wireless/ModemManager[>=0.7]
         sys-apps/colord[>=0.1.14]
+        sys-apps/systemd [[ note = [ Support for logind ] ]]
         sys-auth/polkit:1[>=0.103]
         x11-libs/gdk-pixbuf:2.0[>=2.23.0]
         x11-libs/gtk+:3[>=3.8.0]
@@ -55,6 +54,7 @@ DEPENDENCIES="
         cups? ( net-print/cups[>=1.4] )
 "
 
+DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-systemd' )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'cups'
     'doc documentation'
