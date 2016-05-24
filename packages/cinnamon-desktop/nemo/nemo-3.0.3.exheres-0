@@ -43,8 +43,6 @@ DEPENDENCIES="
 
 RESTRICT="test" # requires X
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/3e8512d05205d69336527f8a72d20608b2566fee.patch )
-
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--disable-packagekit' '--disable-update-mimedb' )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'exif libexif'
