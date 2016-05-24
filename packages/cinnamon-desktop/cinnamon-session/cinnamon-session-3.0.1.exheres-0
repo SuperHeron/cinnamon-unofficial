@@ -48,10 +48,7 @@ DEPENDENCIES="
         gconf? ( gnome-platform/GConf:2 )
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/${PN}-$(ever range 1-2)-fix_g_free_on_uninitialized_pointers.patch
-    "${FILES}"/6e81826ad464d46fc7d2a2ca6ee9bdaa25e9dec2.patch
-)
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-$(ever range 1-2)-fix_g_free_on_uninitialized_pointers.patch )
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-ipv6' )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'doc docbook-docs' 'gconf' )
