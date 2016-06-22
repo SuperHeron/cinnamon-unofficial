@@ -49,9 +49,9 @@ DEPENDENCIES="
         dev-python/pyinotify
         gnome-desktop/gobject-introspection:1[>=0.9.2] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
         gnome-desktop/gnome-backgrounds
-        gnome-desktop/gnome-keyring:1
         gnome-desktop/gnome-themes-standard
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
+        gnome-desktop/libgnome-keyring:1
         gnome-desktop/libsoup:2.4[gconf(+)][gobject-introspection?]
         gnome-desktop/network-manager-applet[bluetooth?][gobject-introspection?]
         gnome-platform/GConf:2[gobject-introspection?][polkit]
