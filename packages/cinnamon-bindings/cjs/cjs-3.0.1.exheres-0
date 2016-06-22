@@ -29,6 +29,14 @@ DEPENDENCIES="
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/fix-tests-dbus-launch.patch" )
 
+src_prepare() {
+    # NOTE(markusr) avoid the dependency on gnome-common
+    edo sed -e 's/GNOME_CXX_WARNINGS/dnl &/'             \
+            -i "${WORK}/configure.ac"
+
+    autotools_src_prepare
+}
+
 src_test() {
     unset DISPLAY
     unset DBUS_SESSION_BUS_ADDRESS
