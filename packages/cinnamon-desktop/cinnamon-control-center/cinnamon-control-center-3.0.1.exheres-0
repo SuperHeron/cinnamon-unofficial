@@ -60,3 +60,8 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'doc documentation'
 )
 
+src_prepare() {
+    edo mkdir m4
+    autotools_src_prepare
+}
+
