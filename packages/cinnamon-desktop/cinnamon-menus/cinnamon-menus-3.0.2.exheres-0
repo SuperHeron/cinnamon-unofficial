@@ -26,6 +26,7 @@ src_prepare() {
     edo sed -e 's/GNOME_COMPILE_WARNINGS/dnl &/'        \
             -i "${WORK}/configure.ac"
 
+    edo mkdir m4
     autotools_src_prepare
 }
 
