@@ -13,6 +13,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
+        sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config
     build+run:
@@ -30,10 +31,7 @@ DEPENDENCIES="
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/fix-tests-dbus-launch.patch" )
 
 src_prepare() {
-    # NOTE(markusr) avoid the dependency on gnome-common
-    edo sed -e 's/GNOME_CXX_WARNINGS/dnl &/'             \
-            -i "${WORK}/configure.ac"
-
+    edo mkdir m4
     autotools_src_prepare
 }
 
