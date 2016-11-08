@@ -25,6 +25,7 @@ DEPENDENCIES="
         app-doc/gtk-doc-autotools[>=1.15]
         dev-util/intltool[>=0.35.0]
         gnome-desktop/gnome-doc-utils[>=0.8.0]
+        sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config[>=0.20]
         gtk-doc? ( dev-doc/gtk-doc[>=1.15] )
