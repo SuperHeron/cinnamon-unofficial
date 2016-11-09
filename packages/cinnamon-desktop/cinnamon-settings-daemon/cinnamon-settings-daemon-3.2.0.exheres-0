@@ -22,6 +22,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.37.1]
+        sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config[>=0.20]
         man-pages? ( dev-libs/libxslt [[ note = [ For xsltproc ] ]] )
@@ -77,6 +78,7 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 RESTRICT="test" # requires X
 
 src_prepare() {
+    edo mkdir m4
     edo glib-gettextize --copy --force
     edo intltoolize --copy --force --automake
     autotools_src_prepare
