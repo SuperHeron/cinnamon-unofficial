@@ -23,6 +23,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.40.1]
+        sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config
         doc? ( dev-libs/libxslt [[ description = [ For xsltproc ] ]] )
@@ -61,11 +62,6 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 )
 
 src_prepare() {
-    # NOTE(markusr) avoid the dependency on gnome-common
-    edo sed -e 's/GNOME_COMPILE_WARNINGS/dnl &/' \
-            -e 's/GNOME_DEBUG_CHECK/dnl &/' \
-            -i "${WORK}/configure.ac"
-
     edo mkdir m4
     autotools_src_prepare
 }
