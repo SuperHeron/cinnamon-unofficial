@@ -1,0 +1,48 @@
+# Copyright 2016 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='linuxmint' ] gsettings
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+
+SUMMARY="Cross-desktop libraries and common resources"
+DESCRIPTION="
+This project gathers the components which are common to multiple desktop environments and required
+to implement cross-DE solutions.
+"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="gobject-introspection"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.25]
+        gnome-desktop/gnome-common
+        sys-devel/gettext
+        virtual/pkg-config
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.7] )
+    build+run:
+        dev-libs/glib:2[>=2.37.3]
+        gnome-desktop/libgnomekbd
+        x11-libs/cairo
+        x11-libs/gdk-pixbuf:2.0[>=2.22.0]
+        x11-libs/gtk+:3[>=3.3.16]
+        x11-libs/libX11
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( '--disable-schemas-compile' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' )
+
+src_prepare() {
+    edo glib-gettextize --copy --force
+    edo intltoolize --copy --force --automake
+    autotools_src_prepare
+}
+
+src_install() {
+    gsettings_src_install
+    edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
+    edo rmdir "${IMAGE}"/usr/share/locale{/fr{/LC_MESSAGES,},}
+}
+
