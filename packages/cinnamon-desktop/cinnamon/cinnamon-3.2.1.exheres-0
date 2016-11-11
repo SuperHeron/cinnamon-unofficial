@@ -27,6 +27,7 @@ DEPENDENCIES="
     build:
         app-doc/gtk-doc-autotools[>=1.15]
         dev-util/intltool[>=0.40]
+        sys-devel/autoconf-archive
         sys-devel/gettext[>=0.17]
         virtual/pkg-config[>=0.22]
         gtk-doc? ( dev-doc/gtk-doc[>=1.15] )
@@ -54,7 +55,6 @@ DEPENDENCIES="
         gnome-desktop/libgnome-keyring:1
         gnome-desktop/libsoup:2.4[gconf(+)][gobject-introspection?]
         gnome-desktop/network-manager-applet[bluetooth?][gobject-introspection?]
-        gnome-platform/GConf:2[gobject-introspection?][polkit]
         media-libs/gstreamer:1.0[>=0.11.92][gobject-introspection?]
         media-libs/libcanberra[gstreamer][providers:gtk3][pulseaudio]
         media-plugins/gst-plugins-base:1.0[>=0.11.92][gobject-introspection?]
@@ -65,7 +65,7 @@ DEPENDENCIES="
         x11-dri/mesa
         x11-libs/clutter:1[>=1.10.0][X][gobject-introspection?]
         x11-libs/gdk-pixbuf:2.0[gobject-introspection?]
-        x11-libs/gtk+:3[>=3.9.12][gobject-introspection?]
+        x11-libs/gtk+:3[>=3.12.0][gobject-introspection?]
         x11-libs/libX11
         x11-libs/libXfixes
         x11-libs/startup-notification[>=0.11]
@@ -98,9 +98,10 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' 'gt
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'bluetooth' )
 
 src_prepare() {
-    edo autopoint --force
-    edo intltoolize --copy --force --automake
+    edo mkdir m4
+    edo glib-gettextize --copy --force
     edo gtkdocize --copy
+    edo intltoolize --copy --force --automake
     autotools_src_prepare
 }
 
