@@ -3,6 +3,7 @@
 
 require github [ user='linuxmint' ] gsettings
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
+require python [ blacklist='2 3.2 3.3' multibuild=false ]
 
 SUMMARY="Screensaver Application for Cinnamon"
 DESCRIPTION="
@@ -18,42 +19,38 @@ It is designed to support:
 LICENCES="GPL-2 LGPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="doc"
+MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        dev-util/intltool[>=0.35.0]
+        dev-util/intltool[>=0.40.0]
+        sys-devel/autoconf-archive
         sys-devel/gettext
-        virtual/pkg-config
-        doc? ( app-text/xmlto )
+        virtual/pkg-config[>=0.26]
     build+run:
-        cinnamon-desktop/cinnamon-desktop[>=2.6.3]
-        dev-libs/dbus-glib:1[>=0.30]
+        cinnamon-desktop/cinnamon-desktop[>=3.0.0][gobject-introspection]
+        cinnamon-desktop/xapps[gobject-introspection]
         dev-libs/glib:2[>=2.37.3]
+        gnome-desktop/gobject-introspection:1[>=0.9.7][python_abis:*(-)?]
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
-        gnome-desktop/libgnomekbd[>=3.6.0]
-        net-libs/webkit:4.0
+        gnome-desktop/libgnomekbd[>=3.6.0][gobject-introspection]
+        gnome-desktop/librsvg:2[gobject-introspection]
+        net-libs/webkit:4.0[gobject-introspection]
+        sys-apps/accountsservice[gobject-introspection]
         sys-apps/dbus[>=0.78]
-        sys-apps/systemd[>=183] [[ note = [ Support for logind ] ]]
-        sys-libs/pam
-        x11-libs/gtk+:3[>=3.1.4]
-        x11-libs/libX11[>=1.0]
+        x11-libs/gtk+:3[>=3.1.4][gobject-introspection]
         x11-libs/libXScrnSaver
         x11-libs/libXext
-        x11-libs/libXxf86misc
-        x11-libs/libXxf86vm
-        x11-libs/libxklavier
+    run:
+        cinnamon-desktop/flags
+    recommendation:
+        dev-python/python-xlib[python_abis:*(-)?]
 "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--disable-schemas-compile' )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'doc docbook-docs' )
 
 src_prepare() {
-    # NOTE(markusr) avoid the dependency on gnome-common
-    edo sed -e 's/GNOME_COMPILE_WARNINGS/dnl &/'        \
-            -i "${WORK}/configure.ac"
-
-    edo glib-gettextize --copy --force
+    edo mkdir m4
     edo intltoolize --copy --force --automake
     autotools_src_prepare
 }
