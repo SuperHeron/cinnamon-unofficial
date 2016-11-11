@@ -20,8 +20,10 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         app-doc/gtk-doc-autotools[>=1.4]
+        dev-lang/perl:*
         dev-python/polib[python_abis:2.7]
         dev-util/intltool[>=0.40.1]
+        sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config[>=0.19]
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
