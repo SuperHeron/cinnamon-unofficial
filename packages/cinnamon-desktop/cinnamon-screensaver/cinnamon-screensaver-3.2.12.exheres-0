@@ -38,7 +38,9 @@ DEPENDENCIES="
         net-libs/webkit:4.0[gobject-introspection]
         sys-apps/accountsservice[gobject-introspection]
         sys-apps/dbus[>=0.78]
+        sys-libs/pam
         x11-libs/gtk+:3[>=3.1.4][gobject-introspection]
+        x11-libs/libX11
         x11-libs/libXScrnSaver
         x11-libs/libXext
     run:
