@@ -13,12 +13,12 @@ to implement cross-DE solutions.
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="gobject-introspection"
+MYOPTIONS="gobject-introspection gtk-doc"
 
 DEPENDENCIES="
     build:
+        app-doc/gtk-doc-autotools[>=1.0]
         dev-util/intltool[>=0.25]
-        gnome-desktop/gnome-common
         sys-devel/gettext
         virtual/pkg-config
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.7] )
@@ -29,13 +29,15 @@ DEPENDENCIES="
         x11-libs/gdk-pixbuf:2.0[>=2.22.0]
         x11-libs/gtk+:3[>=3.3.16]
         x11-libs/libX11
+        gtk-doc? ( dev-doc/gtk-doc[>=1.0] )
 "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--disable-schemas-compile' )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' 'gtk-doc' )
 
 src_prepare() {
     edo glib-gettextize --copy --force
+    edo gtkdocize --copy
     edo intltoolize --copy --force --automake
     autotools_src_prepare
 }
