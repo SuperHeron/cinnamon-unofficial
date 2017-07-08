@@ -1,4 +1,4 @@
-# Copyright 2015-2016 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2017 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings gtk-icon-cache
@@ -11,7 +11,6 @@ SLOT="3.0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     cups
-    man-pages [[ description = [ Generate and install man pages ] ]]
     smartcard [[ description = [ Add support for smart cards via NSS ] ]]
     ( linguas: af am ar as ast az be be@latin bg bn bn_IN br bs ca ca@valencia crh cs cy da de dz
                el en_CA en_GB en@shaw eo es et eu fa fi fr ga gl gu he hi hr hu id is it ja ka km
@@ -25,16 +24,14 @@ DEPENDENCIES="
         sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config[>=0.20]
-        man-pages? ( dev-libs/libxslt [[ note = [ For xsltproc ] ]] )
     build+run:
-        cinnamon-desktop/cinnamon-desktop[>=2.6.3]
+        cinnamon-desktop/cinnamon-desktop[>=3.2.2]
         dev-libs/dbus-glib:1
         dev-libs/glib:2[>=2.38.0]
         gnome-desktop/gsettings-desktop-schemas[>=3.4.1]
         gnome-desktop/libgnomekbd[>=3.6.0]
         gnome-desktop/libgudev
         gnome-desktop/librsvg:2[>=2.36.2]
-        gnome-platform/GConf:2[>=2.6.1]
         media-libs/fontconfig
         media-libs/lcms2[>=2.2]
         media-libs/libcanberra[providers:gtk3]
@@ -57,10 +54,6 @@ DEPENDENCIES="
         x11-proto/kbproto
         cups? ( net-print/cups )
         smartcard? ( dev-libs/nss[>=3.11.2] )
-    recommendation:
-        gnome-desktop/gnome-icon-theme-symbolic [[
-            description = [ explicitly uses symbolic icons ]
-        ]]
 "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
@@ -71,7 +64,6 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'cups'
-    'man-pages man'
     'smartcard smartcard-support'
 )
 
