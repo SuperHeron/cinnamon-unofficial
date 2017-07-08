@@ -1,4 +1,4 @@
-# Copyright 2015-2016 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2017 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings
@@ -39,6 +39,7 @@ DEPENDENCIES="
         gnome-desktop/gobject-introspection:1[>=0.9.7] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
         gnome-desktop/gsettings-desktop-schemas[>=3.5.91]
         media-sound/pulseaudio
+        sys-apps/accountsservice[gobject-introspection?]
         x11-apps/xkeyboard-config
         x11-libs/gdk-pixbuf:2.0[>=2.22.0][gobject-introspection?]
         x11-libs/gtk+:3[>=3.3.16][gobject-introspection?]
