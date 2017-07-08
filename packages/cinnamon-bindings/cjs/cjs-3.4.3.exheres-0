@@ -1,4 +1,4 @@
-# Copyright 2015-2016 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2017 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ]
@@ -18,17 +18,15 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         dev-libs/dbus-glib:1
-        dev-libs/glib:2[>=2.37.3]
+        dev-libs/glib:2[>=2.42.0]
         dev-libs/libffi
-        dev-libs/spidermonkey:24.0
-        gnome-desktop/gobject-introspection:1[>=1.33.10]
+        dev-libs/spidermonkey:38
+        gnome-desktop/gobject-introspection:1[>=1.41.4]
         sys-apps/dbus
         sys-libs/readline
         x11-libs/cairo
-        x11-libs/gtk+:3[gobject-introspection]
+        x11-libs/gtk+:3[>=3.14.0][gobject-introspection]
 "
-
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/fix-tests-dbus-launch.patch" )
 
 src_prepare() {
     edo mkdir m4
@@ -42,10 +40,5 @@ src_test() {
     esandbox allow_net 'unix-abstract:/tmp/dbus-root-*'
     default
     esandbox disallow_net 'unix-abstract:/tmp/dbus-root-*'
-}
-
-src_install() {
-    default
-    edo rmdir "${IMAGE}"/usr/$(exhost --target)/libexec/{${PN}/{installed-tests/{js,},},}
 }
 
