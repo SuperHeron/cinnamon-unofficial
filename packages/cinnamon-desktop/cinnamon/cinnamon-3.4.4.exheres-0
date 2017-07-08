@@ -33,7 +33,7 @@ DEPENDENCIES="
         gtk-doc? ( dev-doc/gtk-doc[>=1.15] )
     build+run:
         app-misc/ca-certificates
-        cinnamon-bindings/cjs:1[>=2.8.0]
+        cinnamon-bindings/cjs:1[>=3.2.0]
         cinnamon-desktop/cinnamon-desktop[>=2.8.0][gobject-introspection?]
         cinnamon-desktop/cinnamon-menus:3.0[gobject-introspection?]
         cinnamon-desktop/muffin[>=3.0.0][gobject-introspection?]
