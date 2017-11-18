@@ -26,6 +26,15 @@ Reason: The different gsm_systemd_can_* methods issue a g_free call on
          gboolean can_stop;
  
 @@ -373,7 +373,7 @@
+ csm_systemd_can_hybrid_sleep (CsmSystem *system)
+ {
+         CsmSystemd *manager = CSM_SYSTEMD (system);
+-        gchar *rv;
++        gchar *rv = NULL;
+         GVariant *res;
+         gboolean can_hybrid_sleep;
+ 
+@@ -405,7 +405,7 @@
  csm_systemd_can_suspend (CsmSystem *system)
  {
          CsmSystemd *manager = CSM_SYSTEMD (system);
@@ -34,7 +43,7 @@ Reason: The different gsm_systemd_can_* methods issue a g_free call on
          GVariant *res;
          gboolean can_suspend;
  
-@@ -405,7 +405,7 @@
+@@ -437,7 +437,7 @@
  Csm_systemd_can_hibernate (CsmSystem *system)
  {
          CsmSystemd *manager = CSM_SYSTEMD (system);
