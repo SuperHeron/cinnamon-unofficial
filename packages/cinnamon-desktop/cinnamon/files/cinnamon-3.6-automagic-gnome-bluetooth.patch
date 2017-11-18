@@ -22,7 +22,7 @@ diff --git a/configure.ac b/configure.ac
 index c0e43e1..bc764e1 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -113,6 +113,8 @@ PKG_CHECK_MODULES(GVC, libpulse libpulse-mainloop-glib gobject-2.0)
+@@ -110,6 +110,8 @@ PKG_CHECK_MODULES(GVC, libpulse libpulse-mainloop-glib gobject-2.0)
  PKG_CHECK_MODULES(DESKTOP_SCHEMAS, cinnamon-desktop >= 2.4.0)
  
  AC_MSG_CHECKING([for bluetooth support])
@@ -31,7 +31,7 @@ index c0e43e1..bc764e1 100644
  PKG_CHECK_EXISTS([gnome-bluetooth-1.0 >= 3.1.0],
          [BLUETOOTH_DIR=`$PKG_CONFIG --variable=applet_libdir gnome-bluetooth-1.0`
  	 BLUETOOTH_LIBS=`$PKG_CONFIG --variable=applet_libs gnome-bluetooth-1.0`
-@@ -125,6 +127,9 @@ PKG_CHECK_EXISTS([gnome-bluetooth-1.0 >= 3.1.0],
+@@ -122,6 +124,9 @@ PKG_CHECK_EXISTS([gnome-bluetooth-1.0 >= 3.1.0],
  	[AC_DEFINE([HAVE_BLUETOOTH],[0])
  	 AC_SUBST([HAVE_BLUETOOTH],[0])
  	 AC_MSG_RESULT([no])])

@@ -36,7 +36,7 @@ DEPENDENCIES="
         cinnamon-bindings/cjs:1[>=3.2.0]
         cinnamon-desktop/cinnamon-desktop[>=2.8.0][gobject-introspection?]
         cinnamon-desktop/cinnamon-menus:3.0[gobject-introspection?]
-        cinnamon-desktop/muffin[>=3.0.0][gobject-introspection?]
+        cinnamon-desktop/muffin[>=3.5.0][gobject-introspection?]
         dev-libs/dbus-glib:1
         dev-libs/glib:2[>=2.37.3]
         dev-libs/libcroco[>=0.6.2]
@@ -52,7 +52,6 @@ DEPENDENCIES="
         gnome-desktop/gnome-backgrounds
         gnome-desktop/gnome-themes-standard
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
-        gnome-desktop/libgnome-keyring:1
         gnome-desktop/libsoup:2.4[gconf(+)][gobject-introspection?]
         gnome-desktop/network-manager-applet[bluetooth?][gobject-introspection?]
         media-libs/gstreamer:1.0[>=0.11.92][gobject-introspection?]
@@ -87,7 +86,6 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}/${PN}-$(ever range 1-2)-automagic-gnome-bluetooth.patch"
     "${FILES}/${PN}-$(ever range 1-2)-set-default-theme.patch"
     "${FILES}/${PN}-$(ever range 1-2)-set-wheel.patch"
-    "${FILES}/${PN}-$(ever range 1-2)-use-pkexec.patch"
     "${FILES}/${PN}-$(ever range 1-2)-os-release.patch"
 )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
