@@ -29,6 +29,7 @@ DEPENDENCIES="
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
     build+run:
         cinnamon-desktop/cinnamon-desktop[>=2.6.1]
+        cinnamon-desktop/xapps[>=1.0.4]
         dev-libs/glib:2[>=2.37.3]
         dev-libs/libxml2:2.0[>=2.7.8]
         gnome-desktop/gobject-introspection:1[>=0.6.4] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
