@@ -1,0 +1,63 @@
+# Copyright 2017 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='linuxmint' ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+
+SUMMARY="xplayer playlist parser"
+DESCRIPTION="
+xplayer-pl-parser is a simple GObject-based library to parse a host of
+playlist formats, as well as save those.
+"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    amazon [[ description = [ Support decoding Amazon AMZ MP3 downloads ] ]]
+    gobject-introspection
+    gtk-doc
+    libarchive [[ description = [ Use libarchive to extract ISOs ] ]]
+    quvi [[ description = [ Use quvi to parse video links ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        app-doc/gtk-doc-autotools[>=1.14]
+        dev-util/intltool[>=0.35.0]
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2[>=2.31.0]
+        dev-libs/libxml2:2.0
+        gnome-desktop/libsoup:2.4[>=2.43.0]
+        net-utils/gmime:2.6
+        amazon? ( dev-libs/libgcrypt )
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.5] )
+        gtk-doc? ( dev-doc/gtk-doc[>=1.14] )
+        libarchive? ( app-arch/libarchive[>=3.0.0] )
+        quvi? ( dev-libs/quvi[>=0.9.1] )
+"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    'amazon libgcrypt'
+    'gobject-introspection introspection'
+    'gtk-doc'
+    'libarchive'
+    'quvi'
+)
+
+src_prepare() {
+    # Disable old gnome-common macros
+    edo sed -i -e 's|GNOME_DEBUG_CHECK|dnl &|'                                        \
+               -e 's|GNOME_COMPILE_WARNINGS|dnl &|'                                   \
+               -e 's|GNOME_CXX_WARNINGS|dnl &|'                                       \
+               -e 's|GNOME_MAINTAINER_MODE_DEFINES|dnl &|'                            \
+               -e 's|GNOME_CODE_COVERAGE|AC_SUBST([GNOME_CODE_COVERAGE_RULES], [])|'  \
+               configure.ac
+
+    edo gtkdocize --copy
+    edo intltoolize --copy --force --automake
+    autotools_src_prepare
+}
+
