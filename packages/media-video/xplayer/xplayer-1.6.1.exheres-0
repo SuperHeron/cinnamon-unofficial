@@ -1,0 +1,98 @@
+# Copyright 2017 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+AT_M4DIR=( 'libgd' )
+
+require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+require python [ blacklist='3' multibuild=false with_opt=true ]
+
+SUMMARY="A generic Media Player"
+DESCRIPTION="
+xplayer is a generic media player.
+"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    brasero [[ description = [ Build CD authoring plugin ] ]]
+    chapters [[ description = [ Build DVD chapter plugin ] ]]
+    gobject-introspection
+    gtk-doc
+    lirc
+"
+
+DEPENDENCIES="
+    build:
+        app-doc/gtk-doc-autotools[>=1.14]
+        dev-util/intltool[>=0.50.0]
+        sys-devel/gettext
+        virtual/pkg-config
+        python? ( dev-python/pylint[python_abis:*(-)?] )
+    build+run:
+        cinnamon-desktop/xapps[>=1.0.0]
+        dev-libs/glib:2[>=2.33.0]
+        dev-libs/libpeas:1.0[>=1.1.0]
+        media-libs/clutter-gst:3.0[>=2.99.2][gobject-introspection?]
+        media-libs/gstreamer:1.0[gobject-introspection?]
+        media-plugins/gst-plugins-base:1.0[gobject-introspection?]
+        media-plugins/gst-plugins-good:1.0
+        media-video/xplayer-plparser[>=1.0.0][gobject-introspection?]
+        x11-libs/cairo
+        x11-libs/clutter:1[>=1.10.0][gobject-introspection?]
+        x11-libs/clutter-gtk:1.0[>=1.0.2][gobject-introspection?]
+        x11-libs/gtk+:3[>=3.5.2][gobject-introspection?]
+        x11-libs/libICE
+        x11-libs/libSM
+        brasero? ( dev-libs/libxml2:2.0[>=2.6.0] )
+        chapters? ( dev-libs/libxml2:2.0[>=2.6.0] )
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6.7] )
+        gtk-doc? ( dev-doc/gtk-doc[>=1.14] )
+        lirc? ( remote/lirc )
+        python? ( gnome-bindings/pygobject:3[>=2.90.3][python_abis:*(-)?] )
+"
+
+src_prepare() {
+    # Disable old gnome-common macros + fix PKG_CONFIG invocation
+    edo sed -i -e 's|GNOME_DEBUG_CHECK|dnl &|'             \
+               -e 's|GNOME_COMPILE_WARNINGS|dnl &|'        \
+               -e 's|GNOME_CXX_WARNINGS|dnl &|'            \
+               -e 's|GNOME_MAINTAINER_MODE_DEFINES|dnl &|' \
+               -e 's|pkg-config|$PKG_CONFIG|'              \
+               configure.ac
+
+    edo gtkdocize --copy
+    edo intltoolize --copy --force --automake
+    autotools_src_prepare
+}
+
+src_configure() {
+    local plugins=( apple-trailers autoload-subtitles dbusservice im-status gromit media-player-keys
+                    ontop opensubtitles properties pythonconsole recent samplepython screensaver
+                    screenshot sidebar-test skipto vimeo )
+
+    option brasero && plugins+=( brasero-disc-recorder )
+    option chapters && plugins+=( chapters )
+    option lirc && plugins+=( lirc )
+
+    econf '--enable-easy-codec-installation'                   \
+          '--disable-vala'                                     \
+          $(option_enable gobject-introspection introspection) \
+          $(option_enable gtk-doc)                             \
+          $(option_enable python)                              \
+          "--with-plugins=$(IFS=, ; echo ${plugins[*]})"
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gsettings_pkg_postinst
+    gtk-icon-cache_pkg_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gsettings_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+}
+
