@@ -1,0 +1,103 @@
+# Copyright 2017 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+
+SUMMARY="A generic Document Reader"
+DESCRIPTION="
+Xreader is a document viewer capable of displaying multiple and single page
+document formats like PDF and Postscript.
+"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    cups
+    djvu [[ description = [ Enable support for DjVu format ] ]]
+    dvi [[ description = [ Enable support for DVI format ] ]]
+    epub [[ description = [ Enable support for ePub format ] ]]
+    gobject-introspection
+    gtk-doc
+    keyring [[ description = [ Use GNOME Keyring to store passwords ] ]]
+    nemo [[ description = [ Build Nemo extensions ] ]]
+    pdf
+    postscript [[ description = [ Enable support for PostScript format ] ]]
+    tiff
+    xps [[ description = [ Enable support for XPS documents ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        app-doc/gtk-doc-autotools[>=1.13]
+        dev-util/intltool[>=0.50.1]
+        sys-devel/gettext
+    build+run:
+        dev-libs/glib:2[>=2.36.0]
+        dev-libs/libxml2:2.0[>=2.5.0]
+        x11-libs/cairo[>=1.14.0]
+        x11-libs/gtk+:3[>=3.14.0][cups?][gobject-introspection?]
+        x11-libs/libSM[>=1.0.0]
+        x11-libs/libX11
+        djvu? ( app-text/djvu[>=3.5.17][tiff?] )
+        dvi? (
+            dev-libs/kpathsea
+            media-libs/t1lib
+        )
+        epub? ( net-libs/webkit:4.0[>=2.4.3][gobject-introspection?] )
+        keyring? ( dev-libs/libsecret:1[>=0.5][gobject-introspection?] )
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6] )
+        gtk-doc? ( dev-doc/gtk-doc[>=1.13] )
+        nemo? ( cinnamon-desktop/nemo[gobject-introspection?] )
+        pdf? ( app-text/poppler[>=0.22.0][cairo][glib][gobject-introspection?][tiff?] )
+        postscript? ( app-text/libspectre[>=0.2.0] )
+        tiff? ( media-libs/tiff[>=3.6.0] )
+        xps? ( dev-libs/libgxps[>=0.2.1][gobject-introspection?][tiff?] )
+"
+
+BUGS_TO=""
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    '--disable-caja' # Not packaged
+    '--enable-pixbuf'
+)
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
+    'cups gtk-unix-print'
+    'keyring'
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    'djvu'
+    'dvi'
+    'dvi t1lib'
+    'epub'
+    'gobject-introspection introspection'
+    'gtk-doc'
+    'nemo'
+    'pdf'
+    'postscript ps'
+    'tiff'
+    'xps'
+)
+DEFAULT_SRC_CONFIGURE_TESTS=( '--enable-tests --disable-tests' )
+
+src_prepare() {
+    edo mkdir m4
+    edo glib-gettextize --copy --force
+    edo gtkdocize --copy
+    edo intltoolize --copy --force --automake
+    autotools_src_prepare
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gsettings_pkg_postinst
+    gtk-icon-cache_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gsettings_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+}
+
