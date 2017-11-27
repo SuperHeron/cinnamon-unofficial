@@ -53,7 +53,7 @@ DEPENDENCIES="
         gnome-desktop/gnome-themes-standard
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
         gnome-desktop/libsoup:2.4[gconf(+)][gobject-introspection?]
-        gnome-desktop/network-manager-applet[bluetooth?][gobject-introspection?]
+        gnome-desktop/network-manager-applet[gobject-introspection?]
         media-libs/gstreamer:1.0[>=0.11.92][gobject-introspection?]
         media-libs/libcanberra[gstreamer][providers:gtk3][pulseaudio]
         media-plugins/gst-plugins-base:1.0[>=0.11.92][gobject-introspection?]
