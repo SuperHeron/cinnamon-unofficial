@@ -1,0 +1,101 @@
+# Copyright 2017 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='linuxmint' ] gsettings
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+require freedesktop-desktop gtk-icon-cache
+
+SUMMARY="Image management application"
+DESCRIPTION="
+This is Pix, an image viewer and browser utility.
+"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    brasero
+    clutter
+    exif
+    gstreamer
+    libopenraw
+    tiff
+    webp
+
+    ( providers: ijg-jpeg jpeg-turbo ) [[ number-selected = exactly-one ]]
+"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool
+        sys-devel/bison
+        sys-devel/flex
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        core/json-glib[>=0.15.0]
+        dev-libs/glib:2[>=2.34.0]
+        dev-libs/libsecret:1[>=0.11]
+        gnome-desktop/gsettings-desktop-schemas
+        gnome-desktop/librsvg:2[>=2.34.0]
+        gnome-desktop/libsoup:2.4[>2.36.0]
+        media-libs/libpng:1.6
+        net-libs/webkit:4.0[>=1.10.0]
+        x11-libs/gtk+:3[>=3.4.0]
+        x11-libs/libICE
+        x11-libs/libSM
+        brasero? ( gnome-desktop/brasero:3[>=3.2.0] )
+        clutter? (
+            x11-libs/clutter:1[>=1.0.0]
+            x11-libs/clutter-gtk:1.0[>=1.0.0]
+        )
+        exif? ( graphics/exiv2[>=0.21] )
+        gstreamer? (
+            media-libs/gstreamer:1.0[>=1.0.0]
+            media-plugins/gst-plugins-base:1.0[>=1.0.0]
+        )
+        libopenraw? ( media-libs/libopenraw[>=0.0.8] )
+        tiff? ( media-libs/tiff )
+        webp? ( media-libs/libwebp:0.6[>=0.2.0][tiff?] )
+        providers:ijg-jpeg? ( media-libs/jpeg:= )
+        providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
+    suggestion:
+        !libopenraw? ( media-libs/libraw [[ note = [ Uses dcraw if present ] ]] )
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( '--localedir=/usr/share/locale' '--with-smclient=xsmp' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    'brasero'
+    'clutter'
+    'exif exiv2'
+    'gstreamer'
+    'libopenraw'
+    'tiff'
+)
+DEFAULT_SRC_CONFIGURE_TESTS=( '--enable-test-suite --disable-test-suite' )
+
+src_prepare() {
+    # Disable old gnome-common macros + fix PKG_CONFIG invocation
+    edo sed -i -e 's|GNOME_COMMON_INIT|dnl &|'             \
+               -e 's|GNOME_COMPILE_WARNINGS|dnl &|'        \
+               -e 's|GNOME_CXX_WARNINGS|dnl &|'            \
+               -e 's|GNOME_MAINTAINER_MODE_DEFINES|dnl &|' \
+               -e 's|pkg-config|$PKG_CONFIG|'              \
+               configure.ac
+
+    # Fix localedir
+    edo sed -i -e 's|itlocaledir = .*|itlocaledir = @localedir@|' po/Makefile.in.in
+
+    autotools_src_prepare
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gtk-icon-cache_pkg_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+}
+
