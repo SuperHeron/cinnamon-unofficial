@@ -51,7 +51,7 @@ DEPENDENCIES="
         x11-libs/libxklavier[>=5.0]
         x11-libs/libnotify[>=0.7.3]
         x11-libs/libwacom[>=0.7]
-        x11-proto/kbproto
+        x11-proto/xorgproto
         cups? ( net-print/cups )
         smartcard? ( dev-libs/nss[>=3.11.2] )
 "
