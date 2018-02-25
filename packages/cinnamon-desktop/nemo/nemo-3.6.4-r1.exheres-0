@@ -38,7 +38,7 @@ DEPENDENCIES="
         x11-libs/libX11
         x11-libs/libnotify[>=0.7.0]
         x11-libs/pango[>=1.28.3]
-        x11-proto/xproto
+        x11-proto/xorgproto
         exif? ( media-libs/libexif[>=0.6.20] )
         tracker? ( app-pim/tracker:=[>=0.16] )
         xmp? ( media-libs/exempi:2.0[>=2.2.0] )
