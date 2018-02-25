@@ -50,7 +50,7 @@ DEPENDENCIES="
         x11-libs/libXxf86misc
         x11-libs/libnotify[>=0.7.3]
         x11-libs/libxklavier[>=5.1]
-        x11-proto/kbproto
+        x11-proto/xorgproto
         cups? ( net-print/cups[>=1.4] )
         online-accounts? ( gnome-desktop/gnome-online-accounts[>=3.18.0] )
         wacom? (
