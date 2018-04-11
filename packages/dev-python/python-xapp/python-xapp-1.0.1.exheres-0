@@ -1,0 +1,17 @@
+# Copyright 2018 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='linuxmint' ] setup-py [ import='distutils' ]
+
+SUMMARY="Python Xapp Library"
+
+LICENCES="LGPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/psutil[python_abis:*(-)?]
+"
+
