@@ -31,6 +31,7 @@ DEPENDENCIES="
         cinnamon-desktop/cinnamon-desktop[>=3.0.0][gobject-introspection]
         cinnamon-desktop/xapps[gobject-introspection]
         dev-libs/glib:2[>=2.37.3]
+        dev-python/python-xapp[>=1.0.1][python_abis:*(-)?]
         gnome-desktop/gobject-introspection:1[>=0.9.7][python_abis:*(-)?]
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
         gnome-desktop/libgnomekbd[>=3.6.0][gobject-introspection]
