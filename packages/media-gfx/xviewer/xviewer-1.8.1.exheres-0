@@ -1,4 +1,4 @@
-# Copyright 2017 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2018 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] freedesktop-desktop gtk-icon-cache
@@ -32,7 +32,7 @@ DEPENDENCIES="
         dev-libs/glib:2[>=2.38.0]
         dev-libs/libxml2:2.0[>=2.0]
         dev-libs/libpeas:1.0[>=0.7.4]
-        cinnamon-desktop/cinnamon-desktop[>=3.2.0][gobject-introspection?]
+        cinnamon-desktop/cinnamon-desktop[>=3.2.0]
         gnome-desktop/librsvg:2[>=2.36.2][gobject-introspection?]
         x11-libs/gdk-pixbuf:2.0[>=2.4.0][gobject-introspection?]
         x11-libs/gtk+:3[>=3.10.0][gobject-introspection?]
@@ -45,8 +45,6 @@ DEPENDENCIES="
         providers:ijg-jpeg? ( media-libs/jpeg:= )
         providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
 "
-
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/61a2da998bf447c0e9aea9d5d0c1a7472715b1df.patch" )
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--localedir=/usr/share/locale' )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
