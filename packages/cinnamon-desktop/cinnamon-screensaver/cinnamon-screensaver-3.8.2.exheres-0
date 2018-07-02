@@ -1,4 +1,4 @@
-# Copyright 2015-2017 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings
@@ -28,7 +28,7 @@ DEPENDENCIES="
         sys-devel/gettext
         virtual/pkg-config[>=0.26]
     build+run:
-        cinnamon-desktop/cinnamon-desktop[>=3.0.0][gobject-introspection]
+        cinnamon-desktop/cinnamon-desktop[>=3.0.0]
         cinnamon-desktop/xapps[gobject-introspection]
         dev-libs/glib:2[>=2.37.3]
         dev-python/python-xapp[>=1.0.1][python_abis:*(-)?]
