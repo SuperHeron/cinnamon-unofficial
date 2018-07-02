@@ -1,8 +1,7 @@
-# Copyright 2015-2017 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='linuxmint' ] gsettings
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
+require github [ user='linuxmint' ] gsettings meson
 
 SUMMARY="Desktop environment for Cinnamon"
 DESCRIPTION="
@@ -20,7 +19,6 @@ LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="
-    gobject-introspection
     ( linguas: af am an ar as ast az be be@latin bg bn bn_IN br bs ca ca@valencia crh cs csb cy da
                de dz el en_CA en_GB en@shaw eo es et eu fa fi fr fur fy ga gl gu ha he hi hr hu hy
                id ig is it ja ka kg kk km kn ko ku ky li lo lt lv mai mg mi mk ml mn mr ms nb nds
@@ -31,18 +29,17 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.40.6]
-        sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config[>=0.18]
     build+run:
         dev-libs/glib:2[>=2.37.3]
-        gnome-desktop/gobject-introspection:1[>=0.9.7] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
+        gnome-desktop/gobject-introspection:1[>=0.9.7]
         gnome-desktop/gsettings-desktop-schemas[>=3.5.91]
         media-sound/pulseaudio
-        sys-apps/accountsservice[gobject-introspection?]
+        sys-apps/accountsservice[gobject-introspection]
         x11-apps/xkeyboard-config
-        x11-libs/gdk-pixbuf:2.0[>=2.22.0][gobject-introspection?]
-        x11-libs/gtk+:3[>=3.3.16][gobject-introspection?]
+        x11-libs/gdk-pixbuf:2.0[>=2.22.0][gobject-introspection]
+        x11-libs/gtk+:3[>=3.3.16][gobject-introspection]
         x11-libs/libX11
         x11-libs/libXext[>=1.1]
         x11-libs/libXrandr[>=1.3]
@@ -53,20 +50,10 @@ DEPENDENCIES="
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-$(ever range 1-2)-gnome-3.14.patch )
 
-DEFAULT_SRC_CONFIGURE_PARAMS=(
-    '--disable-schemas-compile'
-    '--with-pnp-ids-path=/usr/share/misc'
-)
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' )
-
-src_prepare() {
-    edo glib-gettextize --copy --force
-    edo intltoolize --copy --force --automake
-    autotools_src_prepare
-}
+MESON_SRC_CONFIGURE_PARAMS=( '-Dpnp-ids-path=/usr/share/misc' )
 
 src_install() {
-    default
+    meson_src_install
     edo cd "${IMAGE}"/usr
     edo mv {,$(exhost --target)/}bin
 }
