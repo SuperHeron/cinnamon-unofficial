@@ -1,4 +1,4 @@
-# Copyright 2017 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2018 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 AT_M4DIR=( 'libgd' )
@@ -27,6 +27,7 @@ DEPENDENCIES="
     build:
         app-doc/gtk-doc-autotools[>=1.14]
         dev-util/intltool[>=0.50.0]
+        sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config
         python? ( dev-python/pylint[python_abis:*(-)?] )
@@ -56,9 +57,6 @@ DEPENDENCIES="
 src_prepare() {
     # Disable old gnome-common macros + fix PKG_CONFIG invocation
     edo sed -i -e 's|GNOME_DEBUG_CHECK|dnl &|'             \
-               -e 's|GNOME_COMPILE_WARNINGS|dnl &|'        \
-               -e 's|GNOME_CXX_WARNINGS|dnl &|'            \
-               -e 's|GNOME_MAINTAINER_MODE_DEFINES|dnl &|' \
                -e 's|pkg-config|$PKG_CONFIG|'              \
                configure.ac
 
@@ -77,6 +75,7 @@ src_configure() {
     option lirc && plugins+=( lirc )
 
     econf '--enable-easy-codec-installation'                   \
+          '--enable-compile-warnings=no'                       \
           '--disable-vala'                                     \
           $(option_enable gobject-introspection introspection) \
           $(option_enable gtk-doc)                             \
