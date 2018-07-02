@@ -1,4 +1,4 @@
-# Copyright 2015-2017 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require gsettings github [ user=linuxmint ]
@@ -30,7 +30,7 @@ DEPENDENCIES="
         virtual/pkg-config[>=0.20]
         gtk-doc? ( dev-doc/gtk-doc[>=1.15] )
     build+run:
-        cinnamon-desktop/cinnamon-desktop[>=2.4.0][gobject-introspection?]
+        cinnamon-desktop/cinnamon-desktop[>=2.4.0]
         dev-libs/glib:2[>=2.37.3]
         gnome-desktop/gobject-introspection:1[>=0.9.2] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
         gnome-desktop/gsettings-desktop-schemas[>=3.3.0][gobject-introspection?]
