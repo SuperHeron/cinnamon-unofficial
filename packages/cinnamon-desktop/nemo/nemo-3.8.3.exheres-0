@@ -1,7 +1,7 @@
-# Copyright 2015-2017 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=linuxmint ] autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
+require github [ user=linuxmint ] meson
 require gsettings gtk-icon-cache freedesktop-desktop freedesktop-mime
 
 SUMMARY="File Manager for Cinnamon"
@@ -19,7 +19,6 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        app-doc/gtk-doc-autotools[>=1.4]
         dev-lang/perl:*
         dev-python/polib[python_abis:2.7]
         dev-util/intltool[>=0.40.1]
@@ -32,9 +31,9 @@ DEPENDENCIES="
         cinnamon-desktop/xapps[>=1.0.4]
         dev-libs/glib:2[>=2.37.3]
         dev-libs/libxml2:2.0[>=2.7.8]
-        gnome-desktop/gobject-introspection:1[>=0.6.4] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
+        gnome-desktop/gobject-introspection:1[>=1.0.0]
         gnome-desktop/gsettings-desktop-schemas
-        x11-libs/gtk+:3[>=3.9.10][gobject-introspection?]
+        x11-libs/gtk+:3[>=3.9.10][gobject-introspection]
         x11-libs/libX11
         x11-libs/libnotify[>=0.7.0]
         x11-libs/pango[>=1.28.3]
@@ -46,20 +45,18 @@ DEPENDENCIES="
 
 RESTRICT="test" # requires X
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( '--disable-packagekit' '--disable-selinux' '--disable-update-mimedb' )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    'exif libexif'
-    'gobject-introspection introspection'
-    'gtk-doc'
+MESON_SRC_CONFIGURE_PARAMS=( '-Dselinux=false' )
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
+    'exif'
+    'gtk-doc gtk_doc'
     'tracker'
     'xmp'
 )
 
-src_prepare() {
-    edo glib-gettextize --copy --force
-    edo gtkdocize --copy
-    edo intltoolize --copy --force --automake
-    autotools_src_prepare
+src_install() {
+    export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
+    meson_src_install
+    unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
 }
 
 pkg_postinst() {
