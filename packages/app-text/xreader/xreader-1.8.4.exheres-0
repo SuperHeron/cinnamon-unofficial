@@ -1,4 +1,4 @@
-# Copyright 2017 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2018 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache
@@ -21,7 +21,6 @@ MYOPTIONS="
     gobject-introspection
     gtk-doc
     keyring [[ description = [ Use GNOME Keyring to store passwords ] ]]
-    nemo [[ description = [ Build Nemo extensions ] ]]
     pdf
     postscript [[ description = [ Enable support for PostScript format ] ]]
     tiff
@@ -36,6 +35,7 @@ DEPENDENCIES="
     build+run:
         dev-libs/glib:2[>=2.36.0]
         dev-libs/libxml2:2.0[>=2.5.0]
+        cinnamon-desktop/xapps[>=1.1.0]
         x11-libs/cairo[>=1.14.0]
         x11-libs/gtk+:3[>=3.14.0][cups?][gobject-introspection?]
         x11-libs/libSM[>=1.0.0]
@@ -49,7 +49,6 @@ DEPENDENCIES="
         keyring? ( dev-libs/libsecret:1[>=0.5][gobject-introspection?] )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6] )
         gtk-doc? ( dev-doc/gtk-doc[>=1.13] )
-        nemo? ( cinnamon-desktop/nemo[gobject-introspection?] )
         pdf? ( app-text/poppler[>=0.22.0][cairo][glib][gobject-introspection?][tiff?] )
         postscript? ( app-text/libspectre[>=0.2.0] )
         tiff? ( media-libs/tiff[>=3.6.0] )
@@ -59,7 +58,6 @@ DEPENDENCIES="
 BUGS_TO=""
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    '--disable-caja' # Not packaged
     '--enable-pixbuf'
 )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
@@ -73,7 +71,6 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'epub'
     'gobject-introspection introspection'
     'gtk-doc'
-    'nemo'
     'pdf'
     'postscript ps'
     'tiff'
