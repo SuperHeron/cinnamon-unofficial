@@ -1,8 +1,8 @@
 # Copyright 2012 Marc-Antoine Perennou<Marc-Antoine@Perennou.com
-# Copyright 2015 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require pypi setup-py [ import=setuptools blacklist=3 ]
+require pypi setup-py [ import=setuptools 2to3=true ]
 
 SUMMARY="Python module for pam"
 
