@@ -14,8 +14,8 @@ Reason: Use wheel group instead of relying on sudo
 -            mask.remove("nopasswdlogin")
 -            mask = ", ".join(mask)
 -            self.group_mask.set_text(mask)
--            self.password_mask.set_text(u'\u2022\u2022\u2022\u2022\u2022\u2022')
-+        self.password_mask.set_text(u'\u2022\u2022\u2022\u2022\u2022\u2022')
+-            self.password_mask.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
++        self.password_mask.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
          self.destroy()
  
      def set_passwords_visibility(self):
