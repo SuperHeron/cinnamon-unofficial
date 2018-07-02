@@ -1,4 +1,4 @@
-# Copyright 2017 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2018 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings
@@ -41,7 +41,7 @@ DEPENDENCIES="
         gnome-desktop/libsoup:2.4[>2.36.0]
         media-libs/libpng:1.6
         net-libs/webkit:4.0[>=1.10.0]
-        x11-libs/gtk+:3[>=3.4.0]
+        x11-libs/gtk+:3[>=3.20.0]
         x11-libs/libICE
         x11-libs/libSM
         brasero? ( gnome-desktop/brasero:3[>=3.2.0] )
