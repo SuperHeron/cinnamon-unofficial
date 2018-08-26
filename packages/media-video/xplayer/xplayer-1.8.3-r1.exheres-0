@@ -5,7 +5,7 @@ AT_M4DIR=( 'libgd' )
 
 require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
-require python [ blacklist='3' multibuild=false with_opt=true ]
+require python [ blacklist='none' multibuild=false with_opt=true ]
 
 SUMMARY="A generic Media Player"
 DESCRIPTION="
