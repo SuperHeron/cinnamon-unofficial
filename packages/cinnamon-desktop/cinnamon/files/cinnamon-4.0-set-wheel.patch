@@ -4,7 +4,7 @@ Reason: Use wheel group instead of relying on sudo
 
 --- a/files/usr/share/cinnamon/cinnamon-settings-users/cinnamon-settings-users.py
 +++ b/files/usr/share/cinnamon/cinnamon-settings-users/cinnamon-settings-users.py
-@@ -225,13 +225,7 @@
+@@ -254,13 +254,7 @@
          newpass = self.new_password.get_text()
          self.user.set_password(newpass, "")
          mask = self.group_mask.get_text()
@@ -19,7 +19,7 @@ Reason: Use wheel group instead of relying on sudo
          self.destroy()
  
      def set_passwords_visibility(self):
-@@ -839,11 +833,11 @@
+@@ -876,11 +870,11 @@
              pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size("/usr/share/cinnamon/faces/user-generic.png", 48, 48)
              description = "<b>%s</b>\n%s" % (fullname, username)
              piter = self.users.append(None, [new_user, pixbuf, description])
