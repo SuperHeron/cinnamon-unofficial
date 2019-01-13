@@ -1,4 +1,4 @@
-# Copyright 2017-2018 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 AT_M4DIR=( 'libgd' )
@@ -36,9 +36,9 @@ DEPENDENCIES="
         dev-libs/glib:2[>=2.33.0]
         dev-libs/libpeas:1.0[>=1.1.0]
         media-libs/clutter-gst:3.0[>=2.99.2][gobject-introspection?]
-        media-libs/gstreamer:1.0[gobject-introspection?]
-        media-plugins/gst-plugins-base:1.0[gobject-introspection?]
-        media-plugins/gst-plugins-good:1.0
+        media-libs/gstreamer:1.0[>=1.6.0][gobject-introspection?]
+        media-plugins/gst-plugins-base:1.0[>=1.6.0][gobject-introspection?]
+        media-plugins/gst-plugins-good:1.0[>=1.6.0][gstreamer_plugins:taglib]
         media-video/xplayer-plparser[>=1.0.0][gobject-introspection?]
         x11-libs/cairo
         x11-libs/clutter:1[>=1.10.0][gobject-introspection?]
