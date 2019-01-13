@@ -1,4 +1,4 @@
-# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ] meson
@@ -28,7 +28,7 @@ DEPENDENCIES="
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
     build+run:
         cinnamon-desktop/cinnamon-desktop[>=2.6.1]
-        cinnamon-desktop/xapps[>=1.0.4]
+        cinnamon-desktop/xapps[>=1.4.0]
         dev-libs/glib:2[>=2.37.3]
         dev-libs/libxml2:2.0[>=2.7.8]
         gnome-desktop/gobject-introspection:1[>=1.0.0]
