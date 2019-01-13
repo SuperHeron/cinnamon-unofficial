@@ -1,4 +1,4 @@
-# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ]
@@ -27,11 +27,6 @@ DEPENDENCIES="
         x11-libs/cairo
         x11-libs/gtk+:3[>=3.14.0][gobject-introspection]
 "
-
-src_prepare() {
-    edo mkdir m4
-    autotools_src_prepare
-}
 
 src_test() {
     unset DISPLAY
