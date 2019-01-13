@@ -1,4 +1,4 @@
-# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require gsettings github [ user=linuxmint ]
@@ -31,14 +31,13 @@ DEPENDENCIES="
         gtk-doc? ( dev-doc/gtk-doc[>=1.15] )
     build+run:
         cinnamon-desktop/cinnamon-desktop[>=2.4.0]
-        dev-libs/glib:2[>=2.37.3]
+        core/json-glib
+        dev-libs/glib:2[>=2.50.3]
         gnome-desktop/gobject-introspection:1[>=0.9.2] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
         gnome-desktop/gsettings-desktop-schemas[>=3.3.0][gobject-introspection?]
         gnome-desktop/zenity
         x11-dri/mesa
         x11-libs/cairo[>=1.10.0]
-        x11-libs/cogl:1.0[>=1.13.3][gobject-introspection?]
-        x11-libs/clutter:1[>=1.14.3][gobject-introspection?]
         x11-libs/gdk-pixbuf:2.0
         x11-libs/gtk+:3[>=3.9.12][gobject-introspection?]
         x11-libs/libICE
@@ -49,8 +48,13 @@ DEPENDENCIES="
         x11-libs/libXdamage
         x11-libs/libXext
         x11-libs/libXfixes
+        x11-libs/libXi[>=1.6.0]
         x11-libs/libXrandr
         x11-libs/libXrender
+        x11-libs/libXres
+        x11-libs/libxcb
+        x11-libs/libxkbcommon[>=0.4.3][X]
+        x11-libs/libxkbfile
         x11-libs/pango[>=1.14.0]
         x11-libs/startup-notification[>=0.7]
         sound? ( media-libs/libcanberra[>=0.26][providers:gtk3] )
