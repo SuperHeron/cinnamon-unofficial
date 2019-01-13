@@ -1,8 +1,8 @@
-# Copyright 2017-2018 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ] python [ blacklist='2' multibuild=false ]
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+require meson
 require freedesktop-desktop gsettings
 
 SUMMARY="X-Apps [Text] Editor (Cross-DE, backward-compatible, GTK3, traditional UI)"
@@ -16,12 +16,18 @@ average text editor (plugins being the most notable of these).
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="gobject-introspection gtk-doc spell"
+MYOPTIONS="
+    gobject-introspection gtk-doc spell
+    linguas: (
+        ar bg ca cs da de el es fi fr hu it ja ko oc pt_BR ru sv th uk zh_CN zh_HK zh_TW
+    )
+"
 
 DEPENDENCIES="
     build:
         app-doc/gtk-doc-autotools[>=1.0]
         dev-util/intltool[>=0.50.1]
+        gnome-desktop/yelp-tools
         sys-devel/gettext
         virtual/pkg-config
     build+run:
@@ -30,29 +36,17 @@ DEPENDENCIES="
         dev-libs/libpeas:1.0[>=1.12.0]
         dev-libs/libxml2:2.0[>=2.5.0]
         gnome-desktop/gtksourceview:3.0[>=3.19.0][gobject-introspection?]
-        x11-libs/gtk+:3[>=3.19.0][gobject-introspection?]
+        x11-libs/gtk+:3[>=3.19.3][gobject-introspection?]
         x11-libs/libX11
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.3] )
         gtk-doc? ( dev-doc/gtk-doc[>=1.0] )
         spell? ( gnome-desktop/gspell:1[>=0.2.5] )
 "
 
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    'gobject-introspection introspection'
-    'gtk-doc'
+MESON_SRC_CONFIGURE_OPTION_ENABLES=(
+    'gtk-doc docs'
     'spell'
 )
-
-src_prepare() {
-    # Disable old gnome-common macro
-    edo sed -i -e 's/GNOME_COMPILE_WARNINGS/dnl &/' configure.ac
-
-    edo mkdir m4
-    edo glib-gettextize --copy --force
-    edo gtkdocize --copy
-    edo intltoolize --copy --force --automake
-    autotools_src_prepare
-}
 
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
