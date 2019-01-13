@@ -1,4 +1,4 @@
-# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings
@@ -36,15 +36,11 @@ DEPENDENCIES="
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
         gnome-desktop/libgnomekbd[>=3.6.0][gobject-introspection]
         gnome-desktop/librsvg:2[gobject-introspection]
-        net-libs/webkit:4.0[gobject-introspection]
         sys-apps/accountsservice[gobject-introspection]
         sys-apps/dbus[>=0.78]
         sys-libs/pam
         x11-libs/gtk+:3[>=3.1.4][gobject-introspection]
-        x11-libs/libX11
-        x11-libs/libXScrnSaver
         x11-libs/libXext
-        x11-proto/xorgproto
     run:
         cinnamon-desktop/flags
     recommendation:
