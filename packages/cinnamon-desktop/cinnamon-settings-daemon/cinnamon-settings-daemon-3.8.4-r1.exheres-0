@@ -56,6 +56,8 @@ DEPENDENCIES="
         smartcard? ( dev-libs/nss[>=3.11.2] )
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/fe3c1d8d269dae06cf0566e6a403e293ee24f282.patch )
+
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-packagekit'
     '--disable-schemas-compile'

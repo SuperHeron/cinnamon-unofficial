@@ -1,4 +1,4 @@
-# Copyright 2015-2018 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gtk-icon-cache
@@ -55,7 +55,7 @@ DEPENDENCIES="
         online-accounts? ( gnome-desktop/gnome-online-accounts[>=3.18.0] )
         wacom? (
             cinnamon-desktop/cinnamon-settings-daemon[>=1.0.0]
-            x11-libs/libwacom[>=0.7]
+            x11-libs/libwacom[>=0.27]
             x11-libs/libXi[>=1.2]
         )
 "
