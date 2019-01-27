@@ -2,8 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ] python [ blacklist='2' multibuild=false ]
-require meson
-require freedesktop-desktop gsettings
+require meson freedesktop-desktop gsettings
 
 SUMMARY="X-Apps [Text] Editor (Cross-DE, backward-compatible, GTK3, traditional UI)"
 DESCRIPTION="
@@ -43,10 +42,16 @@ DEPENDENCIES="
         spell? ( gnome-desktop/gspell:1[>=0.2.5] )
 "
 
-MESON_SRC_CONFIGURE_OPTION_ENABLES=(
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'gtk-doc docs'
-    'spell'
+    'spell enable_spell'
 )
+
+src_install() {
+    export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
+    meson_src_install
+    unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
+}
 
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
