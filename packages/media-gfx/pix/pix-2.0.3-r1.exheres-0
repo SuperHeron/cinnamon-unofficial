@@ -63,6 +63,8 @@ DEPENDENCIES="
         !libopenraw? ( media-libs/libraw [[ note = [ Uses dcraw if present ] ]] )
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/${PNV}-exiv2-0.27-xmp.patch" )
+
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--localedir=/usr/share/locale' '--with-smclient=xsmp' )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'brasero'
