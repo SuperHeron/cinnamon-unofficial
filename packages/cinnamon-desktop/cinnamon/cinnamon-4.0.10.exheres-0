@@ -1,8 +1,6 @@
 # Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-MY_PN="Cinnamon"
-
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 require python [ blacklist=2 multibuild=false ] github [ user='linuxmint' ]
 require gsettings gtk-icon-cache
@@ -77,8 +75,6 @@ DEPENDENCIES="
     suggestion:
         cinnamon-desktop/cinnamon-translations [[ description = [ Install translations files ] ]]
 "
-
-WORK="${WORKBASE}/${MY_PN}-${PV}"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}/${PN}-$(ever range 1-2)-set-default-theme.patch"
