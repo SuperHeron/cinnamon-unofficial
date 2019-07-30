@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
-require freedesktop-desktop gtk-icon-cache
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
+require freedesktop-desktop gsettings gtk-icon-cache
 
 SUMMARY="Image management application"
 DESCRIPTION="
@@ -23,6 +23,10 @@ MYOPTIONS="
     webp
 
     ( providers: ijg-jpeg jpeg-turbo ) [[ number-selected = exactly-one ]]
+    ( linguas: am ar az bg bn ca ca@valcencia cs cy da de dz el en_CA en_GB eo es et eu fa fi fr ga
+               gl gu he hi hr hu ia id ie is it ja kab kk kn ko ku la lt lv mk ml mr ms nb nds ne
+               nl nn oc pa pl ps pt pt_BR ro ru rw sk sl sq sr sr@latin ar@Latn sv ta tg th tr uk
+               ur vi xh zh_CN zh_HK zh_TW )
 "
 
 DEPENDENCIES="
@@ -60,14 +64,16 @@ DEPENDENCIES="
         providers:ijg-jpeg? ( media-libs/jpeg:= )
         providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
     suggestion:
-        !libopenraw? ( media-libs/libraw [[ note = [ Uses dcraw if present ] ]] )
+        !libopenraw? ( media-libs/libraw [[ description = [ Uses dcraw if present ] ]] )
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/${PNV}-exiv2-0.27-xmp.patch" )
-
-DEFAULT_SRC_CONFIGURE_PARAMS=( '--localedir=/usr/share/locale' '--with-smclient=xsmp' )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --disable-static
+    --localedir=/usr/share/locale
+    --with-smclient=xsmp
+)
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    'brasero'
+    'brasero libbrasero'
     'clutter'
     'exif exiv2'
     'gstreamer'
@@ -77,26 +83,30 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 DEFAULT_SRC_CONFIGURE_TESTS=( '--enable-test-suite --disable-test-suite' )
 
 src_prepare() {
-    # Disable old gnome-common macros + fix PKG_CONFIG invocation
+    # Disable old gnome-common macros + fix PKG_CONFIG invocation + localedir
     edo sed -i -e 's|GNOME_COMMON_INIT|dnl &|'             \
                -e 's|GNOME_COMPILE_WARNINGS|dnl &|'        \
                -e 's|GNOME_CXX_WARNINGS|dnl &|'            \
                -e 's|GNOME_MAINTAINER_MODE_DEFINES|dnl &|' \
                -e 's|pkg-config|$PKG_CONFIG|'              \
+               -e 's:${prefix}/${DATADIRNAME}/locale:/usr/share/locale:g' \
                configure.ac
 
-    # Fix localedir
-    edo sed -i -e 's|itlocaledir = .*|itlocaledir = @localedir@|' po/Makefile.in.in
+    # respect localedir
+    # drop if po/Makefile.in.in doesn't have 'itlocaledir = $(prefix)/$(DATADIRNAME)/locale'
+    edo intltoolize --force --automake
 
     autotools_src_prepare
 }
 
 pkg_postinst() {
+    gsettings_pkg_postinst
     freedesktop-desktop_pkg_postinst
     gtk-icon-cache_pkg_postinst
 }
 
 pkg_postrm() {
+    gsettings_pkg_postrm
     freedesktop-desktop_pkg_postrm
     gtk-icon-cache_pkg_postrm
 }
