@@ -1,0 +1,25 @@
+# Copyright 2019 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github
+
+SUMMARY="Beautiful math in all browsers"
+DESCRIPTION="
+MathJax is an open-source JavaScript display engine for LaTeX, MathML, and AsciiMath notation that
+works in all modern browsers.
+"
+HOMEPAGE+=" https://www.mathjax.org/"
+
+LICENCES="Apache-2.0"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+WORK="${WORKBASE}/MathJax-${PV}"
+
+src_install() {
+    edo mkdir -p "${IMAGE}"/usr/share/"${PN}"
+    edo cp -r * "${IMAGE}"/usr/share/"${PN}"
+    emagicdocs
+}
+
