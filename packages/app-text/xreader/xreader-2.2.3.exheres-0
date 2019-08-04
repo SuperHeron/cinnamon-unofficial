@@ -1,8 +1,7 @@
 # Copyright 2017-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache meson
 
 SUMMARY="A generic Document Reader"
 DESCRIPTION="
@@ -29,7 +28,6 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        app-doc/gtk-doc-autotools[>=1.13]
         dev-util/intltool[>=0.50.1]
         sys-devel/gettext
     build+run:
@@ -38,6 +36,7 @@ DEPENDENCIES="
         cinnamon-desktop/xapps[>=1.1.0]
         x11-libs/cairo[>=1.14.0]
         x11-libs/gtk+:3[>=3.14.0][cups?][gobject-introspection?]
+        x11-libs/libICE
         x11-libs/libSM[>=1.0.0]
         x11-libs/libX11
         djvu? ( app-text/djvu[>=3.5.17][tiff?] )
@@ -45,7 +44,10 @@ DEPENDENCIES="
             dev-libs/kpathsea
             media-libs/t1lib
         )
-        epub? ( net-libs/webkit:4.0[>=2.4.3][gobject-introspection?] )
+        epub? (
+            dev-javascript/mathjax
+            net-libs/webkit:4.0[>=2.4.3][gobject-introspection?]
+        )
         keyring? ( dev-libs/libsecret:1[>=0.5][gobject-introspection?] )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6] )
         gtk-doc? ( dev-doc/gtk-doc[>=1.13] )
@@ -57,34 +59,25 @@ DEPENDENCIES="
 
 BUGS_TO=""
 
-DEFAULT_SRC_CONFIGURE_PARAMS=(
-    '--enable-pixbuf'
+MESON_SRC_CONFIGURE_PARAMS=(
+    '-Dcomics=true'
+    '-Dpixbuf=true'
 )
-DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
-    'cups gtk-unix-print'
-    'keyring'
-)
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
+    'cups gtk_unix_print'
     'djvu'
     'dvi'
     'dvi t1lib'
     'epub'
     'gobject-introspection introspection'
-    'gtk-doc'
+    'gtk-doc docs'
+    'keyring'
     'pdf'
     'postscript ps'
     'tiff'
     'xps'
 )
-DEFAULT_SRC_CONFIGURE_TESTS=( '--enable-tests --disable-tests' )
-
-src_prepare() {
-    edo mkdir m4
-    edo glib-gettextize --copy --force
-    edo gtkdocize --copy
-    edo intltoolize --copy --force --automake
-    autotools_src_prepare
-}
+MESON_SRC_CONFIGURE_TESTS=( '-Dtests=true -Dtests=false' )
 
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
