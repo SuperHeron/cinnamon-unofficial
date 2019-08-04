@@ -56,9 +56,3 @@ MESON_SRC_CONFIGURE_PARAMS=(
     '-Dpnp_ids=/usr/share/misc'
 )
 
-src_install() {
-    meson_src_install
-    edo cd "${IMAGE}"/usr
-    edo mv {,$(exhost --target)/}bin
-}
-
