@@ -1,0 +1,23 @@
+# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Purpose License v2
+
+require github [ user='linuxmint' ] meson
+
+SUMMARY="Menus for Cinnamon Panel"
+
+LICENCES="LGPL-2"
+SLOT="3.0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="gtk-doc"
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config[>=0.20]
+        gtk-doc? ( dev-doc/gtk-doc )
+    build+run:
+        dev-libs/glib:2[>=2.29.15]
+        gnome-desktop/gobject-introspection:1[>=0.9.5]
+"
+
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'gtk-doc enable_docs' )
+
