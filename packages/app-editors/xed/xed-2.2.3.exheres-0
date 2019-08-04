@@ -26,6 +26,7 @@ DEPENDENCIES="
     build:
         app-doc/gtk-doc-autotools[>=1.0]
         dev-util/intltool[>=0.50.1]
+        dev-util/itstool
         gnome-desktop/yelp-tools
         sys-devel/gettext
         virtual/pkg-config
