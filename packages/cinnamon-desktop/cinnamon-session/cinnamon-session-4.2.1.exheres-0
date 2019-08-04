@@ -31,7 +31,6 @@ DEPENDENCIES="
         doc? ( app-text/xmlto )
     build+run:
         cinnamon-desktop/xapps[>=1.0.4]
-        dev-libs/dbus-glib:1[>=0.88]
         dev-libs/glib:2[>=2.37.3]
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7] [[ note = [ See GNOME bug #641686 ] ]]
         media-libs/libcanberra[providers:gtk3]
