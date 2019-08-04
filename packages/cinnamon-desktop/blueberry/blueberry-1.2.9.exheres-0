@@ -1,7 +1,7 @@
 # Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='linuxmint' ] python [ blacklist=3 multibuild=false ]
+require github [ user='linuxmint' ] python [ blacklist=2 multibuild=false ]
 require gsettings gtk-icon-cache
 
 SUMMARY="Bluetooth configuration tool for Cinnamon desktop"
@@ -28,8 +28,9 @@ DEPENDENCIES="
 "
 
 src_prepare() {
+    edo sed -e "s|/usr/lib|/usr/$(exhost --target)/lib|" -i ${WORK}/usr/bin/${PN}{,-tray}
     cd ${WORK}/usr/lib/${PN}
-    edo sed -i -e "s|#!/usr/bin/python2|#!/usr/$(exhost --target)/bin/env python2|" ${PN}-obex-agent.py
+    edo sed -i -e "s|#!/usr/bin/python3|#!/usr/$(exhost --target)/bin/env python3|" ${PN}-obex-agent.py
 }
 
 src_install() {
