@@ -1,0 +1,39 @@
+# Copyright 2019 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require gnome.org [ suffix=tar.xz ] gsettings
+
+SUMMARY="Accessibility Software for GNOME"
+DESCRIPTION="
+    Mousetweaks provides mouse accessibility enhancements for the GNOME
+    desktop. These enhancements are:
+
+    - It offers a way to perform the various clicks without using any
+    physical mouse buttons. (Hover Click)
+
+    - It allows users to perform a secondary click by keeping the primary
+    mouse button pressed for a predetermined amount of time. (Simulated
+    Secondary Click)
+
+    The features can be activated and configured through the Universal Access
+    panel of the GNOME Control Center.
+"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext[>=0.19.8]
+    build+run:
+        dev-libs/glib:2[>=2.25.3]
+        gnome-desktop/gsettings-desktop-schemas
+        x11-libs/gtk+:3[>=3.0.0]
+        x11-libs/libX11
+        x11-libs/libXcursor
+        x11-libs/libXfixes
+        x11-libs/libXtst
+"
+
