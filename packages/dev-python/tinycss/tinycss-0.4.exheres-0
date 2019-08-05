@@ -1,0 +1,23 @@
+# Copyright 2019 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import=setuptools test=pytest ]
+
+SUMMARY="tinycss is a complete yet simple CSS parser for Python."
+DESCRIPTION="
+tinycss is a complete yet simple CSS parser for Python. It supports the full syntax and error
+handling for CSS 2.1 as well as some CSS 3 modules:
+
+    * CSS Color 3
+    * CSS Fonts 3
+    * CSS Paged Media 3
+
+It is designed to be easy to extend for new CSS modules and syntax, and integrates well with
+cssselect for Selectors 3 support.
+"
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
