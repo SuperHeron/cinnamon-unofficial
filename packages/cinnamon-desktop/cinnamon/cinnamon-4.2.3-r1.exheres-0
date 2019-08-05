@@ -45,7 +45,8 @@ DEPENDENCIES="
         dev-python/pexpect[python_abis:*(-)?]
         dev-python/Pillow[python_abis:*(-)?]
         dev-python/pycairo[python_abis:*(-)?]
-        dev-python/pyinotify
+        dev-python/pyinotify[python_abis:*(-)?]
+        dev-python/tinycss[python_abis:*(-)?]
         gnome-desktop/gobject-introspection:1[>=0.9.2] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
         gnome-desktop/gnome-backgrounds
         gnome-desktop/gnome-themes-standard
@@ -74,6 +75,8 @@ DEPENDENCIES="
         gnome-desktop/polkit-gnome:1
     suggestion:
         cinnamon-desktop/cinnamon-translations [[ description = [ Install translations files ] ]]
+    recommendation:
+        gnome-desktop/mousetweaks [[ description = [ Accessibility with Mouse settings ] ]]
 "
 
 DEFAULT_SRC_PREPARE_PATCHES=(
