@@ -13,7 +13,6 @@ MYOPTIONS="
     exif
     gobject-introspection
     gtk-doc
-    tracker [[ description = [ Use tracker as search engine ] ]]
     xmp [[ description = [ Support for XMP metadata ] ]]
 "
 
@@ -22,7 +21,6 @@ DEPENDENCIES="
         dev-lang/perl:*
         dev-python/polib[python_abis:2.7]
         dev-util/intltool[>=0.40.1]
-        sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config[>=0.19]
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
@@ -39,7 +37,6 @@ DEPENDENCIES="
         x11-libs/pango[>=1.28.3]
         x11-proto/xorgproto
         exif? ( media-libs/libexif[>=0.6.20] )
-        tracker? ( app-pim/tracker:=[>=0.16] )
         xmp? ( media-libs/exempi:2.0[>=2.2.0] )
 "
 
@@ -49,7 +46,6 @@ MESON_SRC_CONFIGURE_PARAMS=( '-Dselinux=false' )
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'exif'
     'gtk-doc gtk_doc'
-    'tracker'
     'xmp'
 )
 
