@@ -17,7 +17,7 @@ Reason: Use wheel group instead of relying on sudo
 -            self.password_mask.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
 +        self.password_mask.set_text('\u2022\u2022\u2022\u2022\u2022\u2022')
          self.destroy()
- 
+
      def set_passwords_visibility(self):
 @@ -876,11 +870,11 @@
              pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size("/usr/share/cinnamon/faces/user-generic.png", 48, 48)
@@ -33,4 +33,4 @@ Reason: Use wheel group instead of relying on sudo
 +                subprocess.call(["usermod", username, "-G", "%s" % username])
              self.load_groups()
          dialog.destroy()
-  
+
