@@ -41,6 +41,7 @@ DEPENDENCIES="
         x11-libs/libX11
         djvu? ( app-text/djvu[>=3.5.17][tiff?] )
         dvi? (
+            app-text/libspectre[>=0.2.0]
             dev-libs/kpathsea
             media-libs/t1lib
         )
@@ -82,7 +83,7 @@ MESON_SRC_CONFIGURE_TESTS=( '-Dtests=true -Dtests=false' )
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
     gsettings_pkg_postinst
-    gtk-icon-cache_postinst
+    gtk-icon-cache_pkg_postinst
 }
 
 pkg_postrm() {
