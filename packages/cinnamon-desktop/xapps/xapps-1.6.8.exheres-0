@@ -18,9 +18,9 @@ MYOPTIONS="gobject-introspection gtk-doc"
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.25]
+        gnome-desktop/gobject-introspection:1[>=0.9.7]
         sys-devel/gettext
         virtual/pkg-config
-        gnome-desktop/gobject-introspection:1[>=0.9.7]
     build+run:
         dev-libs/glib:2[>=2.37.3]
         gnome-bindings/pygobject:3[>=2.90][python_abis:*(-)?]
