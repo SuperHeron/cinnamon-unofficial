@@ -65,6 +65,8 @@ DEPENDENCIES="
         ]]
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/${PN}-$(ever range 1-2)-fix-warnings.patch" )
+
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-debug'
     '--disable-schemas-compile'
