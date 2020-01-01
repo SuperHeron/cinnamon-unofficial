@@ -1,0 +1,35 @@
+# Copyright 2020 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="http://bazaar.launchpad.net/~jbicha/timezonemap/"
+SCM_BRANCH="convert-to-dh-and-more"
+
+require launchpad scm-bzr gsettings
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
+
+SUMMARY="A GTK+3 timezone map widget"
+DESCRIPTION="
+This static library is a copied version of the code in GNOME 3.0's control center panel 'datetime',
+which itself is a version of Ubiquity's map ported to C.
+"
+DOWNLOADS=""
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="gobject-introspection"
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        core/json-glib[gobject-introspection?]
+        dev-libs/glib:2[>=2.26]
+        gnome-desktop/gobject-introspection:1[>=0.6.7]
+        gnome-desktop/libsoup:2.4[>=2.42.0][gobject-introspection?]
+        x11-libs/cairo[>=1.10]
+        x11-libs/gtk+:3[>=3.1.4][gobject-introspection?]
+"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' )
+
