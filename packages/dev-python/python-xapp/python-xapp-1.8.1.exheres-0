@@ -1,4 +1,4 @@
-# Copyright 2018 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2018-2019 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] setup-py [ import='distutils' ]
@@ -12,6 +12,9 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
+        cinnamon-desktop/xapps[python_abis:*(-)?][gobject-introspection]
         dev-python/psutil[python_abis:*(-)?]
+        gnome-desktop/gobject-introspection[python_abis:*(-)?]
+        x11-libs/gtk+:3[gobject-introspection]
 "
 
