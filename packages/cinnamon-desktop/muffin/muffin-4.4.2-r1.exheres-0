@@ -60,7 +60,7 @@ DEPENDENCIES="
         sound? ( media-libs/libcanberra[>=0.26][providers:gtk3] )
         xinerama? ( x11-libs/libXinerama )
     recommendation:
-        gnome-desktop/gnome-themes-standard [[
+        gnome-desktop/gnome-themes-extra [[
             description = [ Provides default GNOME 3 theme (Adwaita) ]
         ]]
 "
