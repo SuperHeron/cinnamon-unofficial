@@ -1,4 +1,4 @@
-# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2020 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require gsettings github [ user=linuxmint ]
@@ -72,6 +72,8 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-schemas-compile'
     '--disable-scrollkeeper'
     '--disable-static'
+    '--disable-wayland-egl-platform'
+    '--disable-wayland-egl-server'
     '--enable-shape'
     '--enable-sm'
     '--enable-startup-notification'
