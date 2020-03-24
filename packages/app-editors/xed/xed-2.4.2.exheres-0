@@ -24,7 +24,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        app-doc/gtk-doc-autotools[>=1.0]
+        dev-doc/gtk-doc[>=1.32-r1]
         dev-util/intltool[>=0.50.1]
         dev-util/itstool
         gnome-desktop/yelp-tools
@@ -39,7 +39,6 @@ DEPENDENCIES="
         x11-libs/gtk+:3[>=3.19.3][gobject-introspection?]
         x11-libs/libX11
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.3] )
-        gtk-doc? ( dev-doc/gtk-doc[>=1.0] )
         spell? ( gnome-desktop/gspell:1[>=0.2.5] )
 "
 

@@ -23,7 +23,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        app-doc/gtk-doc-autotools[>=1.14]
+        dev-doc/gtk-doc[>=1.32-r1]
         dev-util/intltool[>=0.35.0]
         sys-devel/gettext
         virtual/pkg-config
@@ -34,7 +34,6 @@ DEPENDENCIES="
         net-utils/gmime:2.6
         amazon? ( dev-libs/libgcrypt )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.5] )
-        gtk-doc? ( dev-doc/gtk-doc[>=1.14] )
         libarchive? ( app-arch/libarchive[>=3.0.0] )
         quvi? ( dev-libs/quvi[>=0.9.1] )
 "
