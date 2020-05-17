@@ -24,7 +24,6 @@ DEPENDENCIES="
     build:
         dev-doc/gtk-doc[>=1.32-r1]
         dev-util/intltool[>=0.35.0]
-        gnome-desktop/gnome-doc-utils[>=0.8.0]
         sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config[>=0.20]
@@ -64,8 +63,6 @@ DEPENDENCIES="
         ]]
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/${PN}-$(ever range 1-2)-fix-warnings.patch" )
-
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-debug'
     '--disable-schemas-compile'
@@ -85,7 +82,6 @@ src_prepare() {
     edo mkdir m4
     edo glib-gettextize --copy --force
     edo gtkdocize --copy
-    edo gnome-doc-prepare --copy --force --automake
     edo intltoolize --copy --force --automake
     autotools_src_prepare
 }
