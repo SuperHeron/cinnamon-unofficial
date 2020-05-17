@@ -1,4 +1,4 @@
-# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2020 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings gtk-icon-cache
@@ -16,6 +16,7 @@ MYOPTIONS="
                el en_CA en_GB en@shaw eo es et eu fa fi fr ga gl gu he hi hr hu id is it ja ka km
                kn ko ku lt lv mai mg mk ml mn mr ms nb nds ne nl nn nso oc or pa pl pt pt_BR ro ru
                rw si sk sl sq sr sr@latin sv ta te th tr ug uk vi wa xh zh_CN zh_HK zh_TW zu )
+    wacom
 "
 
 DEPENDENCIES="
@@ -31,7 +32,6 @@ DEPENDENCIES="
         gnome-desktop/gsettings-desktop-schemas[>=3.4.1]
         gnome-desktop/libgnomekbd[>=3.6.0]
         gnome-desktop/libgudev
-        gnome-desktop/librsvg:2[>=2.36.2]
         media-libs/fontconfig
         media-libs/lcms2[>=2.2]
         media-libs/libcanberra[providers:gtk3]
@@ -41,19 +41,22 @@ DEPENDENCIES="
         sys-apps/systemd [[ note = [ Support for logind ] ]]
         sys-apps/upower[>=0.9.11]
         sys-auth/polkit:1[>=0.97]
-        x11-drivers/xf86-input-wacom
         x11-libs/gtk+:3[>=3.9.10]
         x11-libs/libX11
         x11-libs/libXext
         x11-libs/libXfixes
         x11-libs/libXi
-        x11-libs/libXtst
         x11-libs/libxklavier[>=5.0]
         x11-libs/libnotify[>=0.7.3]
-        x11-libs/libwacom[>=0.7]
         x11-proto/xorgproto
-        cups? ( net-print/cups )
+        cups? ( net-print/cups[>=1.4] )
         smartcard? ( dev-libs/nss[>=3.11.2] )
+        wacom? (
+            gnome-desktop/librsvg:2[>=2.36.2]
+            x11-drivers/xf86-input-wacom
+            x11-libs/libwacom[>=0.7]
+            x11-libs/libXtst
+        )
 "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
@@ -65,6 +68,7 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'cups'
     'smartcard smartcard-support'
+    'wacom'
 )
 
 RESTRICT="test" # requires X
