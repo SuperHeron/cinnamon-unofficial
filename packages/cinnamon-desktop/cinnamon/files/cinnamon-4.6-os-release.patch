@@ -5,7 +5,6 @@ Reason: Show "Exherbo Linux" in System Info
 --- a/files/usr/share/cinnamon/cinnamon-settings/modules/cs_info.py	2015-01-19 16:45:53.000000000 +0100
 +++ b/files/usr/share/cinnamon/cinnamon-settings/modules/cs_info.py	2015-02-14 23:22:45.294543401 +0100
 @@ -102,6 +102,13 @@
-     elif os.path.exists("/etc/manjaro-release"):
          contents = open("/etc/manjaro-release", 'r').readline().split()
          title = ' '.join(contents[:2]) or "Manjaro Linux"
          infos.append((_("Operating System"), title))
@@ -17,4 +16,5 @@ Reason: Show "Exherbo Linux" in System Info
 +
 +        infos.append((_("Operating System"), title + " (" + arch + ")"))
      else:
-         s = '%s (%s)' % (' '.join(platform.linux_distribution()), arch)
+         import distro
+         s = '%s (%s)' % (' '.join(distro.linux_distribution()), arch)

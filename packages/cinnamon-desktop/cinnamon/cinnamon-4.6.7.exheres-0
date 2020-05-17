@@ -1,4 +1,4 @@
-# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2020 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
@@ -34,11 +34,13 @@ DEPENDENCIES="
         cinnamon-desktop/cinnamon-desktop[>=2.8.0]
         cinnamon-desktop/cinnamon-menus:3.0
         cinnamon-desktop/muffin[>=4.0.3][gobject-introspection]
+        cinnamon-desktop/xapps[gobject-introspection]
         dev-libs/dbus-glib:1
         dev-libs/glib:2[>=2.37.3]
         dev-libs/libcroco[>=0.6.2]
         dev-libs/libxml2:2.0
         dev-python/dbus-python[python_abis:*(-)?]
+        dev-python/distro[python_abis:*(-)?]
         dev-python/lxml[python_abis:*(-)?]
         dev-python/pam[python_abis:*(-)?]
         dev-python/pexpect[python_abis:*(-)?]
@@ -47,7 +49,8 @@ DEPENDENCIES="
         dev-python/pyinotify[python_abis:*(-)?]
         dev-python/python-xapp[>=1.8.0][python_abis:*(-)?]
         dev-python/pytz[python_abis:*(-)?]
-        dev-python/tinycss[python_abis:*(-)?]
+        dev-python/tinycss2[python_abis:*(-)?]
+        gnome-desktop/adwaita-icon-theme
         gnome-desktop/gobject-introspection:1[>=0.9.2] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
         gnome-desktop/gnome-backgrounds
         gnome-desktop/gnome-themes-extra
