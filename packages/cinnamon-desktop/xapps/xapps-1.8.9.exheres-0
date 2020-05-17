@@ -1,8 +1,10 @@
-# Copyright 2016-2019 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2016-2020 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+MESON_SOURCE="${WORKBASE}/xapp-${PV}"
+
 require github [ user='linuxmint' ] gsettings meson
-require python [ blacklist="2" multibuild=false ]
+require python [ blacklist='2' multibuild=false ]
 
 SUMMARY="Cross-desktop libraries and common resources"
 DESCRIPTION="
@@ -17,19 +19,22 @@ MYOPTIONS="gobject-introspection gtk-doc"
 
 DEPENDENCIES="
     build:
-        dev-util/intltool[>=0.25]
-        gnome-desktop/gobject-introspection:1[>=0.9.7]
+        dev-util/intltool[>=0.40.6]
+        gnome-desktop/gobject-introspection:1[>=0.10.2]
         sys-devel/gettext
         virtual/pkg-config
     build+run:
         dev-libs/glib:2[>=2.37.3]
+        dev-libs/libdbusmenu:0.4[gobject-introspection?]
         gnome-bindings/pygobject:3[>=2.90][python_abis:*(-)?]
         gnome-desktop/libgnomekbd
+        sys-apps/dbus
         x11-libs/cairo
         x11-libs/gdk-pixbuf:2.0[>=2.22.0]
-        x11-libs/gtk+:3[>=3.3.16]
+        x11-libs/gtk+:3[>=3.3.16][gobject-introspection?]
         x11-libs/libX11
-        gtk-doc? ( dev-doc/gtk-doc[>=1.0] )
+        x11-libs/libxkbfile
+        gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
 "
 
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'gtk-doc docs' )
@@ -38,6 +43,5 @@ src_install() {
     export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
     meson_src_install
     unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
-    edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
 }
 
