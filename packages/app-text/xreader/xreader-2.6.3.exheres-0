@@ -1,4 +1,4 @@
-# Copyright 2017-2019 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2020 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache meson
@@ -14,6 +14,7 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="
     cups
+    dbus
     djvu [[ description = [ Enable support for DjVu format ] ]]
     dvi [[ description = [ Enable support for DVI format ] ]]
     epub [[ description = [ Enable support for ePub format ] ]]
@@ -39,6 +40,7 @@ DEPENDENCIES="
         x11-libs/libICE
         x11-libs/libSM[>=1.0.0]
         x11-libs/libX11
+        dbus? ( sys-apps/dbus )
         djvu? ( app-text/djvu[>=3.5.17][tiff?] )
         dvi? (
             app-text/libspectre[>=0.2.0]
@@ -58,11 +60,12 @@ DEPENDENCIES="
         xps? ( dev-libs/libgxps[>=0.2.1][gobject-introspection?][tiff?] )
 "
 
-BUGS_TO=""
-
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Dcomics=true'
     '-Dpixbuf=true'
+)
+MESON_SRC_CONFIGURE_OPTION_ENABLES=(
+    'dbus'
 )
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'cups gtk_unix_print'
