@@ -1,8 +1,9 @@
-# Copyright 2015-2019 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2020 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=linuxmint ] meson
+require github [ user=linuxmint ]
 require gsettings gtk-icon-cache freedesktop-desktop freedesktop-mime
+require python [ blacklist='2' multibuild=false ] meson
 
 SUMMARY="File Manager for Cinnamon"
 
@@ -13,14 +14,16 @@ MYOPTIONS="
     exif
     gobject-introspection
     gtk-doc
+    tracker
     xmp [[ description = [ Support for XMP metadata ] ]]
 "
 
 DEPENDENCIES="
     build:
         dev-lang/perl:*
-        dev-python/polib[python_abis:2.7]
+        dev-python/polib[python_abis:*(-)?]
         dev-util/intltool[>=0.40.1]
+        dev-util/itstool
         sys-devel/gettext
         virtual/pkg-config[>=0.19]
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
@@ -34,9 +37,10 @@ DEPENDENCIES="
         x11-libs/gtk+:3[>=3.9.10][gobject-introspection]
         x11-libs/libX11
         x11-libs/libnotify[>=0.7.0]
-        x11-libs/pango[>=1.28.3]
+        x11-libs/pango[>=1.44.0]
         x11-proto/xorgproto
         exif? ( media-libs/libexif[>=0.6.20] )
+        tracker? ( app-pim/tracker:2.0 )
         xmp? ( media-libs/exempi:2.0[>=2.2.0] )
 "
 
@@ -46,6 +50,7 @@ MESON_SRC_CONFIGURE_PARAMS=( '-Dselinux=false' )
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'exif'
     'gtk-doc gtk_doc'
+    'tracker'
     'xmp'
 )
 
