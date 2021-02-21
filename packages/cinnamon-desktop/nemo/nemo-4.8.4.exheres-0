@@ -1,4 +1,4 @@
-# Copyright 2015-2020 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2021 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ]
@@ -28,13 +28,13 @@ DEPENDENCIES="
         virtual/pkg-config[>=0.19]
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
     build+run:
-        cinnamon-desktop/cinnamon-desktop[>=2.6.1]
-        cinnamon-desktop/xapps[>=1.4.0]
-        dev-libs/glib:2[>=2.37.3]
+        cinnamon-desktop/cinnamon-desktop[>=4.8.0]
+        cinnamon-desktop/xapps[>=2.0.0]
+        dev-libs/glib:2[>=2.45.7]
         dev-libs/libxml2:2.0[>=2.7.8]
         gnome-desktop/gobject-introspection:1[>=1.0.0]
         gnome-desktop/gsettings-desktop-schemas
-        x11-libs/gtk+:3[>=3.9.10][gobject-introspection]
+        x11-libs/gtk+:3[>=3.10.0][gobject-introspection]
         x11-libs/libX11
         x11-libs/libnotify[>=0.7.0]
         x11-libs/pango[>=1.44.0]
