@@ -1,8 +1,7 @@
-# Copyright 2015-2020 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2021 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=linuxmint ]
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
+require github [ user=linuxmint ] meson
 
 SUMMARY="JavaScript bindings for Cinnamon"
 
@@ -18,10 +17,10 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         dev-libs/dbus-glib:1
-        dev-libs/glib:2[>=2.42.0]
+        dev-libs/glib:2[>=2.58.0]
         dev-libs/libffi
-        dev-libs/spidermonkey:52
-        gnome-desktop/gobject-introspection:1[>=1.41.4]
+        dev-libs/spidermonkey:78
+        gnome-desktop/gobject-introspection:1[>=1.58.3]
         sys-apps/dbus
         sys-libs/readline
         x11-libs/cairo
