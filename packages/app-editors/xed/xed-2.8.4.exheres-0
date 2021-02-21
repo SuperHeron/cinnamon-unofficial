@@ -1,4 +1,4 @@
-# Copyright 2017-2020 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2021 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ] python [ blacklist='2' multibuild=false ]
@@ -31,14 +31,14 @@ DEPENDENCIES="
         sys-devel/gettext
         virtual/pkg-config
     build+run:
-        cinnamon-desktop/xapps
+        cinnamon-desktop/xapps[>=1.9.0]
         dev-libs/glib:2[>=2.40.0]
         dev-libs/libpeas:1.0[>=1.12.0]
         dev-libs/libxml2:2.0[>=2.5.0]
-        gnome-desktop/gtksourceview:3.0[>=3.19.0][gobject-introspection?]
+        gnome-desktop/gtksourceview:4.0[>=4.0.3][gobject-introspection?]
         x11-libs/gtk+:3[>=3.19.3][gobject-introspection?]
         x11-libs/libX11
-        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.3] )
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=1.42.0] )
         spell? ( gnome-desktop/gspell:1[>=0.2.5] )
 "
 
