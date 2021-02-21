@@ -19,7 +19,7 @@ Reason: Use wheel group instead of relying on sudo
          self.destroy()
 
      def set_passwords_visibility(self):
-@@ -876,11 +870,11 @@
+@@ -886,11 +880,11 @@
              pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size("/usr/share/cinnamon/faces/user-generic.png", 48, 48)
              description = "<b>%s</b>\n%s" % (fullname, username)
              piter = self.users.append(None, [new_user, pixbuf, description])

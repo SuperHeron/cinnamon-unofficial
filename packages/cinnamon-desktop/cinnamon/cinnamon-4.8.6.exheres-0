@@ -1,9 +1,8 @@
-# Copyright 2015-2020 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2021 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 require python [ blacklist=2 multibuild=false ] github [ user='linuxmint' ]
-require gsettings gtk-icon-cache
+require gsettings gtk-icon-cache meson
 
 SUMMARY="A Linux Desktop featuring a traditional layout, built from modern technology and introducing brand new innovative features."
 DESCRIPTION="
@@ -30,13 +29,13 @@ DEPENDENCIES="
         virtual/pkg-config[>=0.22]
     build+run:
         app-misc/ca-certificates
-        cinnamon-bindings/cjs:1[>=3.2.0]
+        cinnamon-bindings/cjs:1[>=4.8.0]
         cinnamon-desktop/cinnamon-desktop[>=2.8.0]
-        cinnamon-desktop/cinnamon-menus:3.0
+        cinnamon-desktop/cinnamon-menus:3.0[>=4.8.0]
         cinnamon-desktop/muffin[>=4.0.3][gobject-introspection]
         cinnamon-desktop/xapps[gobject-introspection]
         dev-libs/dbus-glib:1
-        dev-libs/glib:2[>=2.37.3]
+        dev-libs/glib:2[>=2.52.0]
         dev-libs/libcroco[>=0.6.2]
         dev-libs/libxml2:2.0
         dev-python/dbus-python[python_abis:*(-)?]
@@ -51,7 +50,7 @@ DEPENDENCIES="
         dev-python/pytz[python_abis:*(-)?]
         dev-python/tinycss2[python_abis:*(-)?]
         gnome-desktop/adwaita-icon-theme
-        gnome-desktop/gobject-introspection:1[>=0.9.2] [[ note = [ Hard dep for introspection.m4, needed by autotools ] ]]
+        gnome-desktop/gobject-introspection:1[>=0.9.2]
         gnome-desktop/gnome-backgrounds
         gnome-desktop/gnome-themes-extra
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
@@ -64,7 +63,6 @@ DEPENDENCIES="
         sys-apps/accountsservice[>=0.6.14][gobject-introspection]
         sys-auth/polkit:1[>=0.100][gobject-introspection]
         x11-dri/mesa
-        x11-libs/gdk-pixbuf:2.0[gobject-introspection]
         x11-libs/gtk+:3[>=3.12.0][gobject-introspection]
         x11-libs/libX11
         x11-libs/libXfixes
@@ -91,20 +89,20 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}/${PN}-$(ever range 1-2)-set-wheel.patch"
     "${FILES}/${PN}-$(ever range 1-2)-os-release.patch"
 )
-DEFAULT_SRC_CONFIGURE_PARAMS=(
-    '--disable-schemas-compile'
-)
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    'gtk-doc'
-    'networkmanager'
+
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
+    'gtk-doc docs'
+    '!networkmanager disable_networkmanager'
 )
 
-src_prepare() {
-    edo mkdir m4
-    edo glib-gettextize --copy --force
-    edo gtkdocize --copy
-    edo intltoolize --copy --force --automake
-    autotools_src_prepare
+src_install() {
+    export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
+    meson_src_install
+    unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
+    for bin in $(ls ${IMAGE}/usr/bin/); do
+        newbin ${IMAGE}/usr/bin/${bin} ${bin}
+    done
+    edo rm -fr ${IMAGE}/usr/bin
 }
 
 pkg_postinst() {
@@ -116,4 +114,3 @@ pkg_postrm() {
     gsettings_pkg_postrm
     gtk-icon-cache_pkg_postrm
 }
-
