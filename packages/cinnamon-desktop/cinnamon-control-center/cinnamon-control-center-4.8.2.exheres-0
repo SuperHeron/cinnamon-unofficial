@@ -1,8 +1,7 @@
-# Copyright 2015-2020 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2021 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='linuxmint' ] gtk-icon-cache
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
+require github [ user='linuxmint' ] gtk-icon-cache meson
 
 SUMMARY="Configuration Applications for the Cinnamon Desktop"
 DESCRIPTION="
@@ -28,21 +27,17 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         app-text/iso-codes
-        cinnamon-desktop/cinnamon-desktop[>=1.0.0]
+        cinnamon-desktop/cinnamon-desktop[>=4.6.0]
         cinnamon-desktop/cinnamon-menus:3.0
-        dev-libs/glib:2[>=2.31.0]
-        dev-libs/libxml2:2.0
-        gnome-desktop/libgnomekbd[>=2.91.91]
+        dev-libs/glib:2[>=2.44.0]
+        gnome-desktop/libgnomekbd[>=3.0.0]
         gnome-desktop/network-manager-applet[>=1.8.0]
-        media-libs/fontconfig
-        net-apps/NetworkManager[>=0.9.8][modem-manager]
+        net-apps/NetworkManager[>=1.2.0][modem-manager]
         net-wireless/ModemManager[>=0.7]
         sys-apps/colord[>=0.1.14]
         sys-auth/polkit:1[>=0.103]
-        x11-libs/gdk-pixbuf:2.0[>=2.23.0]
-        x11-libs/gtk+:3[>=3.8.0][colord]
+        x11-libs/gtk+:3[>=3.16.0][colord]
         x11-libs/libX11
-        x11-libs/libXxf86misc
         x11-libs/libnotify[>=0.7.3]
         x11-libs/libxklavier[>=5.1]
         x11-proto/xorgproto
@@ -54,16 +49,7 @@ DEPENDENCIES="
         )
 "
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-systemd' )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'online-accounts onlineaccounts'
     'wacom'
 )
-
-src_prepare() {
-    edo mkdir m4
-    edo glib-gettextize --copy --force
-    edo intltoolize --copy --force --automake
-    autotools_src_prepare
-}
-
