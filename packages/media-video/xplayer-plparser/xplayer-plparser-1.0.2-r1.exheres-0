@@ -18,7 +18,6 @@ MYOPTIONS="
     gobject-introspection
     gtk-doc
     libarchive [[ description = [ Use libarchive to extract ISOs ] ]]
-    quvi [[ description = [ Use quvi to parse video links ] ]]
 "
 
 DEPENDENCIES="
@@ -35,15 +34,17 @@ DEPENDENCIES="
         amazon? ( dev-libs/libgcrypt )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.5] )
         libarchive? ( app-arch/libarchive[>=3.0.0] )
-        quvi? ( dev-libs/quvi[>=0.9.1] )
 "
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --disable-quvi
+)
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'amazon libgcrypt'
     'gobject-introspection introspection'
     'gtk-doc'
     'libarchive'
-    'quvi'
 )
 
 src_prepare() {
