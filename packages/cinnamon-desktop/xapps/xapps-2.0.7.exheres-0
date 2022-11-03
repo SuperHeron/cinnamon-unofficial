@@ -43,5 +43,7 @@ src_install() {
     export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
     meson_src_install
     unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
+    edo mv ${IMAGE}/usr/lib/python$(python_get_abi) ${IMAGE}/usr/${CHOST}/lib
+    edo rmdir ${IMAGE}/usr/lib
 }
 
