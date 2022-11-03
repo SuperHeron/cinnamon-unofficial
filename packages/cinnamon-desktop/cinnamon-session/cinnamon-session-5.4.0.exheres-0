@@ -1,4 +1,4 @@
-# Copyright 2015-2021 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2022 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Purpose License v2
 
 require github [ user='linuxmint' ] gsettings gtk-icon-cache meson
@@ -10,7 +10,6 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="
     doc
-    gconf [[ description = [ Support for gconf-based autostart ] ]]
     ( linguas: af am ar as ast az be be@latin bg bn bn_IN br bs ca ca@valencia crh cs csb cy da de
                dz el en_CA en_GB en@shaw eo es et eu fa fi fr fur fy ga gl gu ha he hi hr hu hy id
                ig is it ja ka km kn ko ku lt lv mai mg mi mk ml mn mr ms nb nds ne nl nn nso oc or
@@ -24,11 +23,9 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        dev-libs/libxslt [[ note = [ For xsltproc ] ]]
         dev-util/intltool[>=0.40.6]
         sys-devel/gettext
         virtual/pkg-config[>=0.20]
-        doc? ( app-text/xmlto )
     build+run:
         cinnamon-desktop/xapps[>=1.0.4]
         dev-libs/glib:2[>=2.37.3]
@@ -46,7 +43,6 @@ DEPENDENCIES="
         x11-libs/xtrans
         x11-dri/mesa
         x11-libs/pango[X(+)]
-        gconf? ( gnome-platform/GConf:2 )
         providers:elogind? ( sys-auth/elogind )
         providers:systemd? ( sys-apps/systemd[>=183] )
 "
@@ -56,10 +52,6 @@ DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-$(ever range 1-2)-fix_g_free_on_u
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Dipv6=true'
     '-Dxtrans=true'
-)
-MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
-    'doc'
-    'gconf'
 )
 
 pkg_postinst() {
