@@ -1,4 +1,4 @@
-# Copyright 2015-2021 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2022 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings meson
@@ -48,8 +48,6 @@ DEPENDENCIES="
     run:
         sys-apps/pnp-data
 "
-
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-$(ever range 1-2)-gnome-3.14.patch )
 
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Dalsa=true'
