@@ -1,4 +1,4 @@
-# Copyright 2015-2021 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2022 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ]
@@ -12,7 +12,6 @@ SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     exif
-    gobject-introspection
     gtk-doc
     tracker
     xmp [[ description = [ Support for XMP metadata ] ]]
@@ -20,10 +19,6 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        dev-lang/perl:*
-        dev-python/polib[python_abis:*(-)?]
-        dev-util/intltool[>=0.40.1]
-        dev-util/itstool
         sys-devel/gettext
         virtual/pkg-config[>=0.19]
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
@@ -34,9 +29,9 @@ DEPENDENCIES="
         dev-libs/libxml2:2.0[>=2.7.8]
         gnome-desktop/gobject-introspection:1[>=1.0.0]
         gnome-desktop/gsettings-desktop-schemas
+        office-libs/libgsf:1[gobject-introspection]
         x11-libs/gtk+:3[>=3.10.0][gobject-introspection]
         x11-libs/libX11
-        x11-libs/libnotify[>=0.7.0]
         x11-libs/pango[>=1.44.0]
         x11-proto/xorgproto
         exif? ( media-libs/libexif[>=0.6.20] )
