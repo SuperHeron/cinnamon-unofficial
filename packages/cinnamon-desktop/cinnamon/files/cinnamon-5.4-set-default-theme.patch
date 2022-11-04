@@ -13,7 +13,7 @@ diff --git a/data/org.cinnamon.gschema.xml b/data/org.cinnamon.gschema.xml
 index 91fa171..9f56e4c 100644
 --- a/data/org.cinnamon.gschema.xml
 +++ b/data/org.cinnamon.gschema.xml
-@@ -645,7 +645,7 @@
+@@ -589,7 +589,7 @@
    <schema id="org.cinnamon.theme" path="/org/cinnamon/theme/"
          gettext-domain="@GETTEXT_PACKAGE@">
      <key name="name" type="s">
