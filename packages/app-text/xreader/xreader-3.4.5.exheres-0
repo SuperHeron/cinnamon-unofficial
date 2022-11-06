@@ -1,4 +1,4 @@
-# Copyright 2017-2021 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2022 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache meson
@@ -30,7 +30,10 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.50.1]
+        dev-util/itstool
+        gnome-desktop/yelp-tools
         sys-devel/gettext
+        virtual/pkg-config
     build+run:
         dev-libs/glib:2[>=2.36.0]
         dev-libs/libxml2:2.0[>=2.5.0]
@@ -56,19 +59,20 @@ DEPENDENCIES="
         gtk-doc? ( dev-doc/gtk-doc[>=1.13] )
         pdf? ( app-text/poppler[>=0.22.0][cairo][glib][gobject-introspection?][tiff?] )
         postscript? ( app-text/libspectre[>=0.2.0] )
-        tiff? ( media-libs/tiff[>=3.6.0] )
+        tiff? ( media-libs/tiff[>=4.0.0] )
         xps? ( dev-libs/libgxps[>=0.2.1][gobject-introspection?][tiff?] )
+    recommendation:
+        gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
 
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Dcomics=true'
+    '-Dhelp_files=true'
     '-Dpixbuf=true'
-)
-MESON_SRC_CONFIGURE_OPTION_ENABLES=(
-    'dbus'
 )
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'cups gtk_unix_print'
+    'dbus enable_dbus'
     'djvu'
     'dvi'
     'dvi t1lib'
@@ -81,7 +85,6 @@ MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'tiff'
     'xps'
 )
-MESON_SRC_CONFIGURE_TESTS=( '-Dtests=true -Dtests=false' )
 
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
