@@ -1,4 +1,4 @@
-# Copyright 2017-2021 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2022 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 AT_M4DIR=( 'libgd' )
@@ -27,6 +27,8 @@ DEPENDENCIES="
     build:
         dev-doc/gtk-doc[>=1.32-r1]
         dev-util/intltool[>=0.50.0]
+        dev-util/itstool
+        gnome-desktop/yelp-tools
         sys-devel/autoconf-archive
         sys-devel/gettext
         virtual/pkg-config
@@ -39,7 +41,7 @@ DEPENDENCIES="
         media-libs/gstreamer:1.0[>=1.6.0][gobject-introspection?]
         media-plugins/gst-plugins-base:1.0[>=1.6.0][gobject-introspection?]
         media-plugins/gst-plugins-good:1.0[>=1.6.0][gstreamer_plugins:taglib]
-        media-video/xplayer-plparser[>=1.0.0][gobject-introspection?]
+        media-video/xplayer-plparser[>=1.0.0][gobject-introspection(+)?]
         x11-libs/cairo
         x11-libs/clutter:1[>=1.10.0][gobject-introspection?]
         x11-libs/clutter-gtk:1.0[>=1.0.2][gobject-introspection?]
@@ -51,6 +53,8 @@ DEPENDENCIES="
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6.7] )
         lirc? ( remote/lirc )
         python? ( gnome-bindings/pygobject:3[>=2.90.3][python_abis:*(-)?] )
+    recommendation:
+        gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
 
 src_prepare() {
