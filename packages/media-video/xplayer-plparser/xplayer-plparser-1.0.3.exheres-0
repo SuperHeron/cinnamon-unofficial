@@ -1,0 +1,50 @@
+# Copyright 2017-2022 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='linuxmint' ] meson
+
+SUMMARY="xplayer playlist parser"
+DESCRIPTION="
+xplayer-pl-parser is a simple GObject-based library to parse a host of
+playlist formats, as well as save those.
+"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    amazon [[ description = [ Support decoding Amazon AMZ MP3 downloads ] ]]
+    gtk-doc
+    libarchive [[ description = [ Use libarchive to extract ISOs ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.35.0]
+        sys-devel/gettext
+        virtual/pkg-config
+        gtk-doc? ( dev-doc/gtk-doc[>=1.32-r1] )
+    build+run:
+        dev-libs/glib:2[>=2.31.0]
+        dev-libs/libxml2:2.0
+        gnome-desktop/gobject-introspection:1[>=0.9.5]
+        gnome-desktop/libsoup:2.4[>=2.43.0]
+        net-utils/gmime:3.0
+        amazon? ( dev-libs/libgcrypt )
+        libarchive? ( app-arch/libarchive[>=3.0.0] )
+"
+
+MESON_SRC_CONFIGURE_PARAMS=(
+    '-Denable-quvi=no'
+)
+MESON_SRC_CONFIGURE_OPTION_ENABLES=(
+    'amazon libgcrypt yes no'
+    'gtk-doc'
+    'libarchive libarchive yes no'
+)
+
+src_prepare() {
+    meson_src_prepare
+    edo sed -e "s#install_dir *: 'include#install_dir: '${CHOST}/include#" -i plparse/meson.build
+}
+
