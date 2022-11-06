@@ -1,8 +1,7 @@
-# Copyright 2017-2021 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2022 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='linuxmint' ] freedesktop-desktop gtk-icon-cache
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+require github [ user='linuxmint' ] freedesktop-desktop gtk-icon-cache meson
 
 SUMMARY="A generic Image viewer"
 DESCRIPTION="
@@ -14,7 +13,6 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="
     exif
-    gobject-introspection
     gtk-doc
     lcms
     xmp [[ description = [ Enable support for XMP format ] ]]
@@ -24,45 +22,44 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        dev-doc/gtk-doc[>=1.32-r1]
         dev-util/intltool[>=0.50.1]
+        dev-util/itstool
+        gnome-desktop/yelp-tools
         sys-devel/gettext
         virtual/pkg-config
+        gtk-doc? ( dev-doc/gtk-doc[>=1.32-r1] )
     build+run:
         dev-libs/glib:2[>=2.38.0]
         dev-libs/libxml2:2.0[>=2.0]
         dev-libs/libpeas:1.0[>=0.7.4]
         cinnamon-desktop/cinnamon-desktop[>=3.2.0]
         cinnamon-desktop/xapps[>=1.9.0]
-        gnome-desktop/librsvg:2[>=2.36.2][gobject-introspection?]
-        x11-libs/gdk-pixbuf:2.0[>=2.4.0][gobject-introspection?]
-        x11-libs/gtk+:3[>=3.10.0][gobject-introspection?]
+        gnome-desktop/gobject-introspection:1[>=0.9.3]
+        gnome-desktop/librsvg:2[>=2.36.2][gobject-introspection]
+        x11-libs/gdk-pixbuf:2.0[>=2.19.1][gobject-introspection]
+        x11-libs/gtk+:3[>=3.10.0][gobject-introspection]
         x11-libs/libX11
         exif? ( media-libs/libexif[>=0.6.14] )
-        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.3] )
         lcms? ( media-libs/lcms2 )
         xmp? ( media-libs/exempi:2.0[>=1.99.5] )
-        providers:ijg-jpeg? ( media-libs/jpeg:= )
+        providers:ijg-jpeg? ( media-libs/jpeg:=[>=8] )
         providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
+    recommendation:
+        gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( '--localedir=/usr/share/locale' )
-DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
-    'exif libexif'
-    'lcms cms'
-    'xmp'
+MESON_SRC_CONFIGURE_PARAMS=(
+    '-Djpeg=enabled'
+    '-Drsvg=enabled'
 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    'gobject-introspection introspection'
-    'gtk-doc'
+MESON_SRC_CONFIGURE_OPTION_FEATURES=(
+    'exif'
+    'lcms'
+    'xmp exempi'
 )
-
-src_prepare() {
-    # Fix localedir
-    edo sed -i -e 's|itlocaledir = .*|itlocaledir = @localedir@|' po/Makefile.in.in
-
-    autotools_src_prepare
-}
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
+    'gtk-doc docs'
+)
 
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
