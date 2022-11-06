@@ -1,4 +1,4 @@
-# Copyright 2017-2021 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2022 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings
@@ -32,6 +32,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         dev-util/intltool
+        gnome-desktop/yelp-tools
         sys-devel/bison
         sys-devel/flex
         sys-devel/gettext
@@ -66,6 +67,8 @@ DEPENDENCIES="
         providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
     suggestion:
         !libopenraw? ( media-libs/libraw [[ description = [ Uses dcraw if present ] ]] )
+    recommendation:
+        gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
