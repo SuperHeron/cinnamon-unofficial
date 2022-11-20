@@ -18,7 +18,7 @@ DEPENDENCIES="
     build+run:
         dev-libs/dbus-glib:1
         dev-libs/glib:2[>=2.58.0]
-        dev-libs/libffi
+        dev-libs/libffi:=
         dev-libs/spidermonkey:78
         gnome-desktop/gobject-introspection:1[>=1.58.3]
         sys-apps/dbus
