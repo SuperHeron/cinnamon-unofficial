@@ -77,8 +77,9 @@ DEPENDENCIES="
         x11-libs/libnotify[>=0.7][gobject-introspection]
         x11-libs/startup-notification[>=0.11]
         networkmanager? (
-            gnome-desktop/network-manager-applet[gobject-introspection]
+            gnome-desktop/network-manager-applet
             net-apps/NetworkManager[>=1.6][gobject-introspection][polkit]
+            net-libs/libnma[gobject-introspection]
         )
     run:
         cinnamon-desktop/cinnamon-control-center
