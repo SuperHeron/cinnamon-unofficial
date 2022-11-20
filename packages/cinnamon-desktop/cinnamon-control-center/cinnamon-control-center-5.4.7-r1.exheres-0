@@ -31,8 +31,8 @@ DEPENDENCIES="
         cinnamon-desktop/cinnamon-menus:3.0
         dev-libs/glib:2[>=2.44.0]
         gnome-desktop/libgnomekbd[>=3.0.0]
-        gnome-desktop/network-manager-applet[>=1.8.0]
         net-apps/NetworkManager[>=1.2.0][modem-manager]
+        net-libs/libnma[>=1.8.0]
         net-wireless/ModemManager[>=0.7]
         sys-apps/colord[>=0.1.14]
         sys-auth/polkit:1[>=0.103]
