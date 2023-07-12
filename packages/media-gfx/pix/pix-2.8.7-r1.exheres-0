@@ -55,7 +55,7 @@ DEPENDENCIES="
             x11-libs/clutter:1[>=1.0.0]
             x11-libs/clutter-gtk:1.0[>=1.0.0]
         )
-        exif? ( graphics/exiv2[>=0.21] )
+        exif? ( graphics/exiv2:=[>=0.21] )
         gstreamer? (
             media-libs/gstreamer:1.0[>=1.0.0]
             media-plugins/gst-plugins-base:1.0[>=1.0.0]
