@@ -4,7 +4,7 @@ Reason: Show "Exherbo Linux" in System Info
 
 --- a/files/usr/share/cinnamon/cinnamon-settings/modules/cs_info.py	2015-01-19 16:45:53.000000000 +0100
 +++ b/files/usr/share/cinnamon/cinnamon-settings/modules/cs_info.py	2015-02-14 23:22:45.294543401 +0100
-@@ -130,6 +130,13 @@
+@@ -121,6 +121,13 @@
          contents = open("/etc/manjaro-release", 'r').readline().split()
          title = ' '.join(contents[:2]) or "Manjaro Linux"
          infos.append((_("Operating System"), title))
