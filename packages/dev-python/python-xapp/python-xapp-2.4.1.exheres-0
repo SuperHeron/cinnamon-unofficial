@@ -1,7 +1,7 @@
-# Copyright 2018-2022 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2018-2023 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='linuxmint' ] setup-py [ blacklist='2' import='setuptools' work="python3-xapp-${PV}" ]
+require github [ user='linuxmint' ] python [ blacklist='2' multibuild=false ] meson
 
 SUMMARY="Python Xapp Library"
 
@@ -9,6 +9,7 @@ LICENCES="LGPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
+MESON_SOURCE="${WORKBASE}/python3-xapp-${PV}/"
 
 DEPENDENCIES="
     build+run:
