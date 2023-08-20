@@ -1,4 +1,4 @@
-# Copyright 2017-2022 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2023 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] freedesktop-desktop gtk-icon-cache meson
@@ -33,7 +33,7 @@ DEPENDENCIES="
         dev-libs/libxml2:2.0[>=2.0]
         dev-libs/libpeas:1.0[>=0.7.4]
         cinnamon-desktop/cinnamon-desktop[>=3.2.0]
-        cinnamon-desktop/xapps[>=1.9.0]
+        cinnamon-desktop/xapps[>=2.5.0]
         gnome-desktop/gobject-introspection:1[>=0.9.3]
         gnome-desktop/librsvg:2[>=2.36.2][gobject-introspection]
         x11-libs/gdk-pixbuf:2.0[>=2.19.1][gobject-introspection]
