@@ -1,4 +1,4 @@
-# Copyright 2017-2022 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2023 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache meson
@@ -37,7 +37,7 @@ DEPENDENCIES="
     build+run:
         dev-libs/glib:2[>=2.36.0]
         dev-libs/libxml2:2.0[>=2.5.0]
-        cinnamon-desktop/xapps[>=1.9.0]
+        cinnamon-desktop/xapps[>=2.5.0]
         x11-libs/cairo[>=1.14.0]
         x11-libs/gtk+:3[>=3.14.0][cups?][gobject-introspection?]
         x11-libs/libICE
@@ -52,7 +52,7 @@ DEPENDENCIES="
         )
         epub? (
             dev-javascript/mathjax
-            net-libs/webkit:4.0[>=2.4.3][gobject-introspection?]
+            net-libs/webkit:4.1[>=2.4.3][gobject-introspection?]
         )
         keyring? ( dev-libs/libsecret:1[>=0.5][gobject-introspection?] )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6] )
@@ -64,6 +64,8 @@ DEPENDENCIES="
     recommendation:
         gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/06b18a884c8cf3257ea1f053a82784da078999ed.patch" )
 
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Dcomics=true'
