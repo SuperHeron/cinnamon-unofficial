@@ -1,4 +1,4 @@
-# Copyright 2015-2022 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2023 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ]
@@ -35,7 +35,7 @@ DEPENDENCIES="
         x11-libs/pango[>=1.44.0]
         x11-proto/xorgproto
         exif? ( media-libs/libexif[>=0.6.20] )
-        tracker? ( app-pim/tracker:2.0 )
+        tracker? ( app-pim/tracker:3.0 )
         xmp? ( media-libs/exempi:2.0[>=2.2.0] )
 "
 
