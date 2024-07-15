@@ -32,7 +32,7 @@ DEPENDENCIES="
         sys-devel/gettext
         virtual/pkg-config[>=0.18]
     build+run:
-        dev-libs/glib:2[>=2.37.3]
+        dev-libs/glib:2[>=2.37.3][gobject-introspection]
         gnome-desktop/gobject-introspection:1[>=0.9.7]
         gnome-desktop/gsettings-desktop-schemas[>=3.5.91]
         media-sound/pulseaudio

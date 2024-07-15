@@ -35,7 +35,7 @@ DEPENDENCIES="
         sys-devel/gettext
         virtual/pkg-config
     build+run:
-        dev-libs/glib:2[>=2.36.0]
+        dev-libs/glib:2[>=2.36.0][gobject-introspection(+)?]
         dev-libs/libxml2:2.0[>=2.5.0]
         cinnamon-desktop/xapps[>=2.5.0]
         x11-libs/cairo[>=1.14.0]

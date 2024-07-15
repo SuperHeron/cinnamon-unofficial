@@ -24,7 +24,7 @@ DEPENDENCIES="
         sys-devel/gettext
         virtual/pkg-config
     build+run:
-        dev-libs/glib:2[>=2.37.3]
+        dev-libs/glib:2[>=2.37.3][gobject-introspection(+)?]
         dev-libs/libdbusmenu:0.4[gobject-introspection?]
         gnome-bindings/pygobject:3[>=2.90][python_abis:*(-)?]
         gnome-desktop/libgnomekbd

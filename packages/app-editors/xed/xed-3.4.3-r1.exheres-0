@@ -30,7 +30,7 @@ DEPENDENCIES="
         gtk-doc? ( dev-doc/gtk-doc[>=1.32-r1] )
     build+run:
         cinnamon-desktop/xapps[>=1.9.0]
-        dev-libs/glib:2[>=2.40.0]
+        dev-libs/glib:2[>=2.40.0][gobject-introspection]
         dev-libs/libpeas:1.0[>=1.12.0]
         dev-libs/libxml2:2.0[>=2.5.0]
         gnome-desktop/gobject-introspection:1[>=1.42.0]

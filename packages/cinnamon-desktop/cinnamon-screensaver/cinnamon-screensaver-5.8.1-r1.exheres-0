@@ -28,7 +28,7 @@ DEPENDENCIES="
     build+run:
         cinnamon-desktop/cinnamon-desktop[>=3.5.0]
         cinnamon-desktop/xapps[gobject-introspection]
-        dev-libs/glib:2[>=2.37.3]
+        dev-libs/glib:2[>=2.37.3][gobject-introspection]
         dev-python/pycairo[python_abis:*(-)?]
         dev-python/python-xapp[>=1.0.1][python_abis:*(-)?]
         dev-python/python-xlib[python_abis:*(-)?]

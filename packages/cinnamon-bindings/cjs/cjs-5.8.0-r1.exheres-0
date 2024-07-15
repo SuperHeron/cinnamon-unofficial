@@ -17,7 +17,7 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         dev-libs/dbus-glib:1
-        dev-libs/glib:2[>=2.58.0]
+        dev-libs/glib:2[>=2.58.0][gobject-introspection]
         dev-libs/libffi:=
         dev-libs/spidermonkey:102
         gnome-desktop/gobject-introspection:1[>=1.71.0]
