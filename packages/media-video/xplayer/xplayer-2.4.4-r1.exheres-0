@@ -35,7 +35,7 @@ DEPENDENCIES="
         python? ( dev-python/pylint[python_abis:*(-)?] )
     build+run:
         cinnamon-desktop/xapps[>=1.0.0]
-        dev-libs/glib:2[>=2.33.0]
+        dev-libs/glib:2[>=2.33.0][gobject-introspection(+)?]
         dev-libs/libpeas:1.0[>=1.1.0]
         media-libs/clutter-gst:3.0[>=2.99.2][gobject-introspection?]
         media-libs/gstreamer:1.0[>=1.6.0][gobject-introspection?]

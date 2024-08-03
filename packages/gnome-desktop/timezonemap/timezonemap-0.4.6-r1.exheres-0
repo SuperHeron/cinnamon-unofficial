@@ -24,7 +24,7 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         core/json-glib[gobject-introspection?]
-        dev-libs/glib:2[>=2.26]
+        dev-libs/glib:2[>=2.26][gobject-introspection(+)?]
         gnome-desktop/gobject-introspection:1[>=0.6.7]
         gnome-desktop/libsoup:2.4[>=2.42.0][gobject-introspection?]
         x11-libs/cairo[>=1.10]

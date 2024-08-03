@@ -25,7 +25,7 @@ DEPENDENCIES="
         virtual/pkg-config
         gtk-doc? ( dev-doc/gtk-doc[>=1.32-r1] )
     build+run:
-        dev-libs/glib:2[>=2.31.0]
+        dev-libs/glib:2[>=2.31.0][gobject-introspection]
         dev-libs/libxml2:2.0
         gnome-desktop/gobject-introspection:1[>=0.9.5]
         gnome-desktop/libsoup:2.4[>=2.43.0]

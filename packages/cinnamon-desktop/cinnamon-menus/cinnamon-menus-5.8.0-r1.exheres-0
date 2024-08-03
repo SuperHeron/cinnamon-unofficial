@@ -15,7 +15,7 @@ DEPENDENCIES="
         virtual/pkg-config[>=0.20]
         gtk-doc? ( dev-doc/gtk-doc )
     build+run:
-        dev-libs/glib:2[>=2.29.15]
+        dev-libs/glib:2[>=2.29.15][gobject-introspection]
         gnome-desktop/gobject-introspection:1[>=1.58.3]
 "
 
