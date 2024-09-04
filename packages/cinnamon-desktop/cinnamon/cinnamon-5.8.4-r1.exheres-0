@@ -34,7 +34,7 @@ DEPENDENCIES="
         cinnamon-desktop/xapps[>=2.6.0][gobject-introspection]
         cli/inxi
         core/json-glib[gobject-introspection]
-        dev-libs/atk
+        dev-libs/at-spi2-core[>=2.52.0]
         dev-libs/glib:2[>=2.52.0]
         dev-libs/libxml2:2.0
         dev-python/dbus-python[python_abis:*(-)?]
