@@ -1,4 +1,4 @@
-# Copyright 2015-2023 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2024 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ]
@@ -14,23 +14,24 @@ MYOPTIONS="
     exif
     gtk-doc
     tracker
+    wayland
     xmp [[ description = [ Support for XMP metadata ] ]]
 "
 
 DEPENDENCIES="
     build:
+        gnome-desktop/gobject-introspection:1[>=1.0.0]
         sys-devel/gettext
         virtual/pkg-config[>=0.19]
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
     build+run:
         cinnamon-desktop/cinnamon-desktop[>=4.8.0]
         cinnamon-desktop/xapps[>=2.0.0]
+        core/json-glib[>=1.6.0][gobject-introspection]
         dev-libs/glib:2[>=2.45.7]
-        dev-libs/libxml2:2.0[>=2.7.8]
-        gnome-desktop/gobject-introspection:1[>=1.0.0]
         gnome-desktop/gsettings-desktop-schemas
         office-libs/libgsf:1[gobject-introspection]
-        x11-libs/gtk+:3[>=3.10.0][gobject-introspection]
+        x11-libs/gtk+:3[>=3.10.0][gobject-introspection][wayland?]
         x11-libs/libX11
         x11-libs/pango[>=1.44.0]
         x11-proto/xorgproto
