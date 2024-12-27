@@ -1,4 +1,4 @@
-# Copyright 2017-2023 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2024 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache meson
@@ -35,6 +35,7 @@ DEPENDENCIES="
         sys-devel/gettext
         virtual/pkg-config
     build+run:
+        app-arch/libarchive[>=3.6.0]
         dev-libs/glib:2[>=2.36.0]
         dev-libs/libxml2:2.0[>=2.5.0]
         cinnamon-desktop/xapps[>=2.5.0]
@@ -64,8 +65,6 @@ DEPENDENCIES="
     recommendation:
         gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
-
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/06b18a884c8cf3257ea1f053a82784da078999ed.patch" )
 
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Dcomics=true'
