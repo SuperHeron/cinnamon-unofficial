@@ -1,4 +1,4 @@
-# Copyright 2015-2023 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2024 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require gsettings github [ user=linuxmint ] meson
@@ -12,7 +12,9 @@ MYOPTIONS="
     gobject-introspection
     remote-desktop
     wacom
+    wayland
     ( providers: eudev systemd ) [[ number-selected = exactly-one ]]
+    ( providers: elogind systemd ) [[ number-selected = exactly-one ]]
 "
 
 DEPENDENCIES="
@@ -25,17 +27,19 @@ DEPENDENCIES="
         core/json-glib[>=0.12]
         dev-libs/at-spi2-core[>=2.52.0]
         dev-libs/fribidi[>=1.0.0]
-        dev-libs/glib:2[>=2.61.1]
+        dev-libs/glib:2[>=2.67.3]
         dev-libs/libglvnd[X]
         gnome-desktop/libgudev[>=232][gobject-introspection?][providers:eudev?][providers:systemd?]
         media-libs/libcanberra[>=0.26][providers:gtk3]
         sys-apps/dbus
+        sys-apps/upower[>=0.99.0][gobject-introspection?]
         sys-libs/libinput[>=1.7][wacom?][providers:eudev?][providers:systemd?]
         x11-apps/xkeyboard-config
         x11-dri/mesa[>=10.3]
         x11-libs/cairo[>=1.10.0]
         x11-libs/gdk-pixbuf:2.0[>=2.0]
-        x11-libs/gtk+:3[>=3.9.18][gobject-introspection?]
+        x11-libs/graphene[gobject-introspection?]
+        x11-libs/gtk+:3[>=3.9.18][gobject-introspection?][wayland?]
         x11-libs/libICE
         x11-libs/libSM
         x11-libs/libX11
@@ -58,6 +62,12 @@ DEPENDENCIES="
         x11-libs/startup-notification[>=0.7]
         remote-desktop? ( media/pipewire[>=0.3.0][X][providers:eudev?][providers:systemd?] )
         wacom? ( x11-libs/libwacom[>=0.13] )
+        wayland? (
+            sys-libs/wayland[>=1.13.0]
+            sys-libs/wayland-protocols[>=1.19]
+            x11-server/xwayland
+        )
+        providers:elogind? ( sys-auth/elogind )
         providers:eudev? ( sys-apps/eudev )
         providers:systemd? ( sys-apps/systemd[>=228] )
     recommendation:
@@ -70,6 +80,7 @@ MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'gobject-introspection introspection'
     'remote-desktop remote_desktop'
     'wacom libwacom'
+    'wayland'
 )
 
 MESON_SRC_CONFIGURE_TESTS=(
