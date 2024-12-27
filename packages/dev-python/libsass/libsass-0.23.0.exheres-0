@@ -1,0 +1,28 @@
+# Copyright 2024 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import=setuptools test=pytest ]
+
+SUMMARY="Sass for Python: A straightforward binding of libsass for Python."
+DESCRIPTION="
+This package provides a simple Python extension module sass which is binding LibSass (written in
+C/C++ by Hampton Catlin and Aaron Leung). It’s very straightforward and there isn’t any headache
+related to Python distribution/deployment. That means you can add just libsass into your
+setup.py’s install_requires list or requirements.txt file.
+"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/libsass[>=3.6.6]
+"
+
+src_prepare() {
+    export SYSTEM_SASS=1
+    setup-py_src_prepare
+}
+
