@@ -1,4 +1,4 @@
-# Copyright 2015-2023 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2024 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings gtk-icon-cache meson
@@ -16,6 +16,11 @@ MYOPTIONS="
                kn ko ku lt lv mai mg mk ml mn mr ms nb nds ne nl nn nso oc or pa pl pt pt_BR ro ru
                rw si sk sl sq sr sr@latin sv ta te th tr ug uk vi wa xh zh_CN zh_HK zh_TW zu )
     wacom
+    ( providers: elogind systemd )
+    [[
+        *description = [ logind providers ]
+        number-selected = exactly-one
+    ]]
 "
 
 DEPENDENCIES="
@@ -55,6 +60,8 @@ DEPENDENCIES="
             gnome-desktop/librsvg:2[>=2.36.2]
             x11-libs/libwacom[>=0.7]
         )
+        providers:elogind? ( sys-auth/elogind )
+        providers:systemd? ( sys-apps/systemd )
 "
 
 MESON_SRC_CONFIGURE_OPTION_FEATURES=(
