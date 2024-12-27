@@ -1,4 +1,4 @@
-# Copyright 2015-2023 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2024 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gtk-icon-cache meson
@@ -15,8 +15,8 @@ MYOPTIONS="
     ( linguas: am ar as ast bg bn bn_IN bs ca cs cy da de el en_GB es et fa fi fr gl gu he hi hr hu
                id ilo is it ja ka kn ko ku lo lt lv mai mk ml mr ms nb nds nl nn or pa pl pt pt_BR
                ro ru si sk sl sq sr sr@latin sv ta te tr uk ur vi zh_CN zh_TW )
-    online-accounts
     wacom
+    wayland
 "
 
 DEPENDENCIES="
@@ -31,24 +31,21 @@ DEPENDENCIES="
         cinnamon-desktop/cinnamon-menus:3.0
         dev-libs/glib:2[>=2.44.0]
         gnome-desktop/libgnomekbd[>=3.0.0]
+        gnome-desktop/libgudev[>=232]
         net-apps/NetworkManager[>=1.2.0][modem-manager]
         net-libs/libnma[>=1.8.0]
         net-wireless/ModemManager[>=0.7]
         sys-apps/colord[>=0.1.14]
         sys-auth/polkit:1[>=0.103]
-        x11-libs/gtk+:3[>=3.16.0][colord]
+        x11-libs/gtk+:3[>=3.16.0][colord][wayland?]
         x11-libs/libX11
         x11-libs/libnotify[>=0.7.3]
         x11-libs/libxklavier[>=5.1]
         x11-proto/xorgproto
-        online-accounts? ( gnome-desktop/gnome-online-accounts[>=3.18.0] )
         wacom? (
             x11-libs/libwacom[>=0.27]
             x11-libs/libXi[>=1.2]
         )
 "
 
-MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
-    'online-accounts onlineaccounts'
-    'wacom'
-)
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'wacom' )
