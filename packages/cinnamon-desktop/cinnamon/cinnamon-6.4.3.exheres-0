@@ -1,4 +1,4 @@
-# Copyright 2015-2023 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2024 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require python [ blacklist=2 multibuild=false ] github [ user='linuxmint' ]
@@ -17,12 +17,16 @@ comfortable desktop experience.
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS="gtk-doc networkmanager"
+MYOPTIONS="
+    gtk-doc
+    wayland
+"
 PLATFORMS="~amd64"
 
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.40]
+        gnome-desktop/gobject-introspection:1[>=1.29.15]
         sys-devel/gettext[>=0.17]
         virtual/pkg-config[>=0.22]
         gtk-doc? ( dev-doc/gtk-doc[>=1.32-r1] )
@@ -30,15 +34,17 @@ DEPENDENCIES="
         cinnamon-bindings/cjs:1[>=4.8.0]
         cinnamon-desktop/cinnamon-desktop[>=5.3.0]
         cinnamon-desktop/cinnamon-menus:3.0[>=4.8.0]
-        cinnamon-desktop/muffin[>=5.3.0][gobject-introspection]
+        cinnamon-desktop/muffin[>=5.3.0][gobject-introspection][wayland?]
         cinnamon-desktop/xapps[>=2.6.0][gobject-introspection]
         cli/inxi
         core/json-glib[gobject-introspection]
         dev-libs/at-spi2-core[>=2.52.0]
         dev-libs/glib:2[>=2.52.0]
+        dev-libs/libsecret:1[>=0.18]
         dev-libs/libxml2:2.0
         dev-python/dbus-python[python_abis:*(-)?]
         dev-python/distro[python_abis:*(-)?]
+        dev-python/libsass[python_abis:*(-)?]
         dev-python/pam[python_abis:*(-)?]
         dev-python/pexpect[python_abis:*(-)?]
         dev-python/Pillow[python_abis:*(-)?]
@@ -51,7 +57,7 @@ DEPENDENCIES="
         dev-python/tinycss2[python_abis:*(-)?]
         gnome-desktop/adwaita-icon-theme
         gnome-desktop/evolution-data-server:1.2[gobject-introspection]
-        gnome-desktop/gobject-introspection:1[>=1.29.15]
+        gnome-desktop/gcr:0[>=3.7.5][gobject-introspection]
         gnome-desktop/gnome-backgrounds
         gnome-desktop/gnome-online-accounts[gobject-introspection]
         gnome-desktop/gnome-themes-extra
@@ -64,23 +70,19 @@ DEPENDENCIES="
         media-libs/gstreamer:1.0[>=0.11.92][gobject-introspection]
         media-libs/libcanberra[gstreamer][providers:gtk3][pulseaudio]
         media-sound/pulseaudio
+        net-apps/NetworkManager[>=1.10.4][gobject-introspection][polkit]
+        net-libs/libnma[gobject-introspection]
         office-libs/libical:3[gobject-introspection]
         sys-apps/accountsservice[>=0.6.14][gobject-introspection]
         sys-apps/dbus
         sys-apps/upower[gobject-introspection]
-        sys-auth/polkit:1[>=0.100][gobject-introspection]
+        sys-auth/polkit:1[gobject-introspection]
         x11-dri/mesa
         x11-libs/gdk-pixbuf[X][gobject-introspection]
-        x11-libs/gtk+:3[>=3.12.0][gobject-introspection]
+        x11-libs/gtk+:3[>=3.12.0][gobject-introspection][wayland?]
         x11-libs/libX11
-        x11-libs/libXfixes[>=5.0.0]
         x11-libs/libnotify[>=0.7][gobject-introspection]
         x11-libs/startup-notification[>=0.11]
-        networkmanager? (
-            gnome-desktop/network-manager-applet
-            net-apps/NetworkManager[>=1.6][gobject-introspection][polkit]
-            net-libs/libnma[gobject-introspection]
-        )
     run:
         cinnamon-desktop/cinnamon-control-center
         cinnamon-desktop/flags
@@ -88,6 +90,7 @@ DEPENDENCIES="
         cinnamon-desktop/cinnamon-session
         cinnamon-desktop/cinnamon-settings-daemon[>=5.3.0]
         gnome-desktop/caribou:1.0
+        gnome-desktop/network-manager-applet
         gnome-desktop/polkit-gnome:1
         x11-apps/xdg-user-dirs
     recommendation:
@@ -99,12 +102,11 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}/${PN}-$(ever range 1-2)-set-default-theme.patch"
     "${FILES}/${PN}-$(ever range 1-2)-set-wheel.patch"
     "${FILES}/${PN}-$(ever range 1-2)-settings-libdir.patch"
-    "${FILES}/${PN}-$(ever range 1-2)-os-release.patch"
 )
 
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'gtk-doc docs'
-    '!networkmanager disable_networkmanager'
+    'wayland'
 )
 
 src_install() {
