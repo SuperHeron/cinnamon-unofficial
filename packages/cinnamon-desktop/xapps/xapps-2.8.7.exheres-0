@@ -1,10 +1,11 @@
-# Copyright 2016-2023 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2016-2024 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 MESON_SOURCE="${WORKBASE}/xapp-${PV}"
 
 require github [ user='linuxmint' ] gsettings meson
 require python [ blacklist='2' multibuild=false ]
+require vala [ with_opt=true ]
 
 SUMMARY="Cross-desktop libraries and common resources"
 DESCRIPTION="
@@ -15,14 +16,21 @@ to implement cross-DE solutions.
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="gobject-introspection gtk-doc"
+MYOPTIONS="
+    gobject-introspection
+    gtk-doc
+    vapi [[ requires = [ gobject-introspection ] ]]
+    ( linguas: af am ar ast az be ber bg bn br ca ca@valencia ckb cs cy da de el en_CA en_GB eo es
+        et eu fa fi fil fr fr_CA he hi hr hu ia id ie is it ja ka kab kk ko ku la lt mai ms nb nl
+        oc pl pt pt_BR ro ru sk sl sn sr sr@latin sv te th tr uk uz vi zgh zh_CN zh_HK zh_TW )
+"
 
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.40.6]
-        gnome-desktop/gobject-introspection:1[>=0.10.2]
         sys-devel/gettext
         virtual/pkg-config
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.10.2] )
     build+run:
         dev-libs/glib:2[>=2.37.3]
         dev-libs/libdbusmenu:0.4[gobject-introspection?]
@@ -31,13 +39,14 @@ DEPENDENCIES="
         sys-apps/dbus
         x11-libs/cairo
         x11-libs/gdk-pixbuf:2.0[>=2.22.0]
-        x11-libs/gtk+:3[>=3.3.16][gobject-introspection?]
+        x11-libs/gtk+:3[>=3.22.0][gobject-introspection?]
         x11-libs/libX11
         x11-libs/libxkbfile
         gtk-doc? ( dev-doc/gtk-doc[>=1.4] )
 "
 
-MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'gtk-doc docs' )
+MESON_SRC_CONFIGURE_PARAMS=( -Dmate=false -Dxfce=false )
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'gtk-doc docs' 'gobject-introspection introspection' 'vapi' )
 
 src_install() {
     export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
