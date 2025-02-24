@@ -1,0 +1,23 @@
+# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=linuxmint ] gtk-icon-cache
+
+SUMMARY="Linux Mint Cursor themes"
+DESCRIPTION="
+Modern Cursor themes from Linux Mint.
+"
+
+LICENCES="GPL-3"
+SLOT="0"
+
+DEPENDENCIES="
+    run:
+        cinnamon-desktop/cinnamon
+"
+
+src_install() {
+    insinto /
+    doins -r "${WORK}"/usr
+}
+
