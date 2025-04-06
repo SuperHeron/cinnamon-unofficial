@@ -1,0 +1,66 @@
+# Copyright 2017-2023 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=linuxmint ] python [ blacklist='2' multibuild=false ]
+require meson freedesktop-desktop gsettings
+
+SUMMARY="X-Apps [Text] Editor (Cross-DE, backward-compatible, GTK3, traditional UI)"
+DESCRIPTION="
+xed is a small and lightweight text editor.
+
+xed supports most standard editing features, plus several not found in your
+average text editor (plugins being the most notable of these).
+"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    gtk-doc
+    spell
+"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.50.1]
+        dev-util/itstool
+        gnome-desktop/yelp-tools
+        sys-devel/gettext
+        virtual/pkg-config
+        gtk-doc? ( dev-doc/gtk-doc[>=1.32-r1] )
+    build+run:
+        cinnamon-desktop/xapps[>=1.9.0]
+        dev-libs/glib:2[>=2.40.0][gobject-introspection]
+        dev-libs/libpeas:1.0[>=1.12.0]
+        dev-libs/libxml2:2.0[>=2.5.0]
+        gnome-desktop/gobject-introspection:1[>=1.42.0]
+        gnome-desktop/gtksourceview:4.0[>=4.0.3][gobject-introspection]
+        x11-libs/gtk+:3[>=3.19.3][gobject-introspection]
+        x11-libs/libX11
+        x11-libs/pango[X][gobject-introspection]
+        spell? ( gnome-desktop/gspell:1[>=0.2.5] )
+    recommendation:
+        gnome-desktop/yelp [[ description = [ Help browser ] ]]
+"
+
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
+    'gtk-doc docs'
+    'spell enable_spell'
+)
+
+src_install() {
+    export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
+    meson_src_install
+    unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gsettings_pkg_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gsettings_pkg_postrm
+}
+

@@ -1,0 +1,40 @@
+# Copyright 2015-2023 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=linuxmint ] meson
+
+SUMMARY="JavaScript bindings for Cinnamon"
+
+LICENCES="MIT || ( MPL-1.1 LGPL-2 GPL-2 )"
+SLOT="1"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/autoconf-archive
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        dev-libs/dbus-glib:1
+        dev-libs/glib:2[>=2.58.0][gobject-introspection]
+        dev-libs/libffi:=
+        dev-libs/spidermonkey:102
+        gnome-desktop/gobject-introspection:1[>=1.71.0]
+        sys-apps/dbus
+        sys-libs/readline
+        x11-libs/cairo
+        x11-libs/gtk+:3[>=3.14.0][gobject-introspection]
+"
+
+MESON_SRC_CONFIGURE_PARAMS=( -Dcairo=enabled -Dreadline=enabled )
+
+src_test() {
+    unset DISPLAY
+    unset DBUS_SESSION_BUS_ADDRESS
+
+    esandbox allow_net 'unix-abstract:/tmp/dbus-root-*'
+    default
+    esandbox disallow_net 'unix-abstract:/tmp/dbus-root-*'
+}
+

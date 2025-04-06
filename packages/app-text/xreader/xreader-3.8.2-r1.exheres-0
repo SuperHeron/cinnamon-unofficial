@@ -1,0 +1,102 @@
+# Copyright 2017-2023 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='linuxmint' ] freedesktop-desktop gsettings gtk-icon-cache meson
+
+SUMMARY="A generic Document Reader"
+DESCRIPTION="
+Xreader is a document viewer capable of displaying multiple and single page
+document formats like PDF and Postscript.
+"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    cups
+    dbus
+    djvu [[ description = [ Enable support for DjVu format ] ]]
+    dvi [[ description = [ Enable support for DVI format ] ]]
+    epub [[ description = [ Enable support for ePub format ] ]]
+    gobject-introspection
+    gtk-doc
+    keyring [[ description = [ Use GNOME Keyring to store passwords ] ]]
+    pdf
+    postscript [[ description = [ Enable support for PostScript format ] ]]
+    tiff
+    xps [[ description = [ Enable support for XPS documents ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.50.1]
+        dev-util/itstool
+        gnome-desktop/yelp-tools
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2[>=2.36.0][gobject-introspection(+)?]
+        dev-libs/libxml2:2.0[>=2.5.0]
+        cinnamon-desktop/xapps[>=2.5.0]
+        x11-libs/cairo[>=1.14.0]
+        x11-libs/gtk+:3[>=3.14.0][cups?][gobject-introspection?]
+        x11-libs/libICE
+        x11-libs/libSM[>=1.0.0]
+        x11-libs/libX11
+        dbus? ( sys-apps/dbus )
+        djvu? ( app-text/djvu[>=3.5.17][tiff?] )
+        dvi? (
+            app-text/libspectre[>=0.2.0]
+            dev-libs/kpathsea
+            media-libs/t1lib
+        )
+        epub? (
+            dev-javascript/mathjax
+            net-libs/webkit:4.1[>=2.4.3][gobject-introspection?]
+        )
+        keyring? ( dev-libs/libsecret:1[>=0.5][gobject-introspection?] )
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6] )
+        gtk-doc? ( dev-doc/gtk-doc[>=1.13] )
+        pdf? ( app-text/poppler[>=0.22.0][cairo][glib][gobject-introspection?][tiff?] )
+        postscript? ( app-text/libspectre[>=0.2.0] )
+        tiff? ( media-libs/tiff[>=4.0.0] )
+        xps? ( dev-libs/libgxps[>=0.2.1][gobject-introspection?][tiff?] )
+    recommendation:
+        gnome-desktop/yelp [[ description = [ Help browser ] ]]
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/06b18a884c8cf3257ea1f053a82784da078999ed.patch" )
+
+MESON_SRC_CONFIGURE_PARAMS=(
+    '-Dcomics=true'
+    '-Dhelp_files=true'
+    '-Dpixbuf=true'
+)
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
+    'cups gtk_unix_print'
+    'dbus enable_dbus'
+    'djvu'
+    'dvi'
+    'dvi t1lib'
+    'epub'
+    'gobject-introspection introspection'
+    'gtk-doc docs'
+    'keyring'
+    'pdf'
+    'postscript ps'
+    'tiff'
+    'xps'
+)
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gsettings_pkg_postinst
+    gtk-icon-cache_pkg_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gsettings_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+}
+

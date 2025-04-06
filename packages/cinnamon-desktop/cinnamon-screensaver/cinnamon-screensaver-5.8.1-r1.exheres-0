@@ -1,0 +1,72 @@
+# Copyright 2015-2023 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='linuxmint' ] gsettings meson freedesktop-desktop
+require python [ blacklist='2' multibuild=false ]
+
+SUMMARY="Screensaver Application for Cinnamon"
+DESCRIPTION="
+cinnamon-screensaver is a screen saver and locker that aims to have
+simple, sane, secure defaults and be well integrated with the desktop.
+It is designed to support:
+
+    * the ability to lock down configuration settings
+    * translation into many languages
+    * user switching
+"
+
+LICENCES="GPL-2 LGPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="xinerama"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.40.0]
+        sys-devel/gettext
+        virtual/pkg-config[>=0.26]
+    build+run:
+        cinnamon-desktop/cinnamon-desktop[>=3.5.0]
+        cinnamon-desktop/xapps[gobject-introspection]
+        dev-libs/glib:2[>=2.37.3][gobject-introspection]
+        dev-python/pycairo[python_abis:*(-)?]
+        dev-python/python-xapp[>=1.0.1][python_abis:*(-)?]
+        dev-python/python-xlib[python_abis:*(-)?]
+        dev-python/setproctitle[python_abis:*(-)?]
+        gnome-desktop/gobject-introspection:1[>=0.9.7][python_abis:*(-)?]
+        gnome-desktop/gnome-keyring[pam]
+        gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
+        gnome-desktop/libgnomekbd[>=3.6.0][gobject-introspection]
+        gnome-desktop/librsvg:2[gobject-introspection]
+        sys-apps/accountsservice[gobject-introspection]
+        sys-apps/dbus[>=0.78]
+        sys-libs/pam
+        x11-apps/xrandr
+        x11-apps/xdotool
+        x11-libs/gtk+:3[>=3.22][gobject-introspection]
+        x11-libs/libX11
+        x11-libs/libXext
+        x11-libs/libXrandr
+        xinerama? ( x11-libs/libXinerama )
+    run:
+        cinnamon-desktop/flags
+        x11-apps/xprop
+"
+
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'xinerama' )
+
+src_install() {
+    meson_src_install
+    python_bytecompile "/usr/share/${PN}"
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gsettings_pkg_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gsettings_pkg_postrm
+}
+
