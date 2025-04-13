@@ -1,0 +1,341 @@
+# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=linuxmint ] meson setup-py [ import=setuptools blacklist=2 multibuild=false ]
+require gsettings gtk-icon-cache
+
+SUMMARY="A set of extensions for Nemo"
+
+LICENCES="
+    CCPL-Attribution-NoDerivs-3.0 [[ note = [ Dropbox images ] ]]
+    GPL-2 [[ note = [ fileroller, image-converter, media-columns, pastebin, preview, python, repairer, seahorse, share ] ]]
+    GPL-3 [[ note = [ audio-tab, compare, dropbox, emblems, terminal ] ]]
+"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    gtk-doc
+    nemo_extensions:
+        audio-tab
+        compare
+        dropbox
+        emblems
+        fileroller
+        image-converter
+        media-columns
+        pastebin
+        preview
+        repairer
+        seahorse
+        share
+        terminal
+"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool
+        sys-devel/gettext
+        gtk-doc? ( dev-doc/gtk-doc )
+    build+run:
+        dev-libs/glib:2[>=2.37.3][gobject-introspection]
+        cinnamon-desktop/nemo[>=3.9.0][python_abis:*(-)?]
+        gnome-bindings/pygobject:3[python_abis:*(-)?]
+        x11-libs/gtk+:3[>=3.8.4][X][gobject-introspection]
+        nemo_extensions:audio-tab? ( dev-python/mutagen[python_abis:*(-)?] )
+        nemo_extensions:media-columns? (
+            dev-libs/gexiv2[gobject-introspection]
+            dev-python/Pillow[python_abis:*(-)?]
+            dev-python/PyPDF2[python_abis:*(-)?]
+            dev-python/mutagen[python_abis:*(-)?]
+            dev-python/pymediainfo[python_abis:*(-)?]
+            dev-python/stopit[python_abis:*(-)?]
+        )
+        nemo_extensions:preview? (
+            app-text/xreader[gobject-introspection]
+            cinnamon-bindings/cjs:1[>=1.9.0]
+            gnome-desktop/gobject-introspection:1[>=0.9.2]
+            gnome-desktop/gtksourceview:4.0[>=4.0.3][gobject-introspection]
+            media-libs/clutter-gst:3.0[gobject-introspection]
+            media-libs/freetype:2
+            media-libs/gstreamer:1.0[gobject-introspection]
+            media-libs/libmusicbrainz:5
+            media-plugins/gst-plugins-base:1.0[gobject-introspection]
+            net-libs/webkit:4.1[gobject-introspection]
+            x11-libs/clutter:1[X][>=1.11.4][gobject-introspection]
+            x11-libs/clutter-gtk:1.0[>=1.0.1][gobject-introspection]
+            x11-libs/gdk-pixbuf:2.0[>=2.23.0][gobject-introspection]
+            x11-libs/pango[X][gobject-introspection]
+        )
+        nemo_extensions:seahorse? (
+            app-crypt/gnupg
+            app-crypt/gpgme[>=1.2.0]
+            dev-libs/dbus-glib:1[>=0.78]
+            gnome-desktop/gcr:0[>=3.4.0]
+            gnome-desktop/libcryptui
+            x11-libs/libnotify[>=0.7.0]
+        )
+        nemo_extensions:share? ( cinnamon-desktop/cinnamon-desktop[>=3.0.0] )
+        nemo_extensions:terminal? (
+            cinnamon-desktop/xapp:1[>=1.1.0][gobject-introspection]
+            dev-libs/vte:2.91[gobject-introspection]
+        )
+    run:
+        nemo_extensions:fileroller? ( gnome-desktop/file-roller )
+        nemo_extensions:pastebin? ( app-text/pastebinit )
+        nemo_extensions:preview? ( sys-apps/dbus )
+        nemo_extensions:share? ( sys-auth/polkit:1 )
+    recommendation:
+        nemo_extensions:compare? ( dev-util/meld )
+        nemo_extensions:pastebin? ( x11-libs/libnotify[gobject-introspection] )
+        nemo_extensions:seahorse? ( net-dns/avahi )
+    suggestion:
+        nemo_extensions:compare? ( || ( dev-util/kdiff3 kde/compare ) )
+        nemo_extensions:share? ( net-fs/samba )
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/9cd1e8909f0c536e465662c1edd949dce554e990.patch" )
+
+src_prepare() {
+    pushd "${WORKBASE}/${PNV}"
+    default
+    option nemo_extensions:compare && edo sed -e "s:/usr/bin:/usr/${CHOST}/bin:" -i nemo-compare/setup.py
+    option nemo_extensions:media-columns && edo sed -e "s:/usr/bin:/usr/${CHOST}/bin:" -i nemo-media-columns/setup.py
+    option nemo_extensions:pastebin && edo sed -e "s:/usr/bin:/usr/${CHOST}/bin:" -i nemo-pastebin/setup.py
+    option nemo_extensions:terminal && edo sed -e "s:/usr/bin:/usr/${CHOST}/bin:" -i nemo-terminal/setup.py
+    popd
+}
+
+src_configure() {
+    export MESON_SOURCE=${WORKBASE}/${PNV}/nemo-python
+    exmeson $(meson_switch gtk-doc gtk_doc)
+
+    if option nemo_extensions:audio-tab; then
+        edo cd ${WORKBASE}/${PNV}/nemo-audio-tab
+        setup-py_src_configure
+    fi
+
+    if option nemo_extensions:compare; then
+        edo cd ${WORKBASE}/${PNV}/nemo-compare
+        setup-py_src_configure
+    fi
+
+    if option nemo_extensions:dropbox; then
+        edo mkdir ${WORK}/nemo-dropbox
+        edo cd ${WORK}/nemo-dropbox
+        export MESON_SOURCE=${WORKBASE}/${PNV}/nemo-dropbox
+        meson_src_configure
+    fi
+
+    if option nemo_extensions:emblems; then
+        edo cd ${WORKBASE}/${PNV}/nemo-emblems
+        setup-py_src_configure
+    fi
+
+    if option nemo_extensions:fileroller; then
+        edo mkdir ${WORK}/nemo-fileroller
+        edo cd ${WORK}/nemo-fileroller
+        export MESON_SOURCE=${WORKBASE}/${PNV}/nemo-fileroller
+        exmeson $(meson_switch gtk-doc)
+    fi
+
+    if option nemo_extensions:image-converter; then
+        edo mkdir "${WORK}"/nemo-image-converter
+        edo cd "${WORK}"/nemo-image-converter
+        export MESON_SOURCE=${WORKBASE}/${PNV}/nemo-image-converter
+        meson_src_configure
+    fi
+
+    if option nemo_extensions:media-columns; then
+        edo cd ${WORKBASE}/${PNV}/nemo-media-columns
+        setup-py_src_configure
+    fi
+
+    if option nemo_extensions:pastebin; then
+        edo cd ${WORKBASE}/${PNV}/nemo-pastebin
+        setup-py_src_configure
+    fi
+
+    if option nemo_extensions:preview; then
+        edo mkdir ${WORK}/nemo-preview
+        edo cd "${WORK}"/nemo-preview
+        export MESON_SOURCE=${WORKBASE}/${PNV}/nemo-preview
+        meson_src_configure
+    fi
+
+    if option nemo_extensions:repairer; then
+        edo mkdir ${WORK}/nemo-repairer
+        edo cd ${WORK}/nemo-repairer
+        export MESON_SOURCE=${WORKBASE}/${PNV}/nemo-repairer
+        meson_src_configure
+    fi
+
+    if option nemo_extensions:seahorse; then
+        edo mkdir ${WORK}/nemo-seahorse
+        edo cd ${WORK}/nemo-seahorse
+        export MESON_SOURCE=${WORKBASE}/${PNV}/nemo-seahorse
+        meson_src_configure
+    fi
+
+    if option nemo_extensions:share; then
+        edo mkdir ${WORK}/nemo-share
+        edo cd ${WORK}/nemo-share
+        export MESON_SOURCE=${WORKBASE}/${PNV}/nemo-share
+        exmeson $(meson_switch gtk-doc)
+    fi
+
+    if option nemo_extensions:terminal; then
+        edo cd ${WORKBASE}/${PNV}/nemo-terminal
+        setup-py_src_configure
+    fi
+}
+
+src_compile() {
+    meson_src_compile
+
+    if option nemo_extensions:audio-tab; then
+        edo cd ${WORKBASE}/${PNV}/nemo-audio-tab
+        setup-py_src_compile
+    fi
+
+    if option nemo_extensions:compare; then
+        edo cd ${WORKBASE}/${PNV}/nemo-compare
+        setup-py_src_compile
+    fi
+
+    if option nemo_extensions:dropbox; then
+        edo cd ${WORK}/nemo-dropbox
+        meson_src_compile
+    fi
+
+    if option nemo_extensions:emblems; then
+        edo cd ${WORKBASE}/${PNV}/nemo-emblems
+        setup-py_src_compile
+    fi
+
+    if option nemo_extensions:fileroller; then
+        edo cd ${WORK}/nemo-fileroller
+        meson_src_compile
+    fi
+
+    if option nemo_extensions:image-converter; then
+        edo cd ${WORK}/nemo-image-converter
+        meson_src_compile
+    fi
+
+    if option nemo_extensions:media-columns; then
+        edo cd ${WORKBASE}/${PNV}/nemo-media-columns
+        setup-py_src_compile
+    fi
+
+    if option nemo_extensions:pastebin; then
+        edo cd ${WORKBASE}/${PNV}/nemo-pastebin
+        setup-py_src_compile
+    fi
+
+    if option nemo_extensions:preview; then
+        edo cd ${WORK}/nemo-preview
+        meson_src_compile
+    fi
+
+    if option nemo_extensions:repairer; then
+        edo cd ${WORK}/nemo-repairer
+        meson_src_compile
+    fi
+
+    if option nemo_extensions:seahorse; then
+        edo cd ${WORK}/nemo-seahorse
+        meson_src_compile
+    fi
+
+    if option nemo_extensions:share; then
+        edo cd ${WORK}/nemo-share
+        meson_src_compile
+    fi
+
+    if option nemo_extensions:terminal; then
+        edo cd ${WORKBASE}/${PNV}/nemo-terminal
+        setup-py_src_compile
+    fi
+}
+
+src_install() {
+    export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
+    meson_src_install
+
+    if option nemo_extensions:audio-tab; then
+        edo cd ${WORKBASE}/${PNV}/nemo-audio-tab
+        setup-py_src_install
+    fi
+
+    if option nemo_extensions:compare; then
+        edo cd ${WORKBASE}/${PNV}/nemo-compare
+        setup-py_src_install
+    fi
+
+    if option nemo_extensions:dropbox; then
+        edo cd ${WORK}/nemo-dropbox
+        meson_src_install
+    fi
+
+    if option nemo_extensions:emblems; then
+        edo cd ${WORKBASE}/${PNV}/nemo-emblems
+        setup-py_src_install
+    fi
+
+    if option nemo_extensions:fileroller; then
+        edo cd ${WORK}/nemo-fileroller
+        meson_src_install
+    fi
+
+    if option nemo_extensions:image-converter; then
+        edo cd ${WORK}/nemo-image-converter
+        meson_src_install
+    fi
+
+    if option nemo_extensions:media-columns; then
+        edo cd ${WORKBASE}/${PNV}/nemo-media-columns
+        setup-py_src_install
+    fi
+
+    if option nemo_extensions:pastebin; then
+        edo cd ${WORKBASE}/${PNV}/nemo-pastebin
+        setup-py_src_install
+    fi
+
+    if option nemo_extensions:preview; then
+        edo cd ${WORK}/nemo-preview
+        meson_src_install
+    fi
+
+    if option nemo_extensions:repairer; then
+        edo cd ${WORK}/nemo-repairer
+        meson_src_install
+    fi
+
+    if option nemo_extensions:seahorse; then
+        edo cd ${WORK}/nemo-seahorse
+        meson_src_install
+    fi
+
+    if option nemo_extensions:share; then
+        edo cd ${WORK}/nemo-share
+        meson_src_install
+    fi
+
+    if option nemo_extensions:terminal; then
+        edo cd ${WORKBASE}/${PNV}/nemo-terminal
+        setup-py_src_install
+    fi
+    unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
+}
+
+pkg_postinst() {
+    gsettings_pkg_postinst
+    gtk-icon-cache_pkg_postinst
+}
+
+pkg_postrm() {
+    gsettings_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+}
+
