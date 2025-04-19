@@ -1,0 +1,28 @@
+# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=sbraz tag="v${PV}" ] py-pep517 [ backend=pdm-backend test=pytest ]
+
+SUMMARY="A Python wrapper around the MediaInfo library"
+DESCRIPTION="
+pymediainfo is a wrapper for the MediaInfo library. It makes it easy to extract detailed information
+from multimedia files.
+"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    run:
+        media-libs/libmediainfo
+"
+
+RESTRICT="test" # Some tests need a webserver
+
+src_compile() {
+    export PDM_BUILD_SCM_VERSION=${PV}
+    py-pep517_src_compile
+}
+
