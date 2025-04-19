@@ -1,4 +1,4 @@
-# Copyright 2015-2024 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] gsettings meson freedesktop-desktop
@@ -27,7 +27,7 @@ DEPENDENCIES="
         virtual/pkg-config[>=0.26]
     build+run:
         cinnamon-desktop/cinnamon-desktop[>=3.5.0]
-        cinnamon-desktop/xapps[gobject-introspection]
+        cinnamon-desktop/xapp:1[gobject-introspection]
         dev-libs/glib:2[>=2.37.3]
         dev-python/pycairo[python_abis:*(-)?]
         dev-python/python-xapp[>=1.0.1][python_abis:*(-)?]

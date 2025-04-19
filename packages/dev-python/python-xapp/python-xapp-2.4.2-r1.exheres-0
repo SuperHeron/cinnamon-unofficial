@@ -1,4 +1,4 @@
-# Copyright 2018-2024 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2018-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ] python [ blacklist='2' multibuild=false ] meson
@@ -13,7 +13,7 @@ MESON_SOURCE="${WORKBASE}/python3-xapp-${PV}/"
 
 DEPENDENCIES="
     build+run:
-        cinnamon-desktop/xapps[python_abis:*(-)?][gobject-introspection]
+        cinnamon-desktop/xapp:1[python_abis:*(-)?][gobject-introspection]
         dev-python/psutil[python_abis:*(-)?]
         gnome-desktop/gobject-introspection[python_abis:*(-)?]
         x11-libs/gtk+:3[gobject-introspection]

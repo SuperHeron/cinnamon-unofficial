@@ -1,4 +1,4 @@
-# Copyright 2017-2024 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='linuxmint' ]
@@ -39,7 +39,7 @@ DEPENDENCIES="
         sys-devel/gettext
         virtual/pkg-config
     build+run:
-        cinnamon-desktop/xapps[>=2.5.0]
+        cinnamon-desktop/xapp:1[>=2.5.0]
         core/json-glib[>=0.15.0]
         dev-libs/glib:2[>=2.54.0]
         dev-libs/libsecret:1[>=0.11]

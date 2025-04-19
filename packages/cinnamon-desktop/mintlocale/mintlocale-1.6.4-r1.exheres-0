@@ -1,4 +1,4 @@
-# Copyright 2024 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2024-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 GITHUB_REVISION="2d317c509736d67c310e2d6234f89cbcfdd9e804"
@@ -17,7 +17,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     run:
         cinnamon-desktop/flags
-        cinnamon-desktop/xapps[gobject-introspection]
+        cinnamon-desktop/xapp:1[gobject-introspection]
         dev-lang/python:*[>=3]
         sys-apps/accountsservice[gobject-introspection]
         x11-libs/gtk+:3[gobject-introspection]

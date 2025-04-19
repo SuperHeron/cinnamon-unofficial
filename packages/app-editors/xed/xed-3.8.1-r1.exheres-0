@@ -1,4 +1,4 @@
-# Copyright 2017-2024 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2017-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ] python [ blacklist='2' multibuild=false ]
@@ -29,7 +29,7 @@ DEPENDENCIES="
         virtual/pkg-config
         gtk-doc? ( dev-doc/gtk-doc[>=1.32-r1] )
     build+run:
-        cinnamon-desktop/xapps[>=1.9.0]
+        cinnamon-desktop/xapp:1[>=1.9.0]
         dev-libs/glib:2[>=2.40.0]
         dev-libs/libpeas:1.0[>=1.12.0]
         dev-libs/libxml2:2.0[>=2.5.0]

@@ -1,4 +1,4 @@
-# Copyright 2015-2024 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Purpose License v2
 
 require github [ user='linuxmint' ] gsettings gtk-icon-cache meson
@@ -28,7 +28,7 @@ DEPENDENCIES="
         virtual/pkg-config[>=0.20]
     build+run:
         cinnamon-desktop/cinnamon-desktop[>=6.0.0]
-        cinnamon-desktop/xapps[>=1.0.4]
+        cinnamon-desktop/xapp:1[>=1.0.4]
         dev-libs/glib:2[>=2.37.3]
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7] [[ note = [ See GNOME bug #641686 ] ]]
         media-libs/libcanberra[providers:gtk3]

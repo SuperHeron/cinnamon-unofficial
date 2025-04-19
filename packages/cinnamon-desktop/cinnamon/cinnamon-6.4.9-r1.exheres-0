@@ -1,4 +1,4 @@
-# Copyright 2015-2024 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require python [ blacklist=2 multibuild=false ] github [ user='linuxmint' ]
@@ -35,7 +35,7 @@ DEPENDENCIES="
         cinnamon-desktop/cinnamon-desktop[>=5.3.0]
         cinnamon-desktop/cinnamon-menus:3.0[>=4.8.0]
         cinnamon-desktop/muffin[>=5.3.0][gobject-introspection][wayland?]
-        cinnamon-desktop/xapps[>=2.6.0][gobject-introspection]
+        cinnamon-desktop/xapp:1[>=2.6.0][gobject-introspection]
         cli/inxi
         core/json-glib[gobject-introspection]
         dev-libs/at-spi2-core[>=2.52.0]

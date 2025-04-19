@@ -1,9 +1,9 @@
-# Copyright 2024 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2024-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ] meson
 
-SUMMARY="A slick-looking LightDM greeter "
+SUMMARY="A slick-looking LightDM greeter"
 
 LICENCES="GPL-3"
 SLOT="0"
@@ -12,7 +12,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        cinnamon-desktop/xapps
+        cinnamon-desktop/xapp:1
         media-libs/libcanberra
         x11-apps/lightdm[>=1.12.0]
         x11-libs/cairo
