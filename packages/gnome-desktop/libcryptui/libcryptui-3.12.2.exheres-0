@@ -1,0 +1,55 @@
+# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require gnome.org [ suffix=tar.xz no_tarball=true ] gsettings
+require autotools [ supported_autoconf=[ 2.7 ] supported_automake=[ 1.17 ] ]
+
+SUMMARY="Interface components for OpenPGP"
+DESCRIPTION="
+libcryptui is a library used for prompting for PGP keys.
+"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    gobject-introspection
+    gtk-doc
+"
+
+DEPENDENCIES="
+    build:
+        dev-doc/gtk-doc[>=1.9]
+        dev-util/intltool[>=0.35.0]
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        app-crypt/gnupg
+        app-crypt/gpgme
+        dev-libs/dbus-glib:1[>=0.35]
+        dev-libs/glib:2[>=2.32.0]
+        gnome-desktop/gcr:0
+        x11-libs/gtk+:3[>=3.0.0]
+        x11-libs/libICE
+        x11-libs/libSM
+        x11-libs/libnotify[>=0.3]
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6.4] )
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --disable-schemas-compile
+    --disable-update-mime-database
+)
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' 'gtk-doc' )
+
+src_prepare() {
+    edo sed -e 's/AC_PATH_PROG(PKG_CONFIG, pkg-config, no)/PKG_PROG_PKG_CONFIG/' -i configure.ac
+    edo sed -e 's/pkg-config/\$PKG_CONFIG/' -i configure.ac
+    edo sed -e "/accepted_versions=/s/\".*\"/\"$(ever range 1-2 $($PKG_CONFIG --version gnupg))\"/" -i configure.ac
+    edo glib-gettextize --copy --force
+    edo gtkdocize --flavour=no-tmpl
+    edo intltoolize --copy --force --automake
+    autotools_src_prepare
+}
+
