@@ -1,0 +1,40 @@
+# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github python
+
+SUMMARY="Command-line pastebin client"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        app-text/docbook-xml-dtd:4.2
+        app-text/docbook-xsl-stylesheets
+        dev-libs/libxslt
+        sys-devel/gettext
+    build+run:
+        dev-python/distro[python_abis:*(-)?]
+"
+
+src_compile() {
+    edo xsltproc --nonet /usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl ${PN}.xml
+    emake -C po
+}
+
+src_install() {
+    emagicdocs
+
+    dobin ${PN}
+    doman ${PN}.1
+
+    insinto /etc
+    doins -r pastebin.d
+
+    insinto /usr/share/locale
+    doins -r po/mo/*
+}
+
