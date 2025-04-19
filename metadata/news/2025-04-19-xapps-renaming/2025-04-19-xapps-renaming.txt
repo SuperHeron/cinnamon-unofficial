@@ -1,0 +1,22 @@
+Title: cinnamon-desktop/xapps has been renamed to cinnamon-desktop/xapp
+Author: Pierre Lejeune <superheron@gmail.com>
+Content-Type: text/plain
+Posted: 2025-04-19
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: cinnamon-desktop/xapps
+
+Please install cinnamon-desktop/xapp and *afterwards* uninstall cinnamon-desktop/xapps.
+
+1. Take note of any packages depending on cinnamon-desktop/xapps:
+cave resolve \!cinnamon-desktop/xapps
+
+2. Install cinnamon-desktop/xapp:
+cave resolve cinnamon-desktop/xapp -x
+
+3. Re-install the packages from step 1.
+
+4. Uninstall cinnamon-desktop/xapps
+cave resolve \!cinnamon-desktop/xapps -x
+
+Do it in *this* order or you'll potentially *break* your system.
