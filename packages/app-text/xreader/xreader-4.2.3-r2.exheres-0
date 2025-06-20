@@ -60,7 +60,7 @@ DEPENDENCIES="
         gtk-doc? ( dev-doc/gtk-doc[>=1.13] )
         pdf? ( app-text/poppler[>=0.22.0][cairo][glib][gobject-introspection?][tiff?] )
         postscript? ( app-text/libspectre[>=0.2.0] )
-        tiff? ( media-libs/tiff[>=4.0.0] )
+        tiff? ( media-libs/tiff:=[>=4.0.0] )
         xps? ( dev-libs/libgxps[>=0.2.1][gobject-introspection?][tiff?] )
     recommendation:
         gnome-desktop/yelp [[ description = [ Help browser ] ]]
