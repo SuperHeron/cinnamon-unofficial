@@ -1,7 +1,7 @@
 # Copyright 2017-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='linuxmint' ] freedesktop-desktop gtk-icon-cache meson
+require github [ user='linuxmint' ] freedesktop-desktop gtk-icon-cache meson gsettings
 
 SUMMARY="A generic Image viewer"
 DESCRIPTION="
@@ -61,13 +61,21 @@ MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'gtk-doc docs'
 )
 
+src_install() {
+    export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
+    meson_src_install
+    unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
+}
+
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
+    gsettings_pkg_postinst
     gtk-icon-cache_pkg_postinst
 }
 
 pkg_postrm() {
     freedesktop-desktop_pkg_postrm
+    gsettings_pkg_postrm
     gtk-icon-cache_pkg_postrm
 }
 
