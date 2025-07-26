@@ -1,7 +1,7 @@
-# Copyright 2016-2018 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2016-2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='linuxmint' rev='a9b10937eac1de26c4d7b3c8101198e5e3e7f222' ] # No tag created
+require github [ user='linuxmint' ]
 
 SUMMARY="A collection of flags for the Cinnamon Desktop Environment"
 DESCRIPTION="
