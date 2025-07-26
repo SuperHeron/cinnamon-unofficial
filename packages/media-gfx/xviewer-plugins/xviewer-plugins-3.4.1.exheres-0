@@ -1,0 +1,37 @@
+# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=linuxmint ] meson gsettings
+
+SUMMARY="Set of plugins for xviewer"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2[>=2.32.0][gobject-introspection]
+        dev-libs/libpeas:1.0[>=0.7.4]
+        media-gfx/xviewer[>=3.2.1]
+        media-libs/libexif[>=0.6.16]
+        x11-libs/clutter:1[>=1.9.4][gobject-introspection]
+        x11-libs/clutter-gtk:1.0[>=1.1.2][gobject-introspection]
+        x11-libs/gtk+:3[>=3.3.8][gobject-introspection]
+        x11-libs/libchamplain:0.12[gobject-introspection]
+"
+
+src_install() {
+    export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
+    meson_src_install
+    unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
+
+    edo cd "${IMAGE}"/usr
+    edo mkdir $(exhost --target)
+    edo mv lib $(exhost --target)
+}
+
