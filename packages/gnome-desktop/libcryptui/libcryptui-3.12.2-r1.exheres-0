@@ -25,7 +25,7 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         app-crypt/gnupg
-        app-crypt/gpgme
+        app-crypt/gpgme:=[>=1.0.0]
         dev-libs/dbus-glib:1[>=0.35]
         dev-libs/glib:2[>=2.32.0]
         gnome-desktop/gcr:0
@@ -35,6 +35,8 @@ DEPENDENCIES="
         x11-libs/libnotify[>=0.3]
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6.4] )
 "
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-gnupg-gpgme.patch )
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-schemas-compile
@@ -46,7 +48,6 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gobject-introspection introspection' 'gt
 src_prepare() {
     edo sed -e 's/AC_PATH_PROG(PKG_CONFIG, pkg-config, no)/PKG_PROG_PKG_CONFIG/' -i configure.ac
     edo sed -e 's/pkg-config/\$PKG_CONFIG/' -i configure.ac
-    edo sed -e "/accepted_versions=/s/\".*\"/\"$(ever range 1-2 $($PKG_CONFIG --version gnupg))\"/" -i configure.ac
     edo glib-gettextize --copy --force
     edo gtkdocize --flavour=no-tmpl
     edo intltoolize --copy --force --automake
