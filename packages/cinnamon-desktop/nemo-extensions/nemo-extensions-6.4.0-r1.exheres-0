@@ -68,7 +68,7 @@ DEPENDENCIES="
         )
         nemo_extensions:seahorse? (
             app-crypt/gnupg
-            app-crypt/gpgme[>=1.2.0]
+            app-crypt/gpgme:=[>=1.2.0]
             dev-libs/dbus-glib:1[>=0.78]
             gnome-desktop/gcr:0[>=3.4.0]
             gnome-desktop/libcryptui
@@ -93,7 +93,10 @@ DEPENDENCIES="
         nemo_extensions:share? ( net-fs/samba )
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/9cd1e8909f0c536e465662c1edd949dce554e990.patch" )
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}/9cd1e8909f0c536e465662c1edd949dce554e990.patch"
+    "${FILES}/nemo-seahorse-gpgme-2.0.patch"
+)
 
 src_prepare() {
     pushd "${WORKBASE}/${PNV}"
