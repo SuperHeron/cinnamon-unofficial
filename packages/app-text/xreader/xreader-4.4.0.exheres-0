@@ -52,7 +52,7 @@ DEPENDENCIES="
             media-libs/t1lib
         )
         epub? (
-            dev-javascript/mathjax
+            dev-javascript/mathjax[>=2&<3]
             net-libs/webkit:4.1[>=2.4.3][gobject-introspection?]
         )
         keyring? ( dev-libs/libsecret:1[>=0.5][gobject-introspection?] )
