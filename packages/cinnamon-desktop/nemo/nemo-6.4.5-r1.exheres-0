@@ -36,7 +36,7 @@ DEPENDENCIES="
         x11-libs/pango[>=1.44.0]
         x11-proto/xorgproto
         exif? ( media-libs/libexif[>=0.6.20] )
-        tracker? ( app-pim/tracker:3.0 )
+        tracker? ( app-pim/tinysparql:3.0 )
         xmp? ( media-libs/exempi:2.0[>=2.2.0] )
 "
 
