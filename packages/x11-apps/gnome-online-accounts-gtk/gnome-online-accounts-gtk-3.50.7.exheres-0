@@ -1,0 +1,25 @@
+# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=xapp-project ] meson gtk-icon-cache
+
+SUMMARY="A GTK Frontend for GNOME Online Accounts"
+DESCRIPTION="
+GUI Utility for logging into online accounts for the purpose of syncing mail, contacts and remote filesystems.
+"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+    build+run:
+        dev-libs/glib:2[>=2.44][gobject-introspection]
+        dev-libs/libadwaita:1[gobject-introspection]
+        gnome-desktop/gnome-online-accounts[gobject-introspection][>=3.50.0]
+        x11-libs/gtk:4.0
+"
+
