@@ -1,0 +1,46 @@
+# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=xapp-project ] python [ blacklist="2" ] meson gsettings gtk-icon-cache
+
+SUMMARY="Fingerprint Configuration Tool"
+DESCRIPTION="
+Fingwit is used to configure fingerprint authentication.
+"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+        virtual/pkg-config
+    run:
+        dev-libs/glib:2[gobject-introspection]
+        dev-python/python-pam[python_abis:*(-)?]
+        dev-python/setproctitle
+        cinnamon-desktop/xapp[gobject-introspection]
+        gnome-desktop/gobject-introspection:1[python_abis:*(-)?]
+        sys-auth/fprintd[pam]
+        sys-libs/pam
+        x11-libs/gtk+:3[gobject-introspection]
+"
+
+src_install() {
+    meson_src_install
+    dodir /etc/pam.d
+    edo touch ${IMAGE}/etc/pam.d/common-auth
+}
+
+pkg_postinst() {
+    gsettings_pkg_postinst
+    gtk-icon-cache_pkg_postinst
+}
+
+pkg_postrm() {
+    gsettings_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+}
+
