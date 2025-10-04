@@ -17,7 +17,10 @@ DEPENDENCIES="
     build+run:
         dev-libs/glib:2[>=2.32.0][gobject-introspection]
         dev-libs/libpeas:1.0[>=0.7.4]
+        cinnamon-desktop/cinnamon-desktop[>=3.2.0]
+        gnome-desktop/librsvg:2[>=2.36.2]
         media-gfx/xviewer[>=3.2.1]
+        media-libs/lcms2
         media-libs/libexif[>=0.6.16]
         x11-libs/clutter:1[>=1.9.4][gobject-introspection]
         x11-libs/clutter-gtk:1.0[>=1.1.2][gobject-introspection]
