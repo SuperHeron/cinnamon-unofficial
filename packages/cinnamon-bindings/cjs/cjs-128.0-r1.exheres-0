@@ -27,6 +27,7 @@ DEPENDENCIES="
         x11-libs/gtk+:3[>=3.14.0][gobject-introspection]
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/${PNV}-glib-2.86.0.patch" )
 MESON_SRC_CONFIGURE_PARAMS=( -Dreadline=enabled )
 
 src_test() {
