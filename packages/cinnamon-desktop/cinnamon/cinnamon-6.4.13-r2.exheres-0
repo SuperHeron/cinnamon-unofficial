@@ -58,7 +58,6 @@ DEPENDENCIES="
         gnome-desktop/adwaita-icon-theme
         gnome-desktop/evolution-data-server:1.2[gobject-introspection]
         gnome-desktop/gcr:0[>=3.7.5][gobject-introspection]
-        gnome-desktop/gnome-backgrounds
         gnome-desktop/gnome-online-accounts[gobject-introspection]
         gnome-desktop/gnome-themes-extra
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7]
@@ -95,6 +94,7 @@ DEPENDENCIES="
         x11-apps/xdg-user-dirs
     recommendation:
         cinnamon-desktop/cinnamon-translations [[ description = [ Install translations files ] ]]
+        gnome-desktop/gnome-backgrounds:*
         net-wireless/blueman [[ description = [ Bluetooth support ] ]]
 "
 
