@@ -12,6 +12,9 @@ MYOPTIONS=""
 MESON_SOURCE="${WORKBASE}/python3-xapp-${PV}/"
 
 DEPENDENCIES="
+    build:
+        dev-util/intltool
+        sys-devel/gettext
     build+run:
         cinnamon-desktop/xapp:1[python_abis:*(-)?][gobject-introspection]
         dev-python/psutil[python_abis:*(-)?]
