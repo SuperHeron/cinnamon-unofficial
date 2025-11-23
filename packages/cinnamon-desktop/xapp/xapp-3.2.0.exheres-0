@@ -43,6 +43,8 @@ DEPENDENCIES="
         x11-libs/gtk+:3[>=3.22.0][gobject-introspection?]
         x11-libs/libX11
         x11-libs/libxkbfile
+    run:
+        cinnamon-desktop/xapp-symbolic-icons
 "
 
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'gobject-introspection introspection' 'gtk-doc docs' 'vapi' )
