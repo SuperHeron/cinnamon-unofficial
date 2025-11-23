@@ -1,0 +1,15 @@
+# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='xapp-project' ] meson gtk-icon-cache
+
+SUMMARY="A set of symbolic icons for Gtk applications and projects"
+DESCRIPTION="
+A set of symbolic icons which replaces the GNOME-specific Adwaita set.
+"
+
+LICENCES="LGPL-3.0"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
