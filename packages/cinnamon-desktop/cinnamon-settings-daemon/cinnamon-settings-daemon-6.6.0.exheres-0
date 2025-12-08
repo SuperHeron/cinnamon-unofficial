@@ -34,34 +34,32 @@ DEPENDENCIES="
         dev-libs/dbus-glib:1
         dev-libs/glib:2[>=2.40.0]
         gnome-desktop/gsettings-desktop-schemas[>=3.4.1]
-        gnome-desktop/libgnomekbd[>=3.6.0]
         gnome-desktop/libgudev
         media-libs/fontconfig
         media-libs/lcms2[>=2.2]
         media-libs/libcanberra[providers:gtk3]
-        media-sound/pulseaudio[>=0.9.16]
         sys-apps/colord[>=0.1.27]
         sys-apps/dbus[>=1.1.2]
         sys-apps/systemd [[ note = [ Support for logind ] ]]
-        sys-apps/upower[>=0.9.11]
+        sys-apps/upower[>=0.99.11]
         sys-auth/polkit:1[>=0.97]
         x11-libs/gtk+:3[>=3.14.0]
         x11-libs/libX11
         x11-libs/libXext
-        x11-libs/libXfixes
         x11-libs/libXi
-        x11-libs/libxklavier[>=5.0]
         x11-libs/libnotify[>=0.7.3]
-        x11-libs/pango[>=1.20.0]
         x11-proto/xorgproto
         cups? ( net-print/cups[>=1.4] )
         smartcard? ( dev-libs/nss[>=3.11.2] )
         wacom? (
             gnome-desktop/librsvg:2[>=2.36.2]
             x11-libs/libwacom[>=0.7]
+            x11-libs/pango[>=1.20.0]
         )
         providers:elogind? ( sys-auth/elogind )
         providers:systemd? ( sys-apps/systemd )
+    run:
+        cinnamon-desktop/xapp-symbolic-icons
 "
 
 MESON_SRC_CONFIGURE_OPTION_FEATURES=(
