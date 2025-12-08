@@ -26,11 +26,9 @@ DEPENDENCIES="
         sys-devel/gettext
         virtual/pkg-config
     build+run:
-        app-text/iso-codes
         cinnamon-desktop/cinnamon-desktop[>=4.6.0]
         cinnamon-desktop/cinnamon-menus:3.0
         dev-libs/glib:2[>=2.44.0]
-        gnome-desktop/libgnomekbd[>=3.0.0]
         gnome-desktop/libgudev[>=232]
         net-apps/NetworkManager[>=1.2.0][modem-manager]
         net-libs/libnma[>=1.8.0]
@@ -40,12 +38,13 @@ DEPENDENCIES="
         x11-libs/gtk+:3[>=3.16.0][colord][wayland?]
         x11-libs/libX11
         x11-libs/libnotify[>=0.7.3]
-        x11-libs/libxklavier[>=5.1]
         x11-proto/xorgproto
         wacom? (
             x11-libs/libwacom[>=0.27]
             x11-libs/libXi[>=1.2]
         )
+    run:
+        cinnamon-desktop/xapp-symbolic-icons
 "
 
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'wacom' )
