@@ -46,6 +46,8 @@ DEPENDENCIES="
         x11-libs/pango[X(+)]
         providers:elogind? ( sys-auth/elogind )
         providers:systemd? ( sys-apps/systemd[>=183] )
+    run:
+        cinnamon-desktop/xapp-symbolic-icons
 "
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-$(ever range 1-2)-fix_g_free_on_uninitialized_pointers.patch )
