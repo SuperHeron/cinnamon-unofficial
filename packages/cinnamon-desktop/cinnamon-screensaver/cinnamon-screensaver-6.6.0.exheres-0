@@ -50,6 +50,7 @@ DEPENDENCIES="
         xinerama? ( x11-libs/libXinerama )
     run:
         cinnamon-desktop/flags
+        cinnamon-desktop/xapp-symbolic-icons
         x11-apps/xprop
 "
 
