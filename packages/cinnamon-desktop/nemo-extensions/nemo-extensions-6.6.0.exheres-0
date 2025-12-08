@@ -80,10 +80,20 @@ DEPENDENCIES="
             dev-libs/vte:2.91[gobject-introspection]
         )
     run:
-        nemo_extensions:fileroller? ( gnome-desktop/file-roller )
+        nemo_extensions:dropbox? ( sys-auth/polkit:1 )
+        nemo_extensions:fileroller? (
+            cinnamon-desktop/xapp-symbolic-icons
+            gnome-desktop/file-roller
+        )
         nemo_extensions:pastebin? ( app-text/pastebinit )
-        nemo_extensions:preview? ( sys-apps/dbus )
-        nemo_extensions:share? ( sys-auth/polkit:1 )
+        nemo_extensions:preview? (
+            cinnamon-desktop/xapp-symbolic-icons
+            sys-apps/dbus
+        )
+        nemo_extensions:share? (
+            cinnamon-desktop/xapp-symbolic-icons
+            sys-auth/polkit:1
+        )
     recommendation:
         nemo_extensions:compare? ( dev-util/meld )
         nemo_extensions:pastebin? ( x11-libs/libnotify[gobject-introspection] )
@@ -92,11 +102,6 @@ DEPENDENCIES="
         nemo_extensions:compare? ( || ( dev-util/kdiff3 kde/compare ) )
         nemo_extensions:share? ( net-fs/samba )
 "
-
-DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}/9cd1e8909f0c536e465662c1edd949dce554e990.patch"
-    "${FILES}/nemo-seahorse-gpgme-2.0.patch"
-)
 
 src_prepare() {
     pushd "${WORKBASE}/${PNV}"
