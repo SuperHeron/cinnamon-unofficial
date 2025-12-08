@@ -39,7 +39,7 @@ DEPENDENCIES="
         sys-devel/gettext
         virtual/pkg-config[>=0.18]
     build+run:
-	app-text/iso-codes
+        app-text/iso-codes
         dev-libs/glib:2[>=2.37.3]
         gnome-desktop/gobject-introspection:1[>=0.9.7]
         gnome-desktop/gsettings-desktop-schemas[>=3.5.91]
@@ -56,12 +56,9 @@ DEPENDENCIES="
         providers:eudev? ( sys-apps/eudev )
         providers:systemd? ( sys-apps/systemd )
     run:
-        sys-apps/hwdata
+        cinnamon-desktop/xapp-symbolic-icons
 "
 
-MESON_SRC_CONFIGURE_PARAMS=(
-    '-Dalsa=true'
-    '-Dpnp_ids=/usr/share/hwdata'
-)
+MESON_SRC_CONFIGURE_PARAMS=( '-Dalsa=true' )
 MESON_SRC_CONFIGURE_OPTION_FEATURES=( providers:systemd )
 
