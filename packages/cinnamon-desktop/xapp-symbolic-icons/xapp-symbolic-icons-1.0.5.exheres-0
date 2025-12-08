@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='xapp-project' ] meson gtk-icon-cache
+require python [ blacklist='2' has_lib=true multibuild=false ]
 
 SUMMARY="A set of symbolic icons for Gtk applications and projects"
 DESCRIPTION="
@@ -12,4 +13,9 @@ LICENCES="LGPL-3.0"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+"
 
