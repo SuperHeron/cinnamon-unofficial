@@ -14,8 +14,3 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
 
-DEPENDENCIES="
-    build:
-        virtual/pkg-config
-"
-
