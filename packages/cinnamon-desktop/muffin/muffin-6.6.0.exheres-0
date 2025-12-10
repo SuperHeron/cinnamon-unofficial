@@ -33,7 +33,7 @@ DEPENDENCIES="
         media-libs/libcanberra[>=0.26][providers:gtk3]
         sys-apps/dbus
         sys-apps/upower[>=0.99.0][gobject-introspection?]
-        sys-libs/libinput[>=1.7][wacom?][providers:eudev?][providers:systemd?]
+        sys-libs/libinput[>=1.19.0][wacom?][providers:eudev?][providers:systemd?]
         x11-apps/xkeyboard-config
         x11-dri/mesa[>=10.3]
         x11-libs/cairo[>=1.10.0]
@@ -63,13 +63,15 @@ DEPENDENCIES="
         remote-desktop? ( media/pipewire[>=0.3.0][X][providers:eudev?][providers:systemd?] )
         wacom? ( x11-libs/libwacom[>=0.13] )
         wayland? (
-            sys-libs/wayland[>=1.13.0]
-            sys-libs/wayland-protocols[>=1.19]
+            sys-libs/wayland[>=1.20]
+            sys-libs/wayland-protocols[>=1.36]
             x11-server/xwayland
         )
         providers:elogind? ( sys-auth/elogind )
         providers:eudev? ( sys-apps/eudev )
         providers:systemd? ( sys-apps/systemd[>=228] )
+    run:
+        cinnamon-desktop/xapp-symbolic-icons
     recommendation:
         gnome-desktop/gnome-themes-extra [[
             description = [ Provides default GNOME 3 theme (Adwaita) ]
