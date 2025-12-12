@@ -66,6 +66,7 @@ DEPENDENCIES="
         gnome-desktop/libgudev[gobject-introspection]
         gnome-desktop/librsvg:2[gobject-introspection]
         gnome-desktop/timezonemap[gobject-introspection]
+        inputmethods/ibus[X][gobject-introspection][gtk][wayland?][providers:gtk3][python_abis:*(-)?]
         media-libs/gstreamer:1.0[>=0.11.92][gobject-introspection]
         media-libs/libcanberra[gstreamer][providers:gtk3][pulseaudio]
         media-sound/pulseaudio
