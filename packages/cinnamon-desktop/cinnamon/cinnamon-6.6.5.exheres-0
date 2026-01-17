@@ -1,4 +1,4 @@
-# Copyright 2015-2025 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2026 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require python [ blacklist=2 multibuild=false ] github [ user='linuxmint' ]
@@ -42,6 +42,7 @@ DEPENDENCIES="
         dev-libs/at-spi2-core[>=2.52.0]
         dev-libs/glib:2[>=2.79.2]
         dev-libs/libxml2:2.0
+        dev-python/Babel[python_abis:*(-)?]
         dev-python/dbus-python[python_abis:*(-)?]
         dev-python/distro[python_abis:*(-)?]
         dev-python/libsass[python_abis:*(-)?]
