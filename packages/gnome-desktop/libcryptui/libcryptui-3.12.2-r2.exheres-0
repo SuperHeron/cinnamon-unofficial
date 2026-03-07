@@ -1,7 +1,7 @@
 # Copyright 2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require gnome.org [ suffix=tar.xz no_tarball=true ] gsettings
+require gnome.org [ suffix=tar.xz ] gsettings
 require autotools [ supported_autoconf=[ 2.7 ] supported_automake=[ 1.17 ] ]
 
 SUMMARY="Interface components for OpenPGP"
@@ -36,7 +36,15 @@ DEPENDENCIES="
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6.4] )
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-gnupg-gpgme.patch )
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/02_seahorse-daemon_libcryptui_static_link.patch
+    "${FILES}"/git_allow-gpg2-2.1.patch
+    "${FILES}"/daemon-fix-conflicting-return-types.patch
+    "${FILES}"/libcryptui-fix-logic-flaw-in-the-prompt-recipients-d.patch
+    "${FILES}"/daemon-port-to-gcr-3.patch
+    "${FILES}"/build-use-pkg-config-to-detect-gpgme.patch
+    "${FILES}"/gpgme-2.0.patch
+)
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-schemas-compile
