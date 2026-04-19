@@ -1,0 +1,63 @@
+Source: written by Pierre Lejeune <superheron@gmail.com>, for Exherbo
+Upstream: no
+Reason: Fix compat with newer girepository
+--- a/files/usr/share/cinnamon/cinnamon-slideshow/cinnamon-slideshow.py	2026-04-14 16:20:35.000000000 +0200
++++ b/files/usr/share/cinnamon/cinnamon-slideshow/cinnamon-slideshow.py	2026-04-20 17:24:58.689827141 +0200
+@@ -6,7 +6,7 @@
+ from xml.etree import ElementTree
+ from setproctitle import setproctitle
+ 
+-from gi.repository import Gio, GLib
++from gi.repository import Gio, GLib, GLibUnix
+ 
+ SLIDESHOW_DBUS_NAME = "org.Cinnamon.Slideshow"
+ SLIDESHOW_DBUS_PATH = "/org/Cinnamon/Slideshow"
+@@ -53,7 +53,7 @@
+ 
+         self.connection = None
+         self.registration_id = 0
+-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, self.end)
++        GLibUnix.signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, self.end)
+ 
+     def do_startup(self):
+         Gio.Application.do_startup(self)
+--- a/files/usr/share/cinnamon/cinnamon-settings/cinnamon-settings.py	2026-04-14 16:20:35.000000000 +0200
++++ b/files/usr/share/cinnamon/cinnamon-settings/cinnamon-settings.py	2026-04-20 17:23:44.316580303 +0200
+@@ -20,7 +20,7 @@
+ import gi
+ gi.require_version('Gtk', '3.0')
+ gi.require_version('XApp', '1.0')
+-from gi.repository import Gio, GLib, Gtk, Pango, Gdk, XApp
++from gi.repository import Gio, GLib, GLibUnix, Gtk, Pango, Gdk, XApp
+ 
+ CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+ PYTHON_CS_MODULE_PATH = os.path.join(CURRENT_PATH, "modules")
+@@ -304,7 +304,7 @@
+         self.search_entry.connect("icon-press", self.onClearSearchBox)
+ 
+         self.window.connect("destroy", self._quit)
+-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGTERM, self._quit)
++        GLibUnix.signal_add(GLib.PRIORITY_DEFAULT, signal.SIGTERM, self._quit)
+ 
+         self.builder.connect_signals(self)
+         self.sidePages: typing.List[SidePageData] = []
+--- a/files/usr/bin/cinnamon-hover-click	2026-04-14 16:20:35.000000000 +0200
++++ b/files/usr/bin/cinnamon-hover-click	2026-04-20 17:26:31.492788606 +0200
+@@ -10,7 +10,7 @@
+ gi.require_version('Gtk', '3.0')
+ gi.require_version('XApp', '1.0')
+ 
+-from gi.repository import GLib, Gtk, Gdk, XApp, Gio
++from gi.repository import GLib, GLibUnix, Gtk, Gdk, XApp, Gio
+ 
+ signal.signal(signal.SIGINT, signal.SIG_DFL)
+ 
+@@ -101,7 +101,7 @@
+         self.settings.connect("changed::hoverclick-layout", self.update_layout)
+         self.settings.connect("changed::hoverclick-action", self.on_action_changed)
+         self.connect("delete-event", self.exit)
+-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGTERM, self.exit)
++        GLibUnix.signal_add(GLib.PRIORITY_DEFAULT, signal.SIGTERM, self.exit)
+ 
+     def action_changed(self, button, action):
+         if self.doing_setup:

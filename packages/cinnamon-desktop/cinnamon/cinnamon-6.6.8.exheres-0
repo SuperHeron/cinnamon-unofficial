@@ -27,12 +27,11 @@ PLATFORMS="~amd64"
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.40]
-        gnome-desktop/gobject-introspection:1[>=1.29.15]
         sys-devel/gettext[>=0.17]
         virtual/pkg-config[>=0.22]
         gtk-doc? ( dev-doc/gtk-doc[>=1.32-r1] )
     build+run:
-        cinnamon-bindings/cjs:1[>=4.8.0]
+        cinnamon-bindings/cjs:1[>=140.0]
         cinnamon-desktop/cinnamon-desktop[>=5.3.0]
         cinnamon-desktop/cinnamon-menus:3.0[>=4.8.0]
         cinnamon-desktop/muffin[>=5.3.0][gobject-introspection][wayland?]
@@ -108,6 +107,7 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}/${PN}-$(ever range 1-2)-set-default-theme.patch"
     "${FILES}/${PN}-$(ever range 1-2)-set-wheel.patch"
     "${FILES}/${PN}-$(ever range 1-2)-settings-libdir.patch"
+    "${FILES}/${PN}-$(ever range 1-2)-girepository.patch"
 )
 
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
