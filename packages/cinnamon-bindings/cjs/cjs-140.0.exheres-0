@@ -1,4 +1,4 @@
-# Copyright 2015-2025 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2026 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ] meson
@@ -17,10 +17,9 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         dev-libs/dbus-glib:1
-        dev-libs/glib:2[>=2.66.0]
+        dev-libs/glib:2[>=2.86.0]
         dev-libs/libffi:=
         dev-libs/spidermonkey:$(ever major)
-        gnome-desktop/gobject-introspection:1[>=1.71.0]
         sys-apps/dbus
         sys-libs/readline
         x11-libs/cairo
