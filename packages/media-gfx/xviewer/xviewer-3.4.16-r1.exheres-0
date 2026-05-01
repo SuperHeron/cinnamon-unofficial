@@ -48,6 +48,7 @@ DEPENDENCIES="
         gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/74d7d4ba2584c658ae6fb87208543671664943cc.patch )
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Djpeg=enabled'
     '-Drsvg=enabled'
