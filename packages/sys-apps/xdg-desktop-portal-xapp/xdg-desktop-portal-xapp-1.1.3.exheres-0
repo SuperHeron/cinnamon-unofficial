@@ -1,0 +1,31 @@
+# Copyright 2026 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=linuxmint ] meson systemd-service
+
+SUMMARY="A backend implementation for xdg-desktop-portal that is using GTK and various pieces of Cinnamon/MATE/Xfce4 infrastructure."
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2[>=2.44]
+        sys-apps/dbus
+        sys-apps/xdg-desktop-portal[>=1.5][systemd]
+        sys-apps/systemd[>=242]
+        x11-libs/gtk+:3
+    run:
+        cinnamon-desktop/xapp-symbolic-icons
+"
+
+MESON_SRC_CONFIGURE_PARAMS=(
+    -Ddbus_service_dir=/usr/share/dbus-1/services    
+    -Dsystemduserunitdir="${SYSTEMDUSERUNITDIR}"
+)
+
