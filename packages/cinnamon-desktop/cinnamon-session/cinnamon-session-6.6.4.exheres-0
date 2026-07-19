@@ -50,11 +50,18 @@ DEPENDENCIES="
         cinnamon-desktop/xapp-symbolic-icons
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-$(ever range 1-2)-fix_g_free_on_uninitialized_pointers.patch )
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/${PN}-$(ever range 1-2)-fix_g_free_on_uninitialized_pointers.patch
+    "${FILES}"/${PN}-$(ever range 1-2)-fix-systemduserunitdir.patch
+)
 
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Dipv6=true'
     '-Dxtrans=true'
+)
+
+MESON_SRC_CONFIGURE_OPTION_FEATURES=(
+    'providers:systemd'
 )
 
 pkg_postinst() {
