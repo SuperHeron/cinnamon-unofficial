@@ -22,10 +22,8 @@ DEPENDENCIES="
         media-gfx/xviewer[>=3.2.1]
         media-libs/lcms2
         media-libs/libexif[>=0.6.16]
-        x11-libs/clutter:1[>=1.9.4][gobject-introspection]
-        x11-libs/clutter-gtk:1.0[>=1.1.2][gobject-introspection]
+        x11-libs/osm-gps-map[>=1.1.0][gobject-introspection]
         x11-libs/gtk+:3[>=3.3.8][gobject-introspection]
-        x11-libs/libchamplain:0.12[gobject-introspection]
 "
 
 src_install() {
