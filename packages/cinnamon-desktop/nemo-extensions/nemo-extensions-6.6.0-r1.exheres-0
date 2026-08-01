@@ -1,4 +1,4 @@
-# Copyright 2025 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2025-2026 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=linuxmint ] meson setup-py [ import=setuptools blacklist=2 multibuild=false ]
@@ -43,7 +43,7 @@ DEPENDENCIES="
         x11-libs/gtk+:3[>=3.8.4][X][gobject-introspection]
         nemo_extensions:audio-tab? ( dev-python/mutagen[python_abis:*(-)?] )
         nemo_extensions:media-columns? (
-            dev-libs/gexiv2[gobject-introspection]
+            dev-libs/gexiv2:0[gobject-introspection]
             dev-python/Pillow[python_abis:*(-)?]
             dev-python/PyPDF2[python_abis:*(-)?]
             dev-python/mutagen[python_abis:*(-)?]
