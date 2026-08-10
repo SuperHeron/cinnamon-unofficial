@@ -71,7 +71,7 @@ DEPENDENCIES="
         media-libs/libcanberra[gstreamer][providers:gtk3][pulseaudio]
         media-sound/pulseaudio
         net-libs/libnma[gobject-introspection]
-        office-libs/libical:3[gobject-introspection]
+        office-libs/libical:=[gobject-introspection]
         sys-apps/accountsservice[>=0.6.14][gobject-introspection]
         sys-apps/dbus
         sys-apps/upower[gobject-introspection]
