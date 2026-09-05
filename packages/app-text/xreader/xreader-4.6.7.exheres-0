@@ -17,7 +17,6 @@ MYOPTIONS="
     dbus
     djvu [[ description = [ Enable support for DjVu format ] ]]
     dvi [[ description = [ Enable support for DVI format ] ]]
-    epub [[ description = [ Enable support for ePub format ] ]]
     gobject-introspection
     gtk-doc
     keyring [[ description = [ Use GNOME Keyring to store passwords ] ]]
@@ -51,10 +50,6 @@ DEPENDENCIES="
             dev-libs/kpathsea
             media-libs/t1lib
         )
-        epub? (
-            dev-javascript/mathjax[>=2&<3]
-            net-libs/webkit:4.1[>=2.4.3][gobject-introspection?]
-        )
         keyring? ( dev-libs/libsecret:1[>=0.5][gobject-introspection?] )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6] )
         gtk-doc? ( dev-doc/gtk-doc[>=1.13] )
@@ -79,7 +74,6 @@ MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'djvu'
     'dvi'
     'dvi t1lib'
-    'epub'
     'gobject-introspection introspection'
     'gtk-doc docs'
     'keyring'
