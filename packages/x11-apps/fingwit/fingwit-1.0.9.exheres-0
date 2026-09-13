@@ -22,6 +22,7 @@ DEPENDENCIES="
         dev-python/python-pam[python_abis:*(-)?]
         dev-python/setproctitle
         cinnamon-desktop/xapp[gobject-introspection]
+        cinnamon-desktop/xapp-symbolic-icons
         gnome-desktop/gobject-introspection:1[python_abis:*(-)?]
         sys-auth/fprintd[pam]
         sys-libs/pam
