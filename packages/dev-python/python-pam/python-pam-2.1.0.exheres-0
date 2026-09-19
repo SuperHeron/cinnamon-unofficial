@@ -1,7 +1,9 @@
 # Copyright 2025 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require pypi py-pep517 [ backend=setuptools test=pytest ]
+MY_PNV="${PN/-/_}-${PV}"
+
+require pypi py-pep517 [ backend='poetry-core' test='pytest' work="${MY_PNV}" ]
 
 SUMMARY="Python pam module supporting py3"
 DESCRIPTION="
