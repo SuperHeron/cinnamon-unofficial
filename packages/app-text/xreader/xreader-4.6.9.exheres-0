@@ -63,6 +63,8 @@ DEPENDENCIES="
         gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
 
+RESTRICT="test" # Needs X
+
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Dcomics=true'
     '-Dhelp_files=true'
