@@ -44,6 +44,8 @@ DEPENDENCIES="
         gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
 
+RESTRICT="test" # Needs X
+
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'gtk-doc docs'
     'spell enable_spell'
