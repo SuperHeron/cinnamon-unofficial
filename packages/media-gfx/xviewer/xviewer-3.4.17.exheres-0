@@ -34,7 +34,6 @@ DEPENDENCIES="
         dev-libs/libpeas:1.0[>=0.7.4]
         cinnamon-desktop/cinnamon-desktop[>=3.2.0]
         cinnamon-desktop/xapp:1[>=2.5.0]
-        gnome-desktop/gobject-introspection:1[>=0.9.3]
         gnome-desktop/librsvg:2[>=2.36.2][gobject-introspection]
         x11-libs/gdk-pixbuf:2.0[>=2.19.1][gobject-introspection]
         x11-libs/gtk+:3[>=3.10.0][gobject-introspection]
@@ -48,7 +47,6 @@ DEPENDENCIES="
         gnome-desktop/yelp [[ description = [ Help browser ] ]]
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/74d7d4ba2584c658ae6fb87208543671664943cc.patch )
 MESON_SRC_CONFIGURE_PARAMS=(
     '-Djpeg=enabled'
     '-Drsvg=enabled'
