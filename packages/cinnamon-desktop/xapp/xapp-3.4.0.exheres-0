@@ -20,6 +20,7 @@ MYOPTIONS="
     gobject-introspection
     gtk-doc
     vapi [[ requires = [ gobject-introspection ] ]]
+    wayland
     ( linguas: af am ar ast az be ber bg bn br ca ca@valencia ckb cs cy da de el en_CA en_GB eo es
         et eu fa fi fil fr fr_CA he hi hr hu ia id ie is it ja ka kab kk ko ku la lt mai ms nb nl
         oc pl pt pt_BR ro ru sk sl sn sr sr@latin sv te th tr uk uz vi zgh zh_CN zh_HK zh_TW )
@@ -43,11 +44,12 @@ DEPENDENCIES="
         x11-libs/gtk+:3[>=3.22.0][gobject-introspection?]
         x11-libs/libX11
         x11-libs/libxkbfile
+        wayland? ( wayland-libs/gtk-layer-shell[>=0.8] )
     run:
         cinnamon-desktop/xapp-symbolic-icons
 "
 
-MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'gobject-introspection introspection' 'gtk-doc docs' 'vapi' )
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=( 'gobject-introspection introspection' 'gtk-doc docs' 'vapi' 'wayland' )
 
 src_configure() {
     exmeson -Dmate=false -Dxfce=false -Dpy-overrides-dir=$(python_get_sitedir)/gi/overrides
