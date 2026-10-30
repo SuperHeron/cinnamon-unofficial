@@ -15,3 +15,5 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
 
+RESTRICT="test" # No test found
+
