@@ -1,7 +1,7 @@
-# Copyright 2024-2025 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2024-2026 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-GITHUB_REVISION="6ae782e3a29146578b77671954582ab13bc78aaa"
+GITHUB_REVISION="0caf02e2b6ac9095d44f4e40330118b074e41165"
 require github [ user=linuxmint ] gtk-icon-cache
 
 SUMMARY="Mintlocale applet"
@@ -19,6 +19,7 @@ DEPENDENCIES="
         cinnamon-desktop/flags
         cinnamon-desktop/xapp:1[gobject-introspection]
         dev-lang/python:*[>=3]
+        dev-libs/glib:2[gobject-introspection]
         sys-apps/accountsservice[gobject-introspection]
         x11-libs/gtk+:3[gobject-introspection]
 "
