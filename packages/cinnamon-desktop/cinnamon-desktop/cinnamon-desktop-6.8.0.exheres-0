@@ -21,7 +21,7 @@ PLATFORMS="~amd64"
 MYOPTIONS="
     ( providers:
         eudev
-	systemd
+        systemd
     ) [[
         *description = [ udev provider ]
         number-selected = exactly-one
@@ -40,11 +40,13 @@ DEPENDENCIES="
         virtual/pkg-config[>=0.18]
     build+run:
         app-text/iso-codes
-        dev-libs/glib:2[>=2.37.3]
+        dev-libs/glib:2[>=2.70]
         gnome-desktop/gobject-introspection:1[>=0.9.7]
         gnome-desktop/gsettings-desktop-schemas[>=3.5.91]
+        media-libs/fontconfig
         media-sound/pulseaudio
         sys-apps/accountsservice[gobject-introspection]
+        sys-libs/libseccomp
         sys-sound/alsa-lib
         x11-apps/xkeyboard-config
         x11-libs/gdk-pixbuf:2.0[>=2.22.0][gobject-introspection]
@@ -59,6 +61,9 @@ DEPENDENCIES="
         cinnamon-desktop/xapp-symbolic-icons
 "
 
-MESON_SRC_CONFIGURE_PARAMS=( '-Dalsa=true' )
+MESON_SRC_CONFIGURE_PARAMS=(
+    '-Dalsa=true'
+    '-Dbubblewrap=enabled'
+)
 MESON_SRC_CONFIGURE_OPTION_FEATURES=( providers:systemd )
 
