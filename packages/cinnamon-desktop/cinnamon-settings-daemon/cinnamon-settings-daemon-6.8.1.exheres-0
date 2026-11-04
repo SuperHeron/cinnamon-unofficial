@@ -32,7 +32,7 @@ DEPENDENCIES="
     build+run:
         cinnamon-desktop/cinnamon-desktop[>=4.8.0]
         dev-libs/dbus-glib:1
-        dev-libs/glib:2[>=2.40.0]
+        dev-libs/glib:2[>=2.64.0]
         gnome-desktop/gsettings-desktop-schemas[>=3.4.1]
         gnome-desktop/libgudev
         media-libs/fontconfig
