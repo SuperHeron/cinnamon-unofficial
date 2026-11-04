@@ -1,4 +1,4 @@
-# Copyright 2015-2025 Pierre Lejeune <superheron@gmail.com>
+# Copyright 2015-2026 Pierre Lejeune <superheron@gmail.com>
 # Distributed under the terms of the GNU General Purpose License v2
 
 require github [ user='linuxmint' ] gsettings gtk-icon-cache meson
@@ -29,7 +29,7 @@ DEPENDENCIES="
     build+run:
         cinnamon-desktop/cinnamon-desktop[>=6.0.0]
         cinnamon-desktop/xapp:1[>=1.0.4]
-        dev-libs/glib:2[>=2.37.3]
+        dev-libs/glib:2[>=2.50]
         gnome-desktop/gsettings-desktop-schemas[>=0.1.7] [[ note = [ See GNOME bug #641686 ] ]]
         media-libs/libcanberra[providers:gtk3]
         x11-libs/gtk+:3[>=3.0.0]
@@ -52,7 +52,6 @@ DEPENDENCIES="
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/${PN}-$(ever range 1-2)-fix_g_free_on_uninitialized_pointers.patch
-    "${FILES}"/${PN}-$(ever range 1-2)-fix-systemduserunitdir.patch
 )
 
 MESON_SRC_CONFIGURE_PARAMS=(
