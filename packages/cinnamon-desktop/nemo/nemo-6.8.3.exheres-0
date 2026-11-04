@@ -12,6 +12,7 @@ SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     exif
+    gstreamer [[ description = [ Add video preview using GStreamer ] ]]
     gtk-doc
     tracker
     wayland
@@ -36,7 +37,15 @@ DEPENDENCIES="
         x11-libs/pango[>=1.44.0]
         x11-proto/xorgproto
         exif? ( media-libs/libexif[>=0.6.20] )
+        gstreamer? (
+            media-libs/gstreamer:1.0[>=1.22]
+            media-plugins/gst-plugins-base:1.0[>=1.22]
+        )
         tracker? ( app-pim/tinysparql:3.0 )
+        wayland? (
+            sys-libs/wayland
+            wayland-libs/gtk-layer-shell[>=0.8]
+        )
         xmp? ( media-libs/exempi:2.0[>=2.2.0] )
     run:
         cinnamon-desktop/xapp-symbolic-icons
@@ -47,8 +56,10 @@ RESTRICT="test" # requires X
 MESON_SRC_CONFIGURE_PARAMS=( '-Dselinux=false' )
 MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
     'exif'
+    'gstreamer video_preview'
     'gtk-doc gtk_doc'
     'tracker'
+    'wayland gtk_layer_shell'
     'xmp'
 )
 
