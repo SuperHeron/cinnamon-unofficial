@@ -38,7 +38,7 @@ DEPENDENCIES="
         gtk-doc? ( dev-doc/gtk-doc )
     build+run:
         dev-libs/glib:2[>=2.37.3][gobject-introspection]
-        cinnamon-desktop/nemo[>=3.9.0][python_abis:*(-)?]
+        cinnamon-desktop/nemo[>=6.7.4][python_abis:*(-)?]
         gnome-bindings/pygobject:3[python_abis:*(-)?]
         x11-libs/gtk+:3[>=3.8.4][X][gobject-introspection]
         nemo_extensions:audio-tab? ( dev-python/mutagen[python_abis:*(-)?] )
@@ -67,12 +67,8 @@ DEPENDENCIES="
             x11-libs/pango[X][gobject-introspection]
         )
         nemo_extensions:seahorse? (
-            app-crypt/gnupg
-            app-crypt/gpgme:=[>=1.2.0]
-            dev-libs/dbus-glib:1[>=0.78]
-            gnome-desktop/gcr:0[>=3.4.0]
-            gnome-desktop/libcryptui
-            x11-libs/libnotify[>=0.7.0]
+            dev-python/python-gnupg
+            gnome-desktop/seahorse
         )
         nemo_extensions:share? ( cinnamon-desktop/cinnamon-desktop[>=3.0.0] )
         nemo_extensions:terminal? (
@@ -102,6 +98,8 @@ DEPENDENCIES="
         nemo_extensions:compare? ( || ( dev-util/kdiff3 kde/compare ) )
         nemo_extensions:share? ( net-fs/samba )
 "
+
+RESTRICT="test" # No test present
 
 src_prepare() {
     pushd "${WORKBASE}/${PNV}"
