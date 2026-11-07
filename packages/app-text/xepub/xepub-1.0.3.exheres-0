@@ -1,0 +1,48 @@
+# Copyright 2017-2026 Pierre Lejeune <superheron@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='xapp-project' ] freedesktop-desktop gsettings gtk-icon-cache
+require python [ blacklist=2 has_lib=true multibuild=false ] meson
+
+SUMMARY="EPUB Reader"
+DESCRIPTION="
+EPUB reader for Linux desktops.
+"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2[gobject-introspection]
+        dev-python/python-xapp
+        dev-python/setproctitle
+        net-libs/webkit:4.1[gobject-introspection]
+        x11-libs/gtk+:3[gobject-introspection]
+    run:
+        cinnamon-desktop/xapp-symbolic-icons
+"
+
+src_install() {
+    export GSETTINGS_DISABLE_SCHEMAS_COMPILE=1
+    meson_src_install
+    unset GSETTINGS_DISABLE_SCHEMAS_COMPILE
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gsettings_pkg_postinst
+    gtk-icon-cache_pkg_postinst
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gsettings_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+}
+
