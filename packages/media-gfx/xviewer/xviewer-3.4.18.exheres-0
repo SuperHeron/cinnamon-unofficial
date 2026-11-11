@@ -45,6 +45,7 @@ DEPENDENCIES="
         providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
     recommendation:
         gnome-desktop/yelp [[ description = [ Help browser ] ]]
+        media-libs/libheif
 "
 
 MESON_SRC_CONFIGURE_PARAMS=(
