@@ -17,8 +17,10 @@ DEPENDENCIES="
         sys-devel/gettext
     build+run:
         cinnamon-desktop/xapp:1[python_abis:*(-)?][gobject-introspection]
+        dev-libs/glib:2[gobject-introspection]
         dev-python/psutil[python_abis:*(-)?]
-        gnome-desktop/gobject-introspection[python_abis:*(-)?]
+        gnome-bindings/pygobject:3[python_abis:*(-)?]
         x11-libs/gtk+:3[gobject-introspection]
+        x11-libs/pango[gobject-introspection]
 "
 
