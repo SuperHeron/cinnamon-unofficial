@@ -20,7 +20,7 @@ DEPENDENCIES="
     run:
         dev-libs/glib:2[gobject-introspection]
         dev-python/python-pam[python_abis:*(-)?]
-        dev-python/setproctitle
+        dev-python/setproctitle[python_abis:*(-)?]
         cinnamon-desktop/xapp[gobject-introspection]
         cinnamon-desktop/xapp-symbolic-icons
         gnome-desktop/gobject-introspection:1[python_abis:*(-)?]
