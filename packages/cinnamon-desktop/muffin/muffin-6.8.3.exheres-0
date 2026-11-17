@@ -75,6 +75,9 @@ DEPENDENCIES="
         gnome-desktop/gnome-themes-extra [[
             description = [ Provides default GNOME 3 theme (Adwaita) ]
         ]]
+        wayland? ( sys-libs/libdecor[providers:gtk3] [[
+            description = [ Client-side decorations for Wayland used by SDL3 and GLFW clients ]
+        ]] )
 "
 
 RESTRICT="test" # Tests don't even compile
